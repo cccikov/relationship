@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+		<!--[if lt IE 9]>
+			<style type="text/css">
+				.login-box{
+					filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#800000000, endColorstr=#80000000);
+				}
+			</style>
+		<![endif]-->
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="login-box">
+				<form action="" method="post">
+					<div class="form-group">
+						<label for="username">用户名</label>
+						<div class="placeholder-wrap">
+							<input class="form-control" id="username" type="text" placeholder="用户名" />
+							<!--[if lt IE 10]>
+								<span class="placeholder">用户名</span>
+							<![endif]-->
+						</div>
+					</div>
+					<div class="form-group input-wrap clearfix">
+						<label for="password">密码</label>
+						<div class="placeholder-wrap">
+							<input class="form-control" id="password" type="password" placeholder="请输入密码" />
+							<!--[if lt IE 10]>
+								<span class="placeholder">请输入密码</span>
+							<![endif]-->
+						</div>
+						<a class="forget" href="###">忘记密码？</a>
+					</div>
+					<div class="form-group">
+						<div class="container-fluid">
+							<div class="row">
+								<input class="btn btn-primary col-xs-offset-4 col-xs-4" type="submit" value="登录"/>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+
+</html>
