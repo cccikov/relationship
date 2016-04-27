@@ -11,12 +11,64 @@
 		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
+			#main {
+				padding: 10px;
+			}
+			
+			.tabs-wrap {
+				display: none;
+			}
+			
+			.tabs-wrap.active {
+				display: block;
+			}
+			
+			#main li {
+				padding: 0;
+			}
+			
+			#main a {
+				display: block;
+				padding: 10px 15px;
+			}
 		</style>
+		<script type="text/javascript">
+			$(function() {
+				$(".tabs-btn").on("click", function() {
+					var _index = $(this).index();
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".tabs-wrap").eq(_index).addClass("active").siblings().removeClass("active");
+				});
+			});
+		</script>
 	</head>
 
 	<body>
 		<div id="secondWrap">
-			hello
+			<div role="navigation" id="nav">
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active tabs-btn"><a href="#">未审</a></li>
+					<li role="presentation" class="tabs-btn"><a href="#">已审</a></li>
+				</ul>
+			</div>
+			<div id="main">
+				<div class="tabs-wrap active">
+					<div class="list-group">
+						<a href="#" class="list-group-item">Cras justo odio</a>
+						<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+						<a href="#" class="list-group-item">Morbi leo risus</a>
+						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+						<a href="#" class="list-group-item">Vestibulum at eros</a>
+					</div>
+				</div>
+				<div class="tabs-wrap">
+					<div class="list-group">
+						<a href="#" class="list-group-item">Morbi leo risus</a>
+						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+						<a href="#" class="list-group-item">Vestibulum at eros</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 
