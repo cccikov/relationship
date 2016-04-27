@@ -4,25 +4,123 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>首页</title>
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" href="css/base.css" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<style>
+			html,
+			body,
+			#wrap {
+				height: 100%;
+			}
+			
+			#wrap {
+				min-width: 1007px;
+			}
+			/*导航*/
+			
+			#nav {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				line-height: 49px;
+				padding: 0 20px;
+				border-bottom: 1px solid #2C3746;
+				background: #354052;
+			}
+			
+			#nav p {
+				float: left;
+				margin: 0;
+				color: #fff;
+				font-size: 24px;
+			}
+			
+			#nav a {
+				float: right;
+				color: #8A919A;
+			}
+			/*左侧菜单*/
+			
+			#menu {
+				float: left;
+				width: 150px;
+				height: 100%;
+				padding: 50px 0 0 0;
+				background: #354052;
+				color: #8A919A;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			.menu-list {
+				margin: 10px 0 0 10px;
+			}
+			
+			.menu-list li {
+				padding: 10px;
+				border-bottom-left-radius: 8px;
+				border-top-left-radius: 8px;
+				cursor: pointer;
+			}
+			
+			.menu-list li.active {
+				background: #424F62;
+				color: #fff;
+			}
+			
+			#content {
+				overflow: hidden;
+				height: 100%;
+				padding: 50px 0 0 0;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				$(".menu-btn").on("click", function() {
+					$(this).addClass("active").siblings().removeClass("active");
+					iframeSrc($(this).attr("data-src"));
+				});
+				
+				
+			});
+		</script>
 	</head>
 
 	<body>
-		<div id="wrap">
+		<div class="clearfix" id="wrap">
+
+			<!--导航-->
+			<div class="clearfix" id="nav">
+				<p>欢迎进入xxx系统</p>
+				<a href="javascript:void(0)">退出登录</a>
+			</div>
 
 			<!-- 左侧菜单 -->
 			<div id="menu">
-				
+				<ul class="menu-list">
+					<li class="menu-btn" data-src="second-center.html">
+						管理中心
+					</li>
+					<li class="menu-btn active" data-src="second-relationship.html">
+						管理关系拥有者
+					</li>
+					<li class="menu-btn" data-src="second-supplier.html">
+						管理供应商
+					</li>
+				</ul>
 			</div>
-			
+
 			<!-- 右侧内容 -->
 			<div id="content">
-				
+				<iframe id="iframe" src="second-relationship.html" height="100%" width="100%" frameborder="0"></iframe>
 			</div>
 
 		</div>

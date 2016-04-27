@@ -3,4 +3,7 @@ a {
   text-decoration: none;
   color: #000;
 }
+iframe {
+  display: block;
+}
 /*# sourceMappingURL=common.css.map */
