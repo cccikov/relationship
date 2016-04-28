@@ -43,6 +43,9 @@
 				margin: 0 5px;
 				overflow: hidden;
 			}
+			.pic-clip img{
+				max-width: 100%;
+			}
 			/*关系*/
 			
 			.relation strong {
@@ -86,6 +89,7 @@
 				float: left;
 				width: 50%;
 			}
+			
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -127,7 +131,7 @@
 					});
 				}
 				
-				
+				imgScale();
 				
 			});
 		</script>
@@ -201,6 +205,15 @@
 
 					</div>
 				</div>
+				
+				<!--黑块-->
+				<div id="black">
+					<span class="left-btn">&lt;</span>
+					<span class="right-btn">&gt;</span>
+					<span class="black-close"></span>
+					<div class="img-wrap"></div>
+				</div>
+				
 				<!--关系列表-->
 				<div class="relation list-group">
 					<a href="#" class="list-group-item active">关系列表<span class="badge">14</span></a>

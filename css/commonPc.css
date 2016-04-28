@@ -9,4 +9,74 @@ a {
 iframe {
   display: block;
 }
+.pic-clip img {
+  max-width: 100%;
+}
+#black {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  width: 90px;
+  height: 90px;
+  opacity: 0.5;
+  background-color: #000;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#black img {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+#black img.active {
+  display: inline-block;
+}
+#black span {
+  text-align: center;
+  cursor: pointer;
+}
+#black .left-btn {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 40px;
+  line-height: 40px;
+  height: 40px;
+  padding: 0;
+  margin: -20px 0 0;
+  font-size: 25px;
+  background: #fff;
+  border: none;
+  opacity: 0.5;
+}
+#black .right-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  margin: -20px 0 0;
+  font-size: 25px;
+  background: #fff;
+  border: none;
+  opacity: 0.5;
+}
+#black .black-close {
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  width: 14px;
+  height: 14px;
+  background: url("../img/close.png") center center no-repeat;
+}
 /*# sourceMappingURL=commonPc.css.map */
