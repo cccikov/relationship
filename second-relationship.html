@@ -22,10 +22,15 @@
 			.tabs-wrap.active {
 				display: block;
 			}
-			li.pager-tips{
+			
+			li.pager-tips {
 				display: inline-block;
 				line-height: 30px;
-				padding:2px 0 0;
+				padding: 2px 0 0;
+			}
+			
+			.tabs-wrap .label {
+				float: right;
 			}
 		</style>
 		<script type="text/javascript">
@@ -48,13 +53,11 @@
 				</ul>
 			</div>
 			<div id="main">
+				<!--未审-->
 				<div class="tabs-wrap active">
 					<div class="list-group">
-						<a href="third-relationship.html" class="list-group-item">Cras justo odio</a>
-						<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-						<a href="#" class="list-group-item">Morbi leo risus</a>
-						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-						<a href="#" class="list-group-item">Vestibulum at eros</a>
+						<a href="third-relationship.html" class="list-group-item">Cras justo odio<span class="label label-default">重审</span></a>
+						<a href="third-supplier.html" class="list-group-item">Dapibus ac facilisis in</a>
 					</div>
 					<!--分页按钮-->
 					<div role="navigation">
@@ -65,11 +68,11 @@
 						</ul>
 					</div>
 				</div>
+				<!--已审-->
 				<div class="tabs-wrap">
 					<div class="list-group">
-						<a href="third-supplier.html" class="list-group-item">Morbi leo risus</a>
-						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-						<a href="#" class="list-group-item">Vestibulum at eros</a>
+						<a href="#" class="list-group-item">Morbi leo risus<span class="label label-success">通过</span></a>
+						<a href="#" class="list-group-item">Porta ac consectetur ac<span class="label label-danger">未通过</span></a>
 					</div>
 					<!--分页按钮-->
 					<div role="navigation">
