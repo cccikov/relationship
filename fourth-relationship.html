@@ -28,7 +28,7 @@
 				/*display: none;*/
 			}
 			
-			.general{
+			.general {
 				line-height: 40px;
 				margin: 0 0 10px 0;
 			}
@@ -38,6 +38,7 @@
 				margin: 0;
 				font-weight: 700;
 			}
+			
 			.files-pic .pic-clip {
 				width: 90px;
 				height: 90px;
@@ -67,20 +68,20 @@
 							if ($.trim($("#reason").val()) != "") {
 								$('#prompt').modal('hide');
 								reason = $.trim($("#reason").val());
-//								check()
+								//								check()
 							} else {
 								$("#reason").focus();
 							}
 						});
 					} else {
 						var flag = "pass";
-						if(confirm("确定通过审批")){
-//							check();
+						if (confirm("确定通过审批")) {
+							//							check();
 						}
 					}
 				});
 				//审核ajax
-				function check(checkData,checkUrl,callback) {
+				function check(checkData, checkUrl, callback) {
 					$.ajax({
 						type: "post",
 						data: checkData,
@@ -93,9 +94,6 @@
 						async: true
 					});
 				}
-				
-				
-				
 			});
 		</script>
 	</head>
@@ -140,7 +138,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<!--档案-->
 				<div class="files panel panel-default">
 					<div class="panel-body">
@@ -155,10 +153,18 @@
 							</p>
 						</div>
 						<ul class="files-pic list-inline">
-							<li class="pic-clip"> <img src="img/test.png" alt="" /> </li>
-							<li class="pic-clip"> <img src="img/test.png" alt="" /> </li>
-							<li class="pic-clip"> <img src="img/test.png" alt="" /> </li>
-							<li class="pic-clip "> <img src="img/test.png" alt="" /> </li>
+							<li class="pic-clip">
+								<img src="img/test.png" alt="" />
+							</li>
+							<li class="pic-clip">
+								<img src="img/test.png" alt="" />
+							</li>
+							<li class="pic-clip">
+								<img src="img/test.png" alt="" />
+							</li>
+							<li class="pic-clip ">
+								<img src="img/test.png" alt="" />
+							</li>
 						</ul>
 					</div>
 				</div>
