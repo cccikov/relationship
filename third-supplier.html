@@ -2,8 +2,8 @@
 <html>
 
 	<head>
-		<meta charset="UTF-8">
-		<title></title>
+		<meta charset="utf-8">
+		<title>供应商详情</title>
 		<link rel="stylesheet" href="css/base.css" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/commonPc.css" />
@@ -28,41 +28,113 @@
 				/*display: none;*/
 			}
 			
-			.general {
+			.general{
+				line-height: 40px;
 				margin: 0 0 10px 0;
 			}
 			
 			.company-name {
 				display: inline-block;
+				margin: 0;
+				font-weight: 700;
 			}
-			.files-pic .pic-clip{
+			.commission{
+				box-sizing: border-box;
+				float: right;
+				padding:0 10px;
+				border: 1px solid #eee;
+				border-left-width: 5px;
+				border-left-color: #ce4844;
+				border-radius: 5px;
+				background-origin: ;
+				margin:0;
+				font-family: "微软雅黑";
+			}
+			.files-pic .pic-clip {
 				width: 90px;
 				height: 90px;
-				padding:0;
-				margin:0 5px;
+				padding: 0;
+				margin: 0 5px;
 				overflow: hidden;
 			}
+			
+			dl {
+				margin: 0;
+			}
+			
+			dd {
+				margin: 5px 0 0 15px;
+			}
 			/*产品*/
-			.product .label{
+			
+			.product .label {
 				margin: 0 0 0 5px;
 			}
 			/*消费记录*/
-			.consume{
-				padding:0;
+			
+			.consume {
+				padding: 0;
 			}
-			.consume a{
+			
+			.consume a {
 				display: block;
-				padding:10px 15px;
+				padding: 10px 15px;
 			}
-			.consume .left{
+			
+			.consume .left {
 				float: left;
 				width: 50%;
 			}
-			.consume .right{
+			
+			.consume .right {
 				float: left;
 				width: 50%;
 			}
 		</style>
+		<script type="text/javascript">
+			$(function() {
+				//审核点击事件
+				$("#fail").add("#pass").on("click", function() {
+					var that = $(this);
+					if (that.attr("id") == "fail") {
+						var reason = null;
+						var flag = "fail"
+						$('#prompt').modal('show');
+						$("#save").off("click").on("click", function() {
+							if ($.trim($("#reason").val()) != "") {
+								$('#prompt').modal('hide');
+								reason = $.trim($("#reason").val());
+//								check()
+							} else {
+								$("#reason").focus();
+							}
+						});
+					} else {
+						var flag = "pass";
+						if(confirm("确定通过审批")){
+//							check();
+						}
+					}
+				});
+				//审核ajax
+				function check(checkData,checkUrl,callback) {
+					$.ajax({
+						type: "post",
+						data: checkData,
+						url: checkUrl,
+						success: function(result) {
+							if (callback) {
+								callback();
+							}
+						},
+						async: true
+					});
+				}
+				
+				
+				
+			});
+		</script>
 	</head>
 
 	<body>
@@ -70,59 +142,76 @@
 			<!--导航-->
 			<div id="nav">
 				<ol class="breadcrumb">
-					<li><a href="#">管理关系拥有者</a></li>
-					<li class="active">关系拥有者详情</li>
+					<li><a href="#">管理供应商</a></li>
+					<li class="active">供应商详情</li>
 				</ol>
 			</div>
 			<!--主要-->
 			<div id="main">
 				<!--通过，不通过-->
 				<div class="pass-btn text-right">
-					<div class="btn-group" role="group" aria-label="..."> <button type="button" class="btn btn-primary">通过</button> <button type="button" class="btn btn-danger">不通过</button> </div>
+					<div class="btn-group" role="group" aria-label="...">
+						<button class="btn btn-primary" id="pass" type="button">通过</button>
+						<button class="btn btn-danger" id="fail" type="button">不通过</button>
+					</div>
 				</div>
+
+				<!-- 模拟prompt -->
+				<div class="modal fade" id="prompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">审核不通过</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-grounp">
+									<input id="reason" name="reason" class="form-control" type="text" placeholder="请填写审批不通过理由" />
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="save">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<!--档案-->
 				<div class="files panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">档案</h3> </div>
+						<h3 class="panel-title">档案</h3>
+					</div>
 					<div class="panel-body">
-						<div class="general"> <img class="logo" src="img/logo.png" height="40" alt="" />
-							<h4 class="company-name">普伟集团</h4> </div>
+						<div class="general clearfix">
+							<img class="logo" src="img/logo.png" height="40" alt="" />
+							<h4 class="company-name">普伟集团</h4>
+							<p class="commission">比例：80%</p>
+						</div>
 						<div class="files-detail">
-							<p>普伟集团是一家涉足企业咨询培训、行业资源整合、产业投资于一体的大型教育投资集团，既立足于咨询培训教育主业，又充分整合社会资源积极参与实业的发展，同时利用公司大量高端人脉资源开拓金融投资业务，通过十多年的发展，普伟集团已经形成以教育板块、金融板块、实业板块三驾马车并驾齐驱的产业布局。为客户企业谋求更大福利的同时实现企业的多元化发展，以实现“通过实业报国，重新盛世中华”的使命。 普伟集团教育板块，旗下拥有的大成商道、普伟商学院、商道教练学院三大专业品牌，打造中国最大、最权威、最实战的商业教育平台，为企业构建最有效的商业模式与经营管控系统。
-								普伟集团投资板块，专注于为企业提供金融服务、资产管理、财富教育、股权投资、产业投资、资产配置于一体的综合性金融平台，围绕金融服务产业链多元化布局，业务范围涉及大陆、香港、澳洲等地。 普伟集团实业板块，现已拥有十一家企业，行业涉及教育、建材、家居、互联网、移动互联网、金融、服务等领域，其中三家企业已进入上市通道。 普伟人，将时刻秉承“自强、诚信、阳光、感恩、共赢、传承”的大成商道价值观，以普度众生、伟业我创的情怀，助力中国企业高速成长，为中华民族的强盛而奋斗！</p>
+							<p>
+								普伟集团是一家涉足企业咨询培训、行业资源整合、产业投资于一体的大型教育投资集团，既立足于咨询培训教育主业，又充分整合社会资源积极参与实业的发展，同时利用公司大量高端人脉资源开拓金融投资业务，通过十多年的发展，普伟集团已经形成以教育板块、金融板块、实业板块三驾马车并驾齐驱的产业布局。为客户企业谋求更大福利的同时实现企业的多元化发展，以实现“通过实业报国，重新盛世中华”的使命。 普伟集团教育板块，旗下拥有的大成商道、普伟商学院、商道教练学院三大专业品牌，打造中国最大、最权威、最实战的商业教育平台，为企业构建最有效的商业模式与经营管控系统。
+								普伟集团投资板块，专注于为企业提供金融服务、资产管理、财富教育、股权投资、产业投资、资产配置于一体的综合性金融平台，围绕金融服务产业链多元化布局，业务范围涉及大陆、香港、澳洲等地。 普伟集团实业板块，现已拥有十一家企业，行业涉及教育、建材、家居、互联网、移动互联网、金融、服务等领域，其中三家企业已进入上市通道。 普伟人，将时刻秉承“自强、诚信、阳光、感恩、共赢、传承”的大成商道价值观，以普度众生、伟业我创的情怀，助力中国企业高速成长，为中华民族的强盛而奋斗！
+							</p>
 						</div>
 						<ul class="files-pic list-inline">
-							<li class="pic-clip">
-								<img src="img/test.png" alt="" />
-							</li>
-							<li class="pic-clip">
-								<img src="img/test.png" alt="" />
-							</li>
-							<li class="pic-clip">
-								<img src="img/test.png" alt="" />
-							</li>
-							<li class="pic-clip">
-								<img src="img/test.png" alt="" />
-							</li>
+							<li class="pic-clip"> <img src="img/test.png" alt="" /> </li>
+							<li class="pic-clip"> <img src="img/test.png" alt="" /> </li>
+							<li class="pic-clip"> <img src="img/test.png" alt="" /> </li>
+							<li class="pic-clip "> <img src="img/test.png" alt="" /> </li>
 						</ul>
 						<!--风采-->
-						<a href="###">公司简介</a>
+						<dl> <dt>企业风采:</dt>
+							<dd><a href="https://www.baidu.com/" target="_top">公司简介</a></dd>
+							<dd><a href="https://www.baidu.com/" target="_top">公司简介</a></dd>
+						</dl>
 					</div>
 				</div>
 				<!--产品列表-->
-				<div class="product list-group">
-					<a href="#" class="list-group-item active">产品列表</a>
-					<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-					<a href="#" class="list-group-item">Morbi leo risus</a>
-					<a href="#" class="list-group-item">Porta ac consectetur ac<span class="label label-warning">未审</span></a>
-					<a href="#" class="list-group-item">Vestibulum at eros<span class="label label-warning">未审</span></a>
-				</div>
+				<div class="product list-group"> <a href="#" class="list-group-item active">产品列表</a> <a href="#" class="list-group-item">Dapibus ac facilisis in</a> <a href="#" class="list-group-item">Morbi leo risus</a> <a href="#" class="list-group-item">Porta ac consectetur ac<span class="label label-warning">未审</span></a>					<a href="#" class="list-group-item">Vestibulum at eros<span class="label label-warning">未审</span></a> </div>
 				<!--消费记录-->
 				<div class="consume alert alert-success" role="alert">
-					<a class="clearfix" href="###">
-						<span class="left">消费记录</span>
-						<span class="right">100000元</span>	
-					</a>
+					<a class="clearfix" href="###"> <span class="left">消费记录</span> <span class="right">100000元</span> </a>
 				</div>
 			</div>
 		</div>

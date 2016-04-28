@@ -22,14 +22,10 @@
 			.tabs-wrap.active {
 				display: block;
 			}
-			
-			#main li {
-				padding: 0;
-			}
-			
-			#main a {
-				display: block;
-				padding: 10px 15px;
+			li.pager-tips{
+				display: inline-block;
+				line-height: 30px;
+				padding:2px 0 0;
 			}
 		</style>
 		<script type="text/javascript">
@@ -54,18 +50,34 @@
 			<div id="main">
 				<div class="tabs-wrap active">
 					<div class="list-group">
-						<a href="third.html" class="list-group-item">Cras justo odio</a>
+						<a href="third-relationship.html" class="list-group-item">Cras justo odio</a>
 						<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
 						<a href="#" class="list-group-item">Morbi leo risus</a>
 						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
 						<a href="#" class="list-group-item">Vestibulum at eros</a>
 					</div>
+					<!--分页按钮-->
+					<div role="navigation">
+						<ul class="pager">
+							<li class="previous disabled"><a href="#">上一页</a></li>
+							<li class="pager-tips">1/6</li>
+							<li class="next"><a href="#">下一页</a></li>
+						</ul>
+					</div>
 				</div>
 				<div class="tabs-wrap">
 					<div class="list-group">
-						<a href="#" class="list-group-item">Morbi leo risus</a>
+						<a href="third-supplier.html" class="list-group-item">Morbi leo risus</a>
 						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
 						<a href="#" class="list-group-item">Vestibulum at eros</a>
+					</div>
+					<!--分页按钮-->
+					<div role="navigation">
+						<ul class="pager">
+							<li class="previous disabled"><a href="#">上一页</a></li>
+							<li class="pager-tips">1/6</li>
+							<li class="next"><a href="#">下一页</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>

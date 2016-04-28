@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>关系拥有者详情</title>
 		<link rel="stylesheet" href="css/base.css" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/commonPc.css" />
@@ -22,7 +22,6 @@
 			.pass-btn .btn {
 				width: 68px;
 			}
-			
 			/*档案*/
 			
 			.files {
@@ -44,8 +43,8 @@
 				margin: 0 5px;
 				overflow: hidden;
 			}
-			
 			/*关系*/
+			
 			.relation strong {
 				float: left;
 			}
@@ -53,18 +52,19 @@
 			.relation span {
 				float: right;
 			}
-			
 			/*商机*/
+			
 			.business .list-group-item.active {
 				background: #d9edf7;
 				border-color: #ddd;
 				color: #333;
 			}
 			/*交易*/
-			.deal .list-group-item.active{
+			
+			.deal .list-group-item.active {
 				background: #fcf8e3;
 				border-color: #ddd;
-				color:#333;
+				color: #333;
 			}
 			/*消费记录*/
 			
@@ -87,6 +87,50 @@
 				width: 50%;
 			}
 		</style>
+		<script type="text/javascript">
+			$(function() {
+				//审核点击事件
+				$("#fail").add("#pass").on("click", function() {
+					var that = $(this);
+					if (that.attr("id") == "fail") {
+						var reason = null;
+						var flag = "fail"
+						$('#myModal').modal('show');
+						$("#save").off("click").on("click", function() {
+							if ($.trim($("#reason").val()) != "") {
+								$('#myModal').modal('hide');
+								reason = $.trim($("#reason").val());
+//								check()
+							} else {
+								$("#reason").focus();
+							}
+						});
+					} else {
+						var flag = "pass";
+						if(confirm("确定通过审批")){
+//							check();
+						}
+					}
+				});
+				//审核ajax
+				function check(checkData,checkUrl,callback) {
+					$.ajax({
+						type: "post",
+						data: checkData,
+						url: checkUrl,
+						success: function(result) {
+							if (callback) {
+								callback();
+							}
+						},
+						async: true
+					});
+				}
+				
+				
+				
+			});
+		</script>
 	</head>
 
 	<body>
@@ -98,12 +142,36 @@
 					<li class="active">关系拥有者详情</li>
 				</ol>
 			</div>
-			
+
 			<!--主要-->
 			<div id="main">
 				<!--通过，不通过-->
 				<div class="pass-btn text-right">
-					<div class="btn-group" role="group" aria-label="..."> <button type="button" class="btn btn-primary">通过</button> <button type="button" class="btn btn-danger">不通过</button> </div>
+					<div class="btn-group" role="group" aria-label="...">
+						<button class="btn btn-primary" id="pass" type="button">通过</button>
+						<button class="btn btn-danger" id="fail" type="button">不通过</button>
+					</div>
+				</div>
+
+				<!-- 模拟prompt -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">审核不通过</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-grounp">
+									<input id="reason" name="reason" class="form-control" type="text" placeholder="请填写审批不通过理由" />
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="save">确定</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				<!--档案-->
 				<div class="files panel panel-default">
@@ -130,7 +198,7 @@
 								<img src="img/test.png" alt="" />
 							</li>
 						</ul>
-						
+
 					</div>
 				</div>
 				<!--关系列表-->
