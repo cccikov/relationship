@@ -23,6 +23,15 @@
 				display: block;
 			}
 			
+			.pager li>a:focus {
+				background: #fff;
+			}
+			/*这里hover要放在focus下面*/
+			
+			.pager li>a:hover {
+				background: #eee;
+			}
+			
 			li.pager-tips {
 				display: inline-block;
 				line-height: 30px;
@@ -39,6 +48,58 @@
 					var _index = $(this).index();
 					$(this).addClass("active").siblings().removeClass("active");
 					$(".tabs-wrap").eq(_index).addClass("active").siblings().removeClass("active");
+				});
+				
+				//页面切换ajax
+				function pageAjax(btnObj,nowNum,nowObj,allNum,siblingObj,btnType) {
+					//$.ajax({
+					//	type:"get",
+					//	data:"",
+					//	url:"",
+					//	success:function(result){
+					siblingObj.removeClass("disabled");
+					if (btnType == "next") {
+						nowNum++;
+						if (nowNum == allNum) {
+							btnObj.addClass("disabled");
+						}
+					} else if (btnType == "previous") {
+						nowNum--;
+						if (nowNum == 1) {
+							btnObj.addClass("disabled");
+						}
+					}
+					nowObj.html(nowNum);
+					//	},
+					//	async:true
+					//});
+				}
+				//页面切换
+				function pageChange(obj,btnType) {
+					if (obj.attr("class").indexOf("disabled") != -1) {
+						return;
+					} else {
+						var nowObj = obj.parents(".pager").find('.now');
+						var allObj = obj.parents(".pager").find('.all');
+						var now = Number(nowObj.html());
+						var all = Number(allObj.html());
+						if(btnType=="previous"){
+							var nextObj = obj.parents(".pager").find('.next');
+							pageAjax(obj,now,nowObj,all,nextObj,btnType);
+						}else if(btnType=="next"){
+							var previosObj = obj.parents(".pager").find('.previous');
+							pageAjax(obj,now,nowObj,all,previosObj,btnType);
+						}
+					}
+				}
+				//上一页，下一页按钮
+				$(".previous").on("click", function() {
+					var that = $(this);
+					pageChange(that,"previous");
+				});
+				$(".next").on("click", function() {
+					var that = $(this);
+					pageChange(that,"next");
 				});
 			});
 		</script>
@@ -62,9 +123,9 @@
 					<!--分页按钮-->
 					<div role="navigation">
 						<ul class="pager">
-							<li class="previous disabled"><a href="#">上一页</a></li>
-							<li class="pager-tips">1/6</li>
-							<li class="next"><a href="#">下一页</a></li>
+							<li class="previous disabled"><a href="javascript:void(0)">上一页</a></li>
+							<li class="pager-tips"><em class="now">1</em>/<strong class="all">6</strong></li>
+							<li class="next"><a href="javascript:void(0)">下一页</a></li>
 						</ul>
 					</div>
 				</div>
@@ -77,9 +138,9 @@
 					<!--分页按钮-->
 					<div role="navigation">
 						<ul class="pager">
-							<li class="previous disabled"><a href="#">上一页</a></li>
-							<li class="pager-tips">1/6</li>
-							<li class="next"><a href="#">下一页</a></li>
+							<li class="previous disabled"><a href="javascript:void(0)">上一页</a></li>
+							<li class="pager-tips"><em class="now">1</em>/<strong class="all">11</strong></li>
+							<li class="next"><a href="javascript:void(0)">下一页</a></li>
 						</ul>
 					</div>
 				</div>
