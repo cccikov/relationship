@@ -9,6 +9,9 @@ a {
 iframe {
   display: block;
 }
+.pic-clip {
+  line-height: 90px;
+}
 .pic-clip img {
   max-width: 100%;
 }
