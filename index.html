@@ -27,6 +27,7 @@
 				position: absolute;
 				top: 0;
 				left: 0;
+				z-index: 5;
 				width: 100%;
 				line-height: 49px;
 				padding: 0 20px;
@@ -48,10 +49,11 @@
 			/*左侧菜单*/
 			
 			#menu {
+				position: relative;
 				float: left;
 				width: 150px;
 				height: 100%;
-				padding: 50px 0 0 0;
+				padding: 50px 0 50px 0;
 				background: #354052;
 				color: #8A919A;
 				-webkit-user-select: none;
@@ -74,6 +76,13 @@
 			.menu-list li.active {
 				background: #424F62;
 				color: #fff;
+			}
+
+			.manage-btn{
+				position: absolute;
+				left:10px;
+				bottom:0;
+				width: 140px;
 			}
 			
 			#content {
@@ -130,12 +139,15 @@
 					<li class="menu-btn" data-src="second-relationship.html">
 						风采
 					</li>
+					<li class="menu-btn manage-btn" data-src="manage.html">
+						用户管理
+					</li>
 				</ul>
 			</div>
 
 			<!-- 右侧内容 -->
 			<div id="content">
-				<iframe id="iframe" src="fourth-relationship.html" height="100%" width="100%" frameborder="0"></iframe>
+				<iframe id="iframe" src="manage.html" height="100%" width="100%" frameborder="0"></iframe>
 			</div>
 
 		</div>

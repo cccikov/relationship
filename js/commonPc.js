@@ -73,7 +73,7 @@ function imgScale(){
 		if(_index<=0){
 			_index=0;
 		}
-							console.log(_index);
+		console.log(_index);
 		imgObjs.eq(_index).addClass("active").siblings().removeClass("active");
 	});
 }

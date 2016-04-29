@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户管理</title>
+	<link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/commonPc.css" />
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/commonPc.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		#manageWrap{
+			padding:10px;
+		}
+		#test{
+			width: 400px;
+			height: 400px;
+			margin:40px auto 0;
+			-webkit-box-shadow: 0 3px 9px rgba(0,0,0,0.5);
+   			        box-shadow: 0 3px 9px rgba(0,0,0,0.5);
+		}
+		
+		.account-name{
+			line-height: 34px;
+			font-size: 16px;
+			font-weight: 700;
+		}
+		.account-num{
+			line-height: 34px;
+			font-size: 16px;
+		}
+		.del i{
+			width: 14px;
+			height: 14px;
+			background: url(img/close.png) center center;
+		}
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			$("#addBtn").on("click",function(){
+				editShow(null,function(){
+					$('.save').off("click").on("click",function(){
+
+
+						// 关闭弹窗
+						// $('#edit').modal('hide');
+					})
+				});
+			});
+			$(".editBtn").on("click",function(){
+				// ajax请求得到data
+				data = {"username":"ccc","phone":"15920135479","password":"123456","power1":true,"power2":false}
+				editShow(data,function(){
+					$('.save').off("click").on("click",function(){
+
+
+						// 关闭弹窗
+						$('#edit').modal('hide');
+					})
+				});
+			});
+			function editShow(data,callback){
+				$('#edit').modal('show');
+				$(".modal-body [name='username']").val(data?data.username:"");
+				$(".modal-body [name='phone']").val(data?data.phone:"");
+				$(".modal-body [name='password']").val(data?data.password:"");
+				if(data&&data.power1){
+					$(".modal-body [name='power1']").attr("checked",true);
+				}
+				if(data&&data.power2){
+					$(".modal-body [name='power2']").attr("checked",true);
+				}
+				if(callback){
+					callback();
+				}
+			}
+		});
+	</script>
+		
+</head>
+<body>
+	<div id="manageWrap">
+		<!-- <p id="test">Lorem ipsum orum.</p> -->
+		<div class="list-group">
+			<a class="list-group-item active container-fluid" href="javascript:void(0)">
+				<div class="row">
+					<span class="col-xs-3">账户名</span>
+					<span>账号</span>
+				</div>
+			</a>
+			<a class="list-group-item container-fluid" href="javascript:void(0)">
+				<div class="row">
+					<span class="col-xs-3 account-name">luffy</span>
+					<span class="col-xs-6 account-num">13456789100</span>
+					<span class="col-xs-3 text-center account-btn">
+						<button class="btn btn-info editBtn">编辑</button>
+						<button class="btn btn-danger delBtn">删除</button>
+					</span>
+				</div>
+			</a>
+			<a class="list-group-item container-fluid text-center" href="javascript:void(0)">
+				<button class="btn btn-success" id="addBtn">添加</button>
+			</a>
+		</div>
+
+		<!-- 添加、编辑、详情 -->
+		<div class="modal fade bs-example-modal-lg" id="edit" tabindex="-1"  role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">添加账户</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="username">用户名</label>
+							<input class="form-control" id="username" name="username" type="text" value="" placeholder="填写账户名" />
+						</div>
+						<div class="form-group">
+							<label for="phone">账号</label>
+							<input class="form-control" id="phone" name="phone" type="text" value="" placeholder="填写账号" />
+						</div>
+						<div class="form-group">
+							<label for="password">密码</label>
+							<input class="form-control" id="password"  name="password" type="password" value="" placeholder="输入密码" />
+						</div>
+						<div class="checkbox">
+						  	<label>
+						    	<input id="power1" name="power1" type="checkbox" value="true">审核权限
+						  	</label>
+						</div>
+						<div class="checkbox">
+						  	<label>
+						    	<input id="power2" name="power2" type="checkbox" value="true">修改权限
+						  	</label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary save">修改/保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
