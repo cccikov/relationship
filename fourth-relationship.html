@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>关系</title>
+		<title>关系详情页</title>
 		<link rel="stylesheet" href="css/base.css" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/commonPc.css" />
@@ -50,7 +50,9 @@
 				font-size: 16px;
 				font-weight: 700;
 			}
-			
+			.right-border{
+				border-right:1px solid #ddd;
+			}
 			.files-pic .pic-clip {
 				width: 90px;
 				height: 90px;
@@ -61,54 +63,87 @@
 				overflow: hidden;
 			}
 			
-			dl {
-				margin: 0;
+			.hand-import{
+				margin:0 0 10px;
 			}
-			
-			dd {
-				margin: 5px 0 0 15px;
-			}
-			
 		</style>
 		<script type="text/javascript">
-			$(function() {
+			$(function() {	
+				var fid = "hehe";
 				//审核点击事件
 				$("#fail").add("#pass").on("click", function() {
 					var that = $(this);
-					if (that.attr("id") == "fail") {
-						var reason = null;
-						var flag = "fail"
-						$('#prompt').modal('show');
-						$("#save").off("click").on("click", function() {
-							if ($.trim($("#reason").val()) != "") {
-								$('#prompt').modal('hide');
-								reason = $.trim($("#reason").val());
-								//								check()
-							} else {
-								$("#reason").focus();
-							}
-						});
-					} else {
-						var flag = "pass";
-						if (confirm("确定通过审批")) {
-							//							check();
-						}
+					var state = null;
+					if(that.attr("id")=="fail"){
+						state = 0;
+					}else{
+						state = 1;
 					}
+					$('#prompt').modal('show');
+
+
+					$("#save").off("click").on("click", function() {
+						if ($.trim($("#info").val()) != "") {
+							$('#prompt').modal('hide');
+							reason = $.trim($("#reason").val());
+							console.log(fid,state,$("#info").val());
+							check(fid,state,$("#info").val());
+						} else {
+							$("#reason").focus();
+						}
+					});
 				});
 				//审核ajax
-				function check(checkData, checkUrl, callback) {
+				function check(fid,state,info) {
 					$.ajax({
 						type: "post",
-						data: checkData,
-						url: checkUrl,
+						data:"supplierId="+fid+"&state="+state+"&stateInfo="+info,
+						url: "${contextPath}/web/contact/check.do",
 						success: function(result) {
-							if (callback) {
-								callback();
+							console.log(result);
+							if(result.success){
+								if(state){
+									$(".state").attr("class","state label label-success").html('通过');
+								}else{
+									$(".state").attr("class","state label label-danger").html('未通过');
+								}
+								$(".pass-btn").hide();
+								$('.stateInfo').show().html("说明："+info);
+							}else{
+								alert(result.msg);
 							}
 						},
 						async: true
 					});
 				}
+
+				// 手动输入提交
+				$("#submit").on("click",function(e){
+					var e = e || window.event;//阻止submit默认事件
+					e.preventDefault();
+					if($.trim($("#name").val())==""){
+						$("#name").focus();
+					}else if($.trim($("#position").val())==""){
+						$("#position").focus();
+					}else if($.trim($("#phone").val())==""){
+						$("#phone").focus();
+					}else{
+						console.log($(".hand-import").serialize());
+						// $.ajax({
+						// 	type:"post",
+						// 	url:$(".hand-import").serialize(),
+						// 	data:"",
+						// 	success:function(){
+							$(".hand-import").hide();
+							$("#cardName").html("姓名："+$("#name").val());
+							$("#cardPosition").html("职务："+$("#position").val());
+							$("#cardSex").html("性别："+(($("[name=sex]:checked").val())=="man"?"男":"女"));
+							$("#cardPhone").html("手机："+$("#phone").val());
+						// 	}
+						// });
+
+					}
+				});
 				
 				imgScale();
 			});
@@ -141,11 +176,11 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">审核不通过</h4>
+								<h4 class="modal-title" id="myModalLabel">审核说明</h4>
 							</div>
 							<div class="modal-body">
 								<div class="form-grounp">
-									<input id="reason" name="reason" class="form-control" type="text" placeholder="请填写审批不通过理由" />
+									<textarea class="form-control" id="info" name="info" rows="3" placeholder="请填写审核意见"></textarea>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -156,20 +191,64 @@
 					</div>
 				</div>
 
-				<!--档案-->
 				<div class="files panel panel-default">
 					<div class="panel-body">
 						<div class="general clearfix">
-							<img class="logo" src="img/logo.png" height="40" alt="" />
+							<!-- <img class="logo" src="img/logo.png" height="40" alt="" /> -->
+							<!-- 公司名 -->
 							<h4 class="company-name">普伟集团</h4>
+							<!-- 关系拥有者 -->
 							<p class="contact-man">关系人：黄国辉</p>
 						</div>
-						<div class="files-detail">
-							<p>
-								普伟集团是一家涉足企业咨询培训、行业资源整合、产业投资于一体的大型教育投资集团，既立足于咨询培训教育主业，又充分整合社会资源积极参与实业的发展，同时利用公司大量高端人脉资源开拓金融投资业务，通过十多年的发展，普伟集团已经形成以教育板块、金融板块、实业板块三驾马车并驾齐驱的产业布局。为客户企业谋求更大福利的同时实现企业的多元化发展，以实现“通过实业报国，重新盛世中华”的使命。 普伟集团教育板块，旗下拥有的大成商道、普伟商学院、商道教练学院三大专业品牌，打造中国最大、最权威、最实战的商业教育平台，为企业构建最有效的商业模式与经营管控系统。普伟集团投资板块，专注于为企业提供金融服务、资产管理、财富教育、股权投资、产业投资、资产配置于一体的综合性金融平台，围绕金融服务产业链多元化布局，业务范围涉及大陆、香港、澳洲等地。
-								普伟集团实业板块，现已拥有十一家企业，行业涉及教育、建材、家居、互联网、移动互联网、金融、服务等领域，其中三家企业已进入上市通道。 普伟人，将时刻秉承“自强、诚信、阳光、感恩、共赢、传承”的大成商道价值观，以普度众生、伟业我创的情怀，助力中国企业高速成长，为中华民族的强盛而奋斗！
-							</p>
-						</div>
+
+						<!-- 基本信息 -->
+						<ul class="list-group">
+							<li class="list-group-item clearfix">
+								<div class="col-xs-6 right-border" id="cardName">
+									姓名：邓志鹏
+								</div>
+								<div class="col-xs-6" id="cardPosition">
+									职务：经理
+								</div>
+								
+							</li>
+							<li class="list-group-item clearfix">
+								<div class="col-xs-6 right-border" id="cardSex">
+									性别：男
+								</div>
+								<div class="col-xs-6" id="cardPhone">
+									手机：13456789100
+								</div>
+							</li>
+							<li class="list-group-item">创建时间：2016/4/29 16:43</li>
+							<li class="list-group-item" style="display:none">说明：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, laudantium?</li>
+						</ul>
+
+						<!-- 手动输入 -->
+						<form class="hand-import" method="post" action="http://www.baidu.com">
+							<div class="form-group">
+								<label for="name">姓名</label>
+								<input class="form-control" id="name" name="name" placeholder="姓名">
+							</div>
+							<div class="form-group">
+								<label for="职务">职务</label>
+								<input class="form-control" id="position" name="position" placeholder="职务">
+							</div>
+							<div class="radio">
+								<strong>性别：</strong>
+								<label class="radio-inline"><input name="sex" type="radio" value="man" checked="">男</label>
+								<label class="radio-inline"><input name="sex" type="radio" value="woman">女</label>
+							</div>
+							<div class="form-group">
+								<label for="phone">手机号</label>
+								<input class="form-control" id="phone" name="phone" placeholder="手机号">
+							</div>
+							<div class="text-center">
+								<input class="btn btn-primary" id="submit" type="submit" value="提交">
+							</div>
+						</form>
+						
+						<!-- 名片图片 -->
 						<ul class="files-pic list-inline">
 							<li class="pic-clip">
 								<img src="img/test.png"/>
