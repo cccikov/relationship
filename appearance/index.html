@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/base.css" />
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/commonPc.css" />
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/commonPc.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#main {
+				padding: 10px;
+			}
+			
+			.company{
+				margin:0 0 10px;
+			}
+			.company-name{
+				font-size: 16px;
+				font-weight: 700;
+				font-size: #111;
+			}
+			.appearance{
+			    color: #337ab7;	
+			}
+			
+			/*分页*/
+			.pager li>a:focus {
+				background: #fff;
+			}
+			
+			.pager li>a:hover {/*这里hover要放在focus下面*/
+				background: #eee;
+			}
+			
+			li.pager-tips {
+				display: inline-block;
+				line-height: 30px;
+				padding: 2px 0 0;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function() {
+
+				//页面切换ajax
+				function pageAjax(btnObj,nowNum,nowObj,allNum,siblingObj,btnType) {
+					//$.ajax({
+					//	type:"get",
+					//	data:"",
+					//	url:"",
+					//	success:function(result){
+					siblingObj.removeClass("disabled");
+					if (btnType == "next") {
+						nowNum++;
+						if (nowNum == allNum) {
+							btnObj.addClass("disabled");
+						}
+					} else if (btnType == "previous") {
+						nowNum--;
+						if (nowNum == 1) {
+							btnObj.addClass("disabled");
+						}
+					}
+					nowObj.html(nowNum);
+					//	},
+					//	async:true
+					//});
+				}
+				//页面切换
+				function pageChange(obj,btnType) {
+					if (obj.attr("class").indexOf("disabled") != -1) {
+						return;
+					} else {
+						var nowObj = obj.parents(".pager").find('.now');
+						var allObj = obj.parents(".pager").find('.all');
+						var now = Number(nowObj.html());
+						var all = Number(allObj.html());
+						if(btnType=="previous"){
+							var nextObj = obj.parents(".pager").find('.next');
+							pageAjax(obj,now,nowObj,all,nextObj,btnType);
+						}else if(btnType=="next"){
+							var previosObj = obj.parents(".pager").find('.previous');
+							pageAjax(obj,now,nowObj,all,previosObj,btnType);
+						}
+					}
+				}
+				//上一页，下一页按钮
+				$(".previous").on("click", function() {
+					var that = $(this);
+					pageChange(that,"previous");
+				});
+				$(".next").on("click", function() {
+					var that = $(this);
+					pageChange(that,"next");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="secondWrap">
+
+			<div id="main">
+				
+				<!-- 风采列表 -->
+				<div class="list-group">
+					<!-- 单个 -->
+					<a class="list-group-item" href="http://www.baidu.com">
+						<div class="company">
+							<span class="company-name">百度</span>
+							<span class="company-man">李彦宏</span>
+							<span class="company-phone">(13547897812)</span>
+						</div>
+						<div class="appearance">公司首页</div>
+					</a>
+
+					<!-- 单个 -->
+					<a class="list-group-item" href="http://www.baidu.com">
+						<div class="company">
+							<span class="company-name">百度</span>
+							<span class="company-man">李彦宏</span>
+							<span class="company-phone">(13547897812)</span>
+						</div>
+						<div class="appearance">公司首页</div>
+					</a>
+				</div>
+
+				<!--分页按钮-->
+				<div role="navigation">
+					<ul class="pager">
+						<li class="previous disabled"><a href="../javascript:void(0)">上一页</a></li>
+						<li class="pager-tips"><em class="now">1</em>/<strong class="all">6</strong></li>
+						<li class="next"><a href="../javascript:void(0)">下一页</a></li>
+					</ul>
+				</div>
+			</div>	
+				
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>关系详情页</title>
+		<link rel="stylesheet" href="../css/base.css" />
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/commonPc.css" />
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/commonPc.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#main {
+				margin: 10px 10px 0;
+			}
+			.state{
+				margin:0 0 20px 0;
+			}
+			.state .label{
+				font-size: 16px;
+			}
+			.top img{
+				float: left;
+				margin:0 10px 0 0;
+			}
+			.top h4{
+				float: left;
+			}
+			h4 .label{
+				margin:0 0 0 10px;
+			}
+			.name,.phone{
+				margin:5px 0 0 0;
+			}
+
+			.cancel .panel-default{
+				border-color:#777;
+			}
+			.waiting .panel-default{
+				border-color:#337ab7;
+			}
+			.deal .panel-default{
+				border-color:#5cb85c;
+			}
+			.fall .panel-default{
+				border-color:#f0ad4e;
+			}
+		</style>
+			
+	</head>
+
+	<body>
+		<div id="thirdWrap">
+			<!--导航-->
+			<div id="nav">
+				<ol class="breadcrumb">
+					<li><a href="../#">管理关系拥有者</a></li>
+					<li><a href="../#">关系拥有者详情</a></li>
+					<li class="active">关系</li>
+				</ol>
+			</div>
+
+			<!--主要-->
+			<div class="clearfix" id="main">
+
+				<div class="state">
+					<span class="label label-default">取消</span>
+					<span class="label label-primary">待定</span>
+					<span class="label label-success">成交</span>
+					<span class="label label-warning">失败</span>
+				</div>
+
+				<div class="business-connect cancel">
+					<!-- 关系资源 -->
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="top clearfix">
+								<h4 class="company-name">普伟集团<span class="label label-info">关系资源</span></h4>
+							</div>
+							<div class="name">
+								姓名：邓志鹏(董事长)
+							</div>
+							<div class="phone">
+								手机：13456789100
+							</div>
+						</div>
+					</div>
+					<!-- 供应商 -->
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="top clearfix">
+								<img class="logo" src="../img/logo.png" height="40" alt="" />
+								<h4 class="company-name">Samsung手机供应商<span class="label label-danger">供应商</span></h4>
+							</div>
+							<div class="name">
+								姓名：crystal
+							</div>
+							<div class="phone">
+								手机：13456789100
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<ul class="list-group">
+					<li class="list-group-item">还有产生多少交易？？</li>
+					<li class="list-group-item">还有其他内容吗？？</li>
+				</ul>
+
+			</div>
+		</div>
+	</body>
+
+</html>

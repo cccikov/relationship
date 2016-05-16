@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/base.css" />
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/commonPc.css" />
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/commonPc.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#main {
+				padding: 10px;
+			}
+			
+			.tabs-wrap {
+				display: none;
+			}
+			
+			.tabs-wrap.active {
+				display: block;
+			}
+			.tabs-wrap .label{
+				margin: 0 10px;
+			}
+
+			#businessWrap .right{
+				float: right;
+				width: 47%;
+				text-align: right;
+			}
+			#businessWrap .middle{
+				overflow: hidden;
+			}
+			#businessWrap .left{
+				float: left;
+				width: 47%;
+				text-align: left;
+			}
+			.man-position:before{
+				content: "("
+			}
+			.man-position:after{
+				content: ")"
+			}
+			.man-phone{
+				margin:0;
+			}
+			.list-group-item p{
+				margin:0;
+			}
+			.list-group-item h4{
+				margin: 0 0 10px;
+				font-size: 16px;
+				font-weight: 700;
+			}
+
+
+			/*分页*/
+			.pager li>a:focus {
+				background: #fff;
+			}
+			
+			.pager li>a:hover {/*这里hover要放在focus下面*/
+				background: #eee;
+			}
+			
+			li.pager-tips {
+				display: inline-block;
+				line-height: 30px;
+				padding: 2px 0 0;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				$(".tabs-btn").on("click", function() {
+					var _index = $(this).index();
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".tabs-wrap").eq(_index).addClass("active").siblings().removeClass("active");
+				});
+				
+				//页面切换ajax
+				function pageAjax(btnObj,nowNum,nowObj,allNum,siblingObj,btnType) {
+					//$.ajax({
+					//	type:"get",
+					//	data:"",
+					//	url:"",
+					//	success:function(result){
+					siblingObj.removeClass("disabled");
+					if (btnType == "next") {
+						nowNum++;
+						if (nowNum == allNum) {
+							btnObj.addClass("disabled");
+						}
+					} else if (btnType == "previous") {
+						nowNum--;
+						if (nowNum == 1) {
+							btnObj.addClass("disabled");
+						}
+					}
+					nowObj.html(nowNum);
+					//	},
+					//	async:true
+					//});
+				}
+				//页面切换
+				function pageChange(obj,btnType) {
+					if (obj.attr("class").indexOf("disabled") != -1) {
+						return;
+					} else {
+						var nowObj = obj.parents(".pager").find('.now');
+						var allObj = obj.parents(".pager").find('.all');
+						var now = Number(nowObj.html());
+						var all = Number(allObj.html());
+						if(btnType=="previous"){
+							var nextObj = obj.parents(".pager").find('.next');
+							pageAjax(obj,now,nowObj,all,nextObj,btnType);
+						}else if(btnType=="next"){
+							var previosObj = obj.parents(".pager").find('.previous');
+							pageAjax(obj,now,nowObj,all,previosObj,btnType);
+						}
+					}
+				}
+				//上一页，下一页按钮
+				$(".previous").on("click", function() {
+					var that = $(this);
+					pageChange(that,"previous");
+				});
+				$(".next").on("click", function() {
+					var that = $(this);
+					pageChange(that,"next");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="businessWrap">
+			<div role="navigation" id="nav">
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active tabs-btn"><a href="javascript:void(0)">待定 <span class="badge">42</span></a></li>
+					<li role="presentation" class="tabs-btn"><a href="javascript:void(0)">已定 <span class="badge">3</span></a></li>
+					<li role="presentation" class="tabs-btn"><a href="javascript:void(0)">取消 <span class="badge">3</span></a></li>
+				</ul>
+			</div>
+			<div id="main">
+
+				<!--待定-->
+				<div class="tabs-wrap active">
+					<div class="list-group">
+						<a href="view.html" class="list-group-item clearfix">
+							<div class="left">
+								<h4 class="company-name">普伟集团<span class="label label-info">关系资源</span></h4>
+								<p>
+									<span class="man-name">黄辉<span class="man-position">CEO</span></span>
+									<span class="man-phone">12345678910</span>
+								</p>
+								
+							</div>
+							<div class="right">
+								<h4 class="company-name"><span class="label label-danger">供应商</span>三星</h4>
+								<p>
+									<span class="man-name">谢总</span>
+									<span class="man-phone">12345678910</span>
+								</p>
+							</div>
+						</a>
+					</div>
+					<!--分页按钮-->
+					<div role="navigation">
+						<ul class="pager">
+							<li class="previous disabled"><a href="javascript:void(0)">上一页</a></li>
+							<li class="pager-tips"><em class="now">1</em>/<strong class="all">6</strong></li>
+							<li class="next"><a href="javascript:void(0)">下一页</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!--确定-->
+				<div class="tabs-wrap">
+					<div class="list-group">
+						<a href="view.html" class="list-group-item clearfix">
+							<div class="left">
+								<h4 class="company-name">普伟集团<span class="label label-info">关系资源</span></h4>
+								<p>
+									<span class="man-name">黄辉<span class="man-position">CEO</span></span>
+									<span class="man-phone">12345678910</span>
+								</p>
+								
+							</div>
+							<div class="right">
+								<h4 class="company-name"><span class="label label-danger">供应商</span>三星</h4>
+								<p>
+									<span class="man-name">谢总</span>
+									<span class="man-phone">12345678910</span>
+								</p>
+							</div>
+							<div class="middle">
+								<span class="label label-success">成功</span>
+							</div>
+						</a>
+						<a href="view.html" class="list-group-item clearfix">
+							<div class="left">
+								<h4 class="company-name">普伟集团<span class="label label-info">关系资源</span></h4>
+								<p>
+									<span class="man-name">黄辉<span class="man-position">CEO</span></span>
+									<span class="man-phone">12345678910</span>
+								</p>
+								
+							</div>
+							<div class="right">
+								<h4 class="company-name"><span class="label label-danger">供应商</span>三星</h4>
+								<p>
+									<span class="man-name">谢总</span>
+									<span class="man-phone">12345678910</span>
+								</p>
+							</div>
+							<div class="middle">
+								<span class="label label-warning">失败</span>
+							</div>
+						</a>
+					</div>
+					<!--分页按钮-->
+					<div role="navigation">
+						<ul class="pager">
+							<li class="previous disabled"><a href="javascript:void(0)">上一页</a></li>
+							<li class="pager-tips"><em class="now">1</em>/<strong class="all">11</strong></li>
+							<li class="next"><a href="javascript:void(0)">下一页</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!--取消-->
+				<div class="tabs-wrap">
+					<div class="list-group">
+						<a href="view.html" class="list-group-item clearfix">
+							<div class="left">
+								<h4 class="company-name">普伟集123团<span class="label label-info">关系资源</span></h4>
+								<p>
+									<span class="man-name">黄辉<span class="man-position">CEO</span></span>
+									<span class="man-phone">12345678910</span>
+								</p>
+								
+							</div>
+							<div class="right">
+								<h4 class="company-name"><span class="label label-danger">供应商</span>三123星</h4>
+								<p>
+									<span class="man-name">谢总</span>
+									<span class="man-phone">12345678910</span>
+								</p>
+							</div>
+						</a>
+					</div>
+					<!--分页按钮-->
+					<div role="navigation">
+						<ul class="pager">
+							<li class="previous disabled"><a href="javascript:void(0)">上一页</a></li>
+							<li class="pager-tips"><em class="now">1</em>/<strong class="all">11</strong></li>
+							<li class="next"><a href="javascript:void(0)">下一页</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
