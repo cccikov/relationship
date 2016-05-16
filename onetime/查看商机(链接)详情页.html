@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title>商机详情页</title>
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function(){
+			// 计算logo和名字的合理宽度
+			// $(".comName").width($(".company").width()-$(".logo").width()-20);
+		});
+	</script>
+
+	<style>
+		#content{
+			padding:46px 0 50px;
+		}
+		.main {
+			padding: 5px;
+			margin: 5px;
+			background: #fff;
+		}
+		.main .company {
+			margin: 5px 0;
+			border-bottom: 1px solid #ccc;
+		}
+		.main .company .logo {
+			float: left;
+			margin: 5px;
+		}
+		.main .company .logo img {
+			display: block;
+			width: 65px;
+			height: 65px;
+		}
+		.main .company .comName {
+			overflow: hidden;
+			margin: 5px;
+			word-break: break-word;
+		}
+		.main .company .comName p {
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.main .person {
+			position: relative;
+			margin: 5px 0;
+			padding: 5px;
+		}
+		.main .person .name {
+			float: left;
+			margin: 5px;
+		}
+		.main .person .name span {
+			font-family: "微软雅黑";
+			font-size: 16px;
+		}
+		.main .person .tel {
+			float: left;
+			margin: 5px 20px;
+		}
+		.main .person .tel span {
+			font-size: 16px;
+		}
+		.main .person .supplierTip{
+			position: absolute;
+			top: 5px;
+			right: 10px;
+			padding: 3px 5px;
+			background: #529C17;
+			color: #fff;
+		}
+		.main .person .customerTip{
+			position: absolute;
+			top: 5px;
+			right: 10px;
+			padding: 3px 5px;
+			background: #B94040;
+			color: #fff;
+		}
+		.main .info{
+			padding: 10px;
+		}
+
+		/*write by ccc*/
+		.main{
+			position: relative;
+		}
+		.mark-fall:after{
+			content: "等待确定商机";
+			position: absolute;
+			top:10px;
+			right:0px;
+			left:0px;
+			width: 120px;
+			padding:10px 5px;
+			border: 1px solid #FB0000;
+			/*border-radius: 50px;*/
+			margin:auto;
+			text-align: center;
+			color:#FB0000;
+			font-size: 14px;
+			transform: translateX(70px) rotate(-20deg) translateX(-45px);
+		}
+		.mark-success:after{
+			content: "确认商机";
+			position: absolute;
+			top:0px;
+			right:0px;
+			left:0px;
+			width: 120px;
+			padding:10px 5px;
+			border: 1px solid #61BD5B;
+			/*border-radius: 50px;*/
+			margin:auto;
+			text-align: center;
+			color:#61BD5B;
+			font-size: 14px;
+			transform: translateX(70px) translateY(30px) rotate(15deg);
+		}
+		.deal{
+			margin:15px 5px;
+			text-align: center;
+		}
+		.deal .btn{
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<!--导航条-->
+		<nav class="clearfix" id="nav">
+			<h2>普伟集团</h2>
+			<ul>
+				<!--已登录-->
+				<li>
+					<a class="msg" href="###"></a>
+				</li>
+				<!--未登录-->
+				<li>
+					<a class="register" href="###"></a>
+				</li>
+				<li>
+					<a class="search" href="###"></a>
+				</li>
+				<li>
+					<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+				</li>
+			</ul>
+		</nav>
+
+
+		<!--侧栏-->
+		<div id="sideBlock">
+			<!--侧栏顶部-->
+			<div class="sideBlock-top clearfix">
+				<img src="img/common/common6.png" />
+				<div class="sideBlock-top-center">
+					<p>张某某</p>
+					<p>电话：12345678</p>
+				</div>
+				<a href="">扫一扫</a>
+			</div>
+			<!--侧栏中部-->
+			<div class="sideBlock-middle">
+				<!--实用链接-->
+				<h6>实用链接</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part1">
+					<a class="clearfix" href="###">首页<i></i></a>
+					<a class="clearfix" href="###">精品课程<i></i></a>
+					<a class="clearfix" href="###">商机把握<i></i></a>
+					<a class="clearfix" href="###">学员产品<i></i></a>
+					<a class="clearfix" href="###">营商智囊<i></i></a>
+				</div>
+				<!--账户管理-->
+				<h6>账户管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part2">
+					<a class="clearfix" href="###">个人中心<i></i></a>
+					<a class="clearfix" href="###">个人资料<i></i></a>
+					<a class="clearfix" href="###">修改密码<i></i></a>
+				</div>
+				<!--管理-->
+				<h6>管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part3">
+					<a class="clearfix" href="###">企业管理<i></i></a>
+					<a class="clearfix" href="###">参训记录<i></i></a>
+				</div>
+
+				<!--退出按钮-->
+				<a class="out" href="###">退出登录</a>
+
+			</div>
+		</div>
+		<!--=================================================================================================-->
+		<!--内容-->
+		<div id="content">
+
+			<!-- 供应商模块 -->
+			<!-- supplier是供应商类，方便DOM操作，用以区分关系人-->
+			<!-- main是样式类，方便日后维护 -->
+			<!-- 关系拥有者 mark-fall为待定确定关系，mark-success为已确定关系 -->
+			<div class="supplier main mark-success">
+				<!-- logo和名字 -->
+				<div class="company clearfix">
+					<!-- logo -->
+					<div class="logo">
+						<img src="./img/share/top.jpg">
+					</div>
+					<!-- 名字 -->
+					<div class="comName">
+						<p>佛山碉堡了的不锈钢有限公司</p>
+					</div>
+				</div>
+				<!-- 个人信息 -->
+				<div class="person clearfix">
+					<!-- 姓名 -->
+					<div class="name">
+						<span>张学友</span>
+						<!-- 标识为供应商的标签 -->
+						<span class="supplierTip">供应商</span>
+					</div>
+				</div>
+				<!-- 文字信息 -->
+				<div class="info">
+					<p>
+						好吧，在这个地方我们就真的得稍微费点精神写一段不太长又不太短的文字介绍来介绍一下这个关系人或者供应商的基本信息，但是问题来了，到底多长才算合适呢，这里我觉得像这么长就可以了。
+					</p>
+				</div>
+			</div>
+
+			<!-- 关系人模块-->
+			<!-- customer是供应商类，方便DOM操作，用以区分关系人-->
+			<!-- main是样式类，方便日后维护 -->
+			<div class="customer main">
+				<!-- logo和名字 -->
+				<div class="company clearfix">
+					<!-- logo -->
+					<!-- <div class="logo">
+						<img src="./img/share/bottom.jpg">
+					</div> -->
+					<!-- 名字 -->
+					<div class="comName">
+						<p>佛山碉堡了的需要不锈钢的公司</p>
+					</div>
+				</div>
+				<!-- 个人信息 -->
+				<div class="person clearfix">
+					<!-- 姓名 -->
+					<div class="name">
+						<span>刘德华(董事长)</span><br>
+						<span>15920123456</span>
+						<!-- 标识为关系人标签 -->
+						<span class="customerTip">推荐关系</span>
+					</div>
+				</div>
+				<!-- 文字信息 -->
+				<!-- <div class="info">
+					<p>
+						好吧，在这个地方我们就真的得稍微费点精神写一段不太长又不太短的文字介绍来介绍一下这个关系人或者供应商的基本信息，但是问题来了，到底多长才算合适呢，这里我觉得像这么长就可以了。
+					</p>
+				</div> -->
+			</div>
+
+			<div class="deal" style="display: none">
+				<button class="btn btn-danger">确定关系</button>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

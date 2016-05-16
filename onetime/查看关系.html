@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title>我的关系</title>
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function(){
+			// 设置公司信息的合理宽度
+			$(".business").width($(".main").width()-$(".pic").width()-5);
+		})
+	</script>
+
+	<style>
+		.search-wrap {
+			position: relative;
+			height: 30px;
+			margin: 10px 10px 0 10px;
+			border: 1px solid #ff8d37;
+			border-right:0px;
+			background: #FFF;
+		}
+		.search-wrap .left{
+			height: 100%;
+			margin-right: 60px;
+		}
+		.search-wrap input{
+			width: 100%;
+			line-height: 28px;
+			padding-left: 5px;
+			border: none;
+			font-size: 18px;
+		}
+		.search-wrap .search-btn{
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 60px; 
+			height: 100%;
+			line-height: 28px;
+			text-align: center;
+			background: #ff8d37;
+			font-size: 18px;
+			color: #fff;
+		} 
+		#relation li {
+			display: block;
+			width: 96%;
+			margin: 10px auto;
+			background: #fff;
+		}
+		#relation li .main {
+			padding: 5px 0;
+		}
+		#relation li .main .vendor {
+			float: left;
+			padding: 5px 0;
+		}
+		#relation li .main .vendor .info {
+			overflow: hidden;
+		}
+		#relation li .main .vendor .info .pic {
+			float: left;
+		}
+		/*公司logo*/
+		#relation li .main .vendor .info .pic img {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			border-radius: 20px;
+			margin: 0 10px;
+		}
+		/*公司信息*/
+		#relation li .main .vendor .info .business {
+			float: left;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		/*公司名*/
+		#relation li .main .vendor .info .business span {
+			margin: 0 5px;
+			font-size: 16px;
+		}
+		/*联系人*/
+		#relation li .main .vendor .info .business .name {
+			padding: 3px 5px;
+		}
+		#relation li .main .vendor .info .business .name span:nth-of-type(1) {
+			display: inline-block;
+			max-width: 5em;
+			margin: -3px 0;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			font-size: 12px;
+		}
+		#relation li .main .vendor .info .business .name span:nth-of-type(2) {
+			display: inline-block;
+			font-size: 12px;
+		}
+		/*产品*/
+		#relation li .main .vendor .info .business .product {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		#relation li .main .vendor .info .business .product span {
+			font-size: 12px;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<!--导航条-->
+		<nav class="clearfix" id="nav">
+			<h2>普伟集团</h2>
+			<ul>
+				<!--已登录-->
+				<li>
+					<a class="msg" href="###"></a>
+				</li>
+				<!--未登录-->
+				<li>
+					<a class="register" href="###"></a>
+				</li>
+				<li>
+					<a class="search" href="###"></a>
+				</li>
+				<li>
+					<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+				</li>
+			</ul>
+		</nav>
+
+
+		<!--侧栏-->
+		<div id="sideBlock">
+			<!--侧栏顶部-->
+			<div class="sideBlock-top clearfix">
+				<img src="img/common/common6.png" />
+				<div class="sideBlock-top-center">
+					<p>张某某</p>
+					<p>电话：12345678</p>
+				</div>
+				<a href="">扫一扫</a>
+			</div>
+			<!--侧栏中部-->
+			<div class="sideBlock-middle">
+				<!--实用链接-->
+				<h6>实用链接</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part1">
+					<a class="clearfix" href="###">首页<i></i></a>
+					<a class="clearfix" href="###">精品课程<i></i></a>
+					<a class="clearfix" href="###">商机把握<i></i></a>
+					<a class="clearfix" href="###">学员产品<i></i></a>
+					<a class="clearfix" href="###">营商智囊<i></i></a>
+				</div>
+				<!--账户管理-->
+				<h6>账户管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part2">
+					<a class="clearfix" href="###">个人中心<i></i></a>
+					<a class="clearfix" href="###">个人资料<i></i></a>
+					<a class="clearfix" href="###">修改密码<i></i></a>
+				</div>
+				<!--管理-->
+				<h6>管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part3">
+					<a class="clearfix" href="###">企业管理<i></i></a>
+					<a class="clearfix" href="###">参训记录<i></i></a>
+				</div>
+
+				<!--退出按钮-->
+				<a class="out" href="###">退出登录</a>
+
+			</div>
+		</div>
+		<!--=================================================================================================-->
+		<!--内容-->
+		<div id="content">
+			<!-- 搜索框 -->
+			<div class="search-wrap clearfix">
+				 <div class="left">
+				 <input  id="search" type="text" placeholder="输入标题搜索">
+				 </div>
+				 <div class="search-btn" onclick="toSearch()">搜索</div>
+			</div>
+			<ul id="relation">
+				<!-- 单元关系 -->
+				<li>
+					<div class="main clearfix">
+						<div class="vendor clearfix">
+							<div class="info clearfix">
+								<!-- 图片 -->
+								<div class="pic">
+									<img src="./img/share/top.jpg">
+								</div>
+								<!-- 公司信息 -->
+								<div class="business">
+									<!-- 公司名 -->
+									<span>佛山博美铝材和钢材还有建材有限公司</span>
+									<!-- 联系人 -->
+									<div class="name">
+										<span>王骆丹</span>
+										<span>13456789100</span>
+									</div>
+									<!-- 产品 -->
+									<div class="product">
+										<span>产品:</span>
+										<span>不锈钢、铝材、铝合金、钛合金、黄铜、塑料/不锈钢、铝材、铝合金、钛合金、黄铜、塑料</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>	
+	</div>
+</body>
+</html>

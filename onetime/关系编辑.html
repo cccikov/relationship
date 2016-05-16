@@ -1,0 +1,773 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>关系修改</title>
+	<!-- <#include "/wechat/include/common_resource.tpl" > -->
+
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" href="/css/upload.css" type="text/css">
+	<link rel="stylesheet" href="/css/upload.css" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/uploader.js"></script>
+	<script src="js/photoswipe/photoswipe.min.js"></script>
+    <script src="js/photoswipe/photoswipe-ui-default.min.js"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+	<script type="text/javascript"> 
+		var scrollImg,uploader;
+		$(function(){
+				initPhotoSwipeFromDOM('#uploadDiv .progressDiv');
+			if(allNum >=9){
+					$("#imgDiv").hide();
+			} 
+			//图片上传
+			uploader = new MobileUploadFile({
+				context:'',
+				viewId:"uploadDiv",
+				progressTemplate:"<div class='progressDiv imgDiv'><div class='progressImgDiv' style='max-width:90px;max-height:90px;overflow:hidden;'><img  class='progressImg' src='/images/supplyDemand/uploading.png'/></div><div class='progress'></div><img class='del_btn' src='/images/supplyDemand/imgDel.png'/></div>",
+				success_name:"images",
+				delete_name:"deleteImage",
+				delSuccess:function(uploadMsg){
+					$("#mark").hide();
+				},
+				uploadSuccess:function(fileId){
+					initPhotoSwipeFromDOM('#uploadDiv .progressDiv');
+				}
+			});
+			 
+			$('#imgDiv').on('click', function(e) { 
+				uploader.upload_btn.trigger('click'); 
+				if(allNum >= 9){
+					alert('图片超过9张');
+				}
+			}); 
+		});
+		//图片加载后改变尺寸
+		function imgOnload(dom) {
+   			var w = $(dom).width()/90;
+			var h = $(dom).height()/90;
+			var ww;//缩放后宽
+			var hh; //缩放后的高
+			if(w > h){
+				ww = parseInt($(dom).width()/h);
+				hh = parseInt($(dom).height()/h);
+			}else{
+				ww = parseInt($(dom).width()/w);
+				hh = parseInt($(dom).height()/w);
+			}	
+			$(dom).width(ww);
+			$(dom).height(hh);
+        }	
+			
+		var initPhotoSwipeFromDOM = function(gallerySelector) {
+			var parseThumbnailElements = function($el) {
+				var divs = $el.find(".progressImgDiv");
+			    var items = [];
+				$el.each(function(){
+					var $this = $(this);
+					$img = $this.find(".progressImgDiv img");
+					if($img.attr("img-width")){
+						item = {
+							src: "/filesystem/view/" + $img.attr("fileId") + ".do",
+							w: parseInt($img.attr("img-width"), 10),
+							h: parseInt($img.attr("img-height"), 10),
+							author: ""
+				        };
+				        item.el = this;
+				        item.msrc = $img.attr("src");
+				        item.o = {
+			          		src: item.src,
+			          		w: item.w,
+			          		h: item.h
+			          	};
+			          	items.push(item);
+					}
+				});
+			    return items;
+			};
+
+			var onThumbnailsClick = function(e) {
+			    e = e || window.event;
+			    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+			    var eTarget = e.target || e.srcElement;
+			    var index = $("#uploadDiv").find(".progressImgDiv").index(eTarget); 
+			    if(index <0 ){
+			    	index = $("#uploadDiv").find(".progressImgDiv img").index(eTarget);
+			    }		
+			    if(index <0 ){
+			    	index = $("#uploadDiv").find(".progress").index(eTarget);
+			    }	
+			    if(index <0 ){
+			    	index = $("#uploadDiv").find(".progressDiv").index(eTarget);
+			    }	    
+			    var $clickedGallery = $("#uploadDiv").children(".progressDiv");
+
+			    if(index >= 0) {
+			        openPhotoSwipe( index, $clickedGallery );
+			    }
+			    return false;
+			};
+
+			var openPhotoSwipe = function(index, $galleryElement) {
+			    var pswpElement = document.querySelectorAll('.pswp')[0],
+			        gallery,
+			        options,
+			        items;
+
+				items = parseThumbnailElements($galleryElement);
+
+			    // define options (if needed)
+			    options = {
+
+			        galleryUID: $galleryElement.attr('data-pswp-uid'),
+
+			        getThumbBoundsFn: function(index) {
+			            // See Options->getThumbBoundsFn section of docs for more info
+			           		var thumbnail = items[index].el.children[0];
+			                pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+			                rect = thumbnail.getBoundingClientRect(); 
+
+			            return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+			        }
+					
+			    };
+
+				options.index = parseInt(index, 10);
+				options.mainClass = 'pswp--minimal--dark';
+				options.barsSize = {top:0,bottom:0};
+				options.captionEl = false;
+				options.fullscreenEl = false;
+				options.shareEl = false;
+				options.bgOpacity = 1;
+				options.tapToClose = true;
+				options.tapToToggleControls = false;
+			    options.showAnimationDuration = 0;
+
+			    gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+
+			  
+				var realViewportWidth,
+				    useLargeImages = false,
+				    firstResize = true,
+				    imageSrcWillChange;
+
+				gallery.listen('beforeResize', function() {
+
+					var dpiRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+					dpiRatio = Math.min(dpiRatio, 2.5);
+				    realViewportWidth = gallery.viewportSize.x * dpiRatio;
+
+
+				    if(realViewportWidth >= 1200 || (!gallery.likelyTouchDevice && realViewportWidth > 800) || screen.width > 1200 ) {
+				    	if(!useLargeImages) {
+				    		useLargeImages = true;
+				        	imageSrcWillChange = true;
+				    	}
+				        
+				    } else {
+				    	if(useLargeImages) {
+				    		useLargeImages = false;
+				        	imageSrcWillChange = true;
+				    	}
+				    }
+
+				    if(imageSrcWillChange && !firstResize) {
+				        gallery.invalidateCurrItems();
+				    }
+
+				    if(firstResize) {
+				        firstResize = false;
+				    }
+
+				    imageSrcWillChange = false;
+
+				});
+
+				gallery.listen('gettingData', function(index, item) {
+				     item.src = item.o.src;
+				     item.w = item.o.w;
+				     item.h = item.o.h;
+				});
+
+			    gallery.init();
+			};
+
+			// 选择所有图片，绑定事件
+			var $galleryElements = $( gallerySelector );
+			for(var i = 0, l = $galleryElements.size(); i < l; i++) {
+				var finsh = false;
+				for(var j = 0 ; j <$galleryElements.size(); j++){
+				/*	if($galleryElements.get(i) === uploader.progressList[j].progressBar.get(0)){
+						if(uploader.progressList[j].uploadMsg.status == 'success'){
+							finsh = true;
+						}
+						break;
+					}else{
+				*/
+						finsh = true;
+				//	}
+				}
+				if(finsh){
+					$galleryElements.get(i).setAttribute('data-pswp-uid', i+1);
+					$galleryElements.get(i).onclick = onThumbnailsClick;
+				}
+			}
+		};
+		var lock = false;
+		
+		function doSubmit() {
+			if(lock){
+				return;
+			}
+			 
+			// if ($(".progressImg").size() < 1 ) {
+			// 	$("#errorMsg").html("请至少上传1张图片");
+			// 	return;
+			// }
+			// if ($(".progressImg").size() > 9 ) {
+			// 	$("#errorMsg").html("最多只能上传9张图片");
+			// 	return;
+			// }
+			if(uploader.isUpload()){
+				return;
+			}
+			lock = true;
+			$.ajax({
+				type: "POST",
+				url: "/contact/apply.do",
+				data: $("form").serialize(),
+				dataType: "json",
+				async: false,
+				success: function (result) {
+					if (result.success) {
+						alert('提交成功')
+						window.location= '/relation/index.do';
+					} else {
+						$("#errorMsg").html(result.msg);
+						lock = false;
+					}
+				}
+			});
+		}
+		
+		var allNum =0;
+		
+		//删除原有图片
+		function delOldImg(dom){	
+			var fileId=$(dom).attr("fileId");
+			$(dom).parent().parent().append("<input type='hidden' name='imagesDel' value='"+fileId+"'/>");
+			$(dom).parent().remove();
+			allNum--;
+			if(allNum <9){
+				$("#imgDiv").show();
+			}
+		}
+			
+		/**
+		 * 过滤文件
+		 */
+		function filterFile(files) {
+			var maxSize = 3*1024*1024;
+			var maxNum = 2;
+			var suffix = ["jpg","jpeg","png","gif","bmp"];
+			var arrfiles = [];
+			
+			if (files.length + allNum <= maxNum) {
+				for (var i = 0, file; file = files[i]; i++) {
+					if (file.size > maxSize) {
+						setTimeout(function(){
+						alert("单个文件大小不能超过" + Math.round(maxSize / 1024 / 1024) + "M");
+						},50);
+						return null;
+					}
+				}
+				var count = 0;
+				for (var i = 0, file; file = files[i]; i++) {
+					if (suffix.length == 0) {
+						return files;
+					} else {
+						if (suffix.indexOf(file.name.substr(file.name.lastIndexOf(".") + 1)) >= 0 || suffix.indexOf(file.type) >= 0) {
+							arrfiles.push(file);
+							count++;
+						} else {
+						setTimeout(function(){
+							alert("只允许上传图片");
+							},50);
+							return null;
+						}
+					}
+				}
+				allNum = allNum+count;
+				if(allNum >=1){
+					$("#imgDiv").hide();
+				}
+			} else {
+				setTimeout(function(){
+					alert("最大上传数量为" + maxNum);
+				},50);
+				return null;
+			}
+			return arrfiles;
+		}
+	</script>
+
+	<script type="text/javascript">
+		wx.ready(function () {   
+			wx.hideOptionMenu();
+		});		
+	</script>
+		
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "//hm.baidu.com/hm.js?f3498b833d24632a6d5b9701b824dfe4";
+			var s = document.getElementsByTagName("script")[0]; 
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+
+	<script type="text/javascript">  
+	  	$(function(){
+	  	    //性别选择时 触发的事件
+	  		$(".showInform span").click(function(){
+	  		    var _this = $(this);
+	  			_this.addClass("active").siblings().removeClass("active");
+	  			$("#sex").val(_this.html());
+	  		});
+	  	    //提交信息时做判断
+	  		$('#submitBtn').click(function(){
+	  			var businessName = $('#businessName').val();
+	  			var position = $('#position').val();
+	  			var name = $('#name').val();
+	  			var mobile = $('#mobile').val();
+	  			var sex = $('#sex').val();
+	  			var imgLength = $(".progressImg").size();
+	  			if (businessName == "") {
+					$("#errorMsg").html("公司名称不能为空");
+					return false;
+				}
+				
+				if(imgLength==0){
+					if (position == "") {
+						$("#errorMsg").html("职位不能为空");
+						return false;
+					}
+		  			
+		  			if (name == "") {
+						$("#errorMsg").html("姓名不能为空");
+						return false;
+					}
+					var regChina=/^[\u4e00-\u9fa5]{1,}$/gi;	//中文
+					var regEnglish=/^[a-zA-Z]{1,}$/gi; //字母
+					if(regChina.test(name)){   //中文
+						if(name.length < 2 || name.length > 10) {
+							$("#errorMsg").html("中文名长度必须大于等于2个字并且少于10个字");
+							return false;
+						}				
+					}else if(regEnglish.test(name)){   //是英文
+						if(name.length < 2 || name.length > 30) {
+							$("#errorMsg").html("英文名长度必须大于等于2个字并且少于30个字");
+							return false;
+						}
+					}else{
+						$("#errorMsg").html("姓名只能是中文名或英文名");
+						return false;
+					}						
+					if ( mobile == "") {
+						$("#errorMsg").html("手机号不能为空");
+						return false;
+					}
+					var re = /^1[3458]\d{9}$/gi;//最简单的正则表达式,将匹配he这个单词
+					if (!re.test(mobile)) {
+						$("#errorMsg").html("手机号格式不正确");
+						return false;
+					}
+				}
+				
+				
+				$.ajax({
+					url: "${contextPath}/contactResource/saveOrUpadte.do",
+					type: "POST",
+					data: {name:name,mobile:mobile,businessName : businessName,position : position,sex : sex},
+					dataTypeString: "json",
+					success: function (result) {
+						if (result.success) {
+							//$("#errorMsg").html("保存成功");
+							alert("保存成功");
+							$('input').val('');
+						} else {
+							$("#errorMsg").html(result.msg);
+						}
+					}
+				});
+	  		});
+	  	});	
+	</script>
+
+ 	<style type="text/css"> 
+    	p{
+			margin:0;
+		}
+		/*手动输入*/
+ 		#content {
+			background:#fff;
+		}
+		.required{
+			font-size: 12px;
+		    color: #fff;
+		    background-color: #721616;
+		    padding: 2px;
+		}
+		#formContent {
+			padding:0 10px;
+		}
+		input{
+			float:right;
+			padding-right:10px;
+			text-align:right;
+		    margin: 0;
+		    width: 70%;
+		    height: 50px;
+		    border:none;
+		    outline:0;
+		    font-size:16px;
+		    font-family: PingHei, 'Hiragino Sans GB', 'Microsoft YaHei';
+		    color:#808080;
+		} 
+		.commonContain {
+			padding: 5px 10px;
+			border-bottom:1px solid #ccc;
+		}
+		.commonContain p {
+			width:30%;
+	    	line-height: 50px;
+    		height: 50px;
+    		font-size:16px;
+			float:left;
+			margin:0;
+		}  
+		.theButton {
+			display: block;
+			margin: 20px 3% 0;
+			width: 94%;
+			background-color: #a50100;
+			height: 40px;
+			line-height: 40px;
+			border-radius: 3px;
+			text-align: center;
+			color: #fff;
+			box-sizing: border-box;
+			border: none;
+		}
+		textarea {
+			resize:none;
+			outline:none;
+			padding:6px;
+		}
+		
+		.red-tip{
+			color: #a50100;
+			font-size: 14px;
+			text-align: left;
+			margin: 5px 5%;
+			width: 90%;
+			height: 40px;
+		}
+		#sex {
+			display:none;
+		}
+		.showInform {
+			width:50%;
+			height:50px;
+			float:right;
+			padding: 15px 8px 15px 0;
+		}
+		.showInform span {
+			display: inline-block;
+		    float: right;
+		    width: 60px;
+		    text-align: right;
+		}
+		.showInform span.active {
+			color: #a50100;
+    		background: none;
+    	}
+    	.showInform span:before {
+    		content: "";
+		    position: relative;
+		    top: 0;
+		    left: -5px;
+		    display: inline-block;
+		    width: 18px;
+		    height: 18px;
+		    margin: -3px 0 0 0;
+		    vertical-align: middle;
+		    background: url(${contextPath}/img/training/sure.png) center center no-repeat;
+		    background-size: contain;
+    	}
+    	.showInform span.active:before {
+    		background: url(${contextPath}/img/training/sureactive.png) center center no-repeat;
+    		background-size: contain;
+    	}
+		
+		/*上传图片*/
+		#main{
+			margin:10px;
+		}
+		.mainBody{
+			margin-top: 20px;
+			background:#fff;
+		}
+		/*.commonContain{
+			margin: 25px 0;
+			border-bottom: 1px solid #ccc;
+		}
+		.commonContain p{
+			display: block;
+			float: left;
+			margin-left: 10px;
+			line-height: 35px;
+		}
+		.commonContain input{
+			display: block;
+			float: right;
+			width: 70%;
+			text-align: right;
+	    	margin: 0;
+	    	margin-right: 10px;
+	    	border: 0;
+	    	outline: 0;
+	    	height: 35px;
+		}*/
+		.info-text{
+			padding: 15px;
+			font-size: 14px;
+			background: #fff;
+			color: #777;
+		}
+		.imgDiv{
+			float:left;
+			margin:7px;
+			width:90px;
+			height:90px;
+			border:1px dashed #cccccc;
+		}
+		.imgDiv div{
+			text-align:center;
+			color:#cccccc;
+			font-size:12px;
+			line-height:18px;
+		}  
+		/*.msg {
+			float: left;
+			color: Red;
+			line-height: 45px;
+			height:45px;
+			width: 94%;
+			margin-left: 3%;
+			margin-top: 0px;
+			font-size: 16px;
+			text-align: left;
+		}*/
+		.bottom-opts {
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+			padding: 6px 0px;
+			border-top: 1px solid #ccc;
+			background-color: #fff;
+			z-index:18;
+		}
+		.btn-bright {
+			color: #fff;
+			background-color: #a50100;
+			width: 160px;
+			margin: auto;
+			height: 38px;
+			line-height: 38px;
+			border-radius: 5px;
+		} 
+		.progress{
+			z-index:1;
+			position:absolute;
+			left:0;
+			bottom:0;
+			width:100%;
+			height:0%;
+			background-color:#000000;
+			margin-top: 0px;
+			margin-bottom: 0px;
+		}
+		.progressImg{
+			position:relative;
+			margin:auto;
+			z-index: 15;
+			width: 88px;
+		}
+		.progressDiv{
+			position:relative;
+			border:1px dashed #cccccc;
+			background-color:#fff;
+			
+		}
+		.del_btn{
+			position:absolute;
+			top:-10px;
+			right:-15px;
+			z-index:17;
+			width: 20px;
+		}
+		#uploadDiv{
+			width:94%;
+		} 
+	</style>
+	
+</head>
+<body>
+	<div id="wrap">
+
+		<!--导航条-->
+		<nav class="clearfix" id="nav">
+			<h2>普伟集团</h2>
+			<ul>
+				<!--已登录-->
+				<li>
+					<a class="msg" href="###"></a>
+				</li>
+				<!--未登录-->
+				<li>
+					<a class="register" href="###"></a>
+				</li>
+				<li>
+					<a class="search" href="###"></a>
+				</li>
+				<li>
+					<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+				</li>
+			</ul>
+		</nav>
+
+
+		<!--侧栏-->
+		<div id="sideBlock">
+			<!--侧栏顶部-->
+			<div class="sideBlock-top clearfix">
+				<img src="img/common/common6.png" />
+				<div class="sideBlock-top-center">
+					<p>张某某</p>
+					<p>电话：12345678</p>
+				</div>
+				<a href="">扫一扫</a>
+			</div>
+			<!--侧栏中部-->
+			<div class="sideBlock-middle">
+				<!--实用链接-->
+				<h6>实用链接</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part1">
+					<a class="clearfix" href="###">首页<i></i></a>
+					<a class="clearfix" href="###">精品课程<i></i></a>
+					<a class="clearfix" href="###">商机把握<i></i></a>
+					<a class="clearfix" href="###">学员产品<i></i></a>
+					<a class="clearfix" href="###">营商智囊<i></i></a>
+				</div>
+				<!--账户管理-->
+				<h6>账户管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part2">
+					<a class="clearfix" href="###">个人中心<i></i></a>
+					<a class="clearfix" href="###">个人资料<i></i></a>
+					<a class="clearfix" href="###">修改密码<i></i></a>
+				</div>
+				<!--管理-->
+				<h6>管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part3">
+					<a class="clearfix" href="###">企业管理<i></i></a>
+					<a class="clearfix" href="###">参训记录<i></i></a>
+				</div>
+
+				<!--退出按钮-->
+				<a class="out" href="###">退出登录</a>
+
+			</div>
+		</div>
+		<!-- <#include "/wechat/include/top_nav.tpl" >  -->
+		<!--内容-->
+		<div id="content">
+			<p class="info-text">
+				公司名为必填，若上传名片(图片至少包含一张带联系方式和职务的名片)，职位、姓名、手机号、性别为选填。
+			</p>
+		   <form id="formContent">
+	    		<!--公司-->
+	    		<div class="commonContain clearfix">
+	    			<p>
+		    			<label for="businessName">公司</label>
+	    			</p>
+	    			<input name="businessName" id="businessName" type="text" placeholder="请输入公司名称">
+	    		</div>
+
+				<div class="mainBody clearfix"> 
+					<div id="uploadDiv"><input class="upload_btn" type="file" style="display:none" multiple="">
+						<input type="file" id="uploader" style="display:none" multiple="">
+						<input id="imagesOld" type="hidden" name="imagesOld" value="1461319102910S0011I7928E661R2458">
+								
+						<div id="imgDiv" class="imgDiv">
+							<img style="width:30px;margin:12px 30px 0 30px;" src="/images/supplyDemand/addImg.png">
+							<div>上传图片<br>(上传1张)</div>
+						</div>
+						<div class="clear"></div> 
+					</div>
+					<div id="aa" style="width:100%;height:0px;"></div>
+				</div>
+
+	    		<!--公司-->
+	    		<div class="commonContain clearfix">
+	    			<p>
+		    			<label for="position">职位</label>
+	    			</p>
+	    			<input name="position" id="position" type="text" placeholder="请输入职位">
+	    		</div>
+	    	    <!--姓名-->
+	    		<div class="commonContain clearfix">
+	    			<p>
+		    			<label for="name">姓名</label>
+	    			</p>
+	    			<input name="name" id="name" type="text" placeholder="请输入姓名">
+	    		</div>
+	    		<!--手机-->
+	    		<div class="commonContain clearfix">
+	    			<p>
+		    			<label for="mobile">手机</label>
+	    			</p>
+	    			<input type="tel" name="mobile" id="mobile" maxlength="11" placeholder="请输入手机号码">
+	    		</div> 
+	    		<!--性别-->
+	    		<div class="commonContain clearfix">
+	    			<p>
+		    			<label for="man">性别</label>
+	    			</p>
+	    			<input type="text" name="sex" id="sex" value="男">
+	    			<div class="showInform">
+	    				<span>女</span>
+	    				<span class="active">男</span>
+	    			</div>
+	    		</div> 
+	    		<div id="errorMsg" class="red-tip"></div>
+	    	</form>
+	    	<div class="theButton" id="submitBtn">提交</div>
+		</div>
+	</div> 
+</body>
+</html>

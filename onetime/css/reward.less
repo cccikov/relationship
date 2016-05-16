@@ -1,0 +1,133 @@
+#content{
+    padding: 46px 0 10px;
+    // background: #f6f6f6;
+}
+.btn-wrap{
+	margin:10px;
+}
+p{
+	margin:0;
+}
+.reward-item{
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin:10px;
+	background: #fff;
+	box-shadow: 2px 3px 1px rgba(0,0,0,.2);
+	a{
+		display: block;
+		// 单个顶部
+		.item-top{
+			border-bottom: 1px solid #ddd;
+			img{
+				box-sizing: content-box;
+				float: left;
+				padding:10px;
+			}
+			.reward-company{
+				box-sizing:content-box;
+				line-height: 50px;
+				padding:0 10px 0 0;
+				overflow: hidden;
+				text-align: center;
+				font-size: 16px;
+				font-weight: 700;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
+		// 单个中部
+		.item-middle{
+			padding:10px;
+			border-bottom: 1px solid #ddd;
+			text-indent: 2em;
+		}
+		// 单个底部
+		.item-bottom{
+			padding:10px;
+			color:#999;
+			font-size:12px;
+		}
+	}
+}
+
+/*详情独有*/
+
+.comment-input{
+	position: relative;
+	padding:10px;
+	button{
+		position:absolute;
+		bottom:10px;
+		right:10px;
+	}
+	.form-group{
+		overflow:hidden;
+		margin:0 54px 0 0;
+		textarea{
+			resize:none;
+			height: 34px;
+			overflow:auto;
+		}
+	}
+} 
+.c-hd{
+	padding:5px;
+	font-size:14px;
+	font-weight:700;
+	color:#666;
+}
+/*评论列表*/ 
+.comment-list{
+	margin:0 5px;
+	.comment-item{
+		padding:5px 0;
+		border-top: 1px solid #ddd;
+		img{
+			position:relative;
+			top:5px;
+			float: left;
+			border-radius:15px;
+		}
+		.content{
+			margin:0 0 0 35px;
+			.name{
+				color:#666;
+				font-size:14px;
+			}
+			.time{
+				color:#aaa;
+				font-size:12px;
+			}
+			.main-content{
+				margin:5px 0;
+				color:#222;
+			}
+		}
+	}
+}
+
+
+//悬赏新增
+#addReward{
+	.info-list{
+		background: #fff;
+		.info-item{
+			padding:10px;
+			border-bottom:1px solid #ddd;
+			.company-name{
+				text-align:center;
+				margin:0;
+				font-weight:700;
+			}
+		}
+	}
+	form{
+		padding:10px 10px;
+		background: #fff;
+		textarea{
+			resize:none;
+		}
+	}
+	
+}

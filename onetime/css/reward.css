@@ -1,0 +1,121 @@
+#content {
+  padding: 46px 0 10px;
+}
+.btn-wrap {
+  margin: 10px;
+}
+p {
+  margin: 0;
+}
+.reward-item {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  background: #fff;
+  box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.2);
+}
+.reward-item a {
+  display: block;
+}
+.reward-item a .item-top {
+  border-bottom: 1px solid #ddd;
+}
+.reward-item a .item-top img {
+  box-sizing: content-box;
+  float: left;
+  padding: 10px;
+}
+.reward-item a .item-top .reward-company {
+  box-sizing: content-box;
+  line-height: 50px;
+  padding: 0 10px 0 0;
+  overflow: hidden;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.reward-item a .item-middle {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-indent: 2em;
+}
+.reward-item a .item-bottom {
+  padding: 10px;
+  color: #999;
+  font-size: 12px;
+}
+/*详情独有*/
+.comment-input {
+  position: relative;
+  padding: 10px;
+}
+.comment-input button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.comment-input .form-group {
+  overflow: hidden;
+  margin: 0 54px 0 0;
+}
+.comment-input .form-group textarea {
+  resize: none;
+  height: 34px;
+  overflow: auto;
+}
+.c-hd {
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #666;
+}
+/*评论列表*/
+.comment-list {
+  margin: 0 5px;
+}
+.comment-list .comment-item {
+  padding: 5px 0;
+  border-top: 1px solid #ddd;
+}
+.comment-list .comment-item img {
+  position: relative;
+  top: 5px;
+  float: left;
+  border-radius: 15px;
+}
+.comment-list .comment-item .content {
+  margin: 0 0 0 35px;
+}
+.comment-list .comment-item .content .name {
+  color: #666;
+  font-size: 14px;
+}
+.comment-list .comment-item .content .time {
+  color: #aaa;
+  font-size: 12px;
+}
+.comment-list .comment-item .content .main-content {
+  margin: 5px 0;
+  color: #222;
+}
+#addReward .info-list {
+  background: #fff;
+}
+#addReward .info-list .info-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+#addReward .info-list .info-item .company-name {
+  text-align: center;
+  margin: 0;
+  font-weight: 700;
+}
+#addReward form {
+  padding: 10px 10px;
+  background: #fff;
+}
+#addReward form textarea {
+  resize: none;
+}

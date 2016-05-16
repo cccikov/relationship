@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title>关系共享</title>
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+	#content{
+	  		background:#fff;
+	  		padding-bottom:  0px;
+	  	}
+		/*未注册情况下选项框*/
+		.selectBox { 
+		  padding: 15px 0;
+		  border-bottom: 1px solid #ccc;
+		  text-align: center;
+		}
+		.selectBox p {
+		  line-height: 50px;
+		  font-size: 16px;
+		  color: #777;
+		}
+		.selectBox div {
+		  width: 90%;
+		  margin: 0 auto;
+		}
+		.selectBox a {
+		  display: block;
+		  float: left;
+		  width: 100%;
+		  line-height: 43px;
+		  padding: 0 20px;
+		  border-radius: 5px;
+		  text-align: center;
+		  background: #a50100;
+		  color: #fff;
+		}
+		/*头部我的账户*/
+		.account {
+		  position: relative;
+		  height: 120px;
+		  text-align: center;
+		  background-image: -webkit-linear-gradient(top, #f37425, #f14c1f);
+		  color: #FFFFDF;
+		}
+		.account p {
+		  position: absolute;
+		  top: 10px;
+		  left: 0;
+		  width: 100%;
+		}
+		.account p:before {
+		  content: "";
+		  display: inline-block;
+		  width: 20px;
+		  height: 20px;
+		  margin: -3px 5px 0 0;
+		  vertical-align: middle;
+		  background: url(${contextPath}/img/relation/money.png) center center no-repeat;
+		  background-size: contain;
+		}
+		.account .rmb {
+		  width: 100%;
+		  line-height: 120px;
+		  font-size: 38px;
+		}
+		.account .rmb:before {
+		  content: "";
+		  display: inline-block;
+		  width: 40px;
+		  height: 40px;
+		  margin: -5px -15px;
+		  background: url(${contextPath}/img/relation/rmb.png) center center no-repeat;
+		  background-size: contain;
+		}
+		/*供应商*/
+		.vendor {
+		  position: relative;
+		  border-bottom: 1px solid #ccc;
+		  padding: 15px 0;
+		  font-size: 16px;
+		  text-align: center;
+		}
+		.vendor .big {
+		  margin: 0 auto;
+		}
+		.vendor .left {
+		  float: left;
+		}
+		.vendor .left i {
+		  display: block;
+		  width: 60px;
+		  height: 60px;
+		  margin-bottom: 5px;
+		  border-radius: 30px;
+		  background-color: #3EBCCA;
+		  background-image: url(${contextPath}/img/relation/vendor.png);
+		  background-repeat: no-repeat;
+		  background-size: contain;
+		  background-position: center;
+		}
+		.vendor .right {
+		  float: left;
+		}
+		.vendor .right span {
+		  display: block;
+		  margin: 5px 10px;
+		}
+		.vendor .right .up {
+		  font-size: 18px;
+		}
+		.vendor .right .down {
+		  max-width: 109px;
+		  font-family: Arial;
+		  font-size: 20px;
+		  color: #ff3300;
+		}
+		/*关系*/
+		.stock {
+		  border-bottom: 1px solid #ccc;
+		}
+		.stock div {
+		  float: left;
+		  padding: 20px 0;
+		  text-align: center;
+		}
+		.stock div span {
+		  display: block;
+		  margin: 0 0 15px 0;
+		  font-size: 14px;
+		}
+		.stock .relation,
+		.stock .collect {
+		  position: relative;
+		  width: 33.5%;
+		  height: 110px;
+		  background: url(${contextPath}/img/relation/line.png) center right no-repeat;
+		}
+		.stock .collect {
+		  padding: 0;
+		  margin: 0;
+		}
+		.stock .collect i {
+		  display: block;
+		  width: 50px;
+		  height: 50px;
+		  margin: 20px auto;
+		  margin-bottom: 5px;
+		  border-radius: 25px;
+		  background-color: #6BC235;
+		  background-image: url(${contextPath}/img/relation/collect.png);
+		  background-repeat: no-repeat;
+		  background-size: 35px;
+		  background-position: center 6px;
+		}
+		.stock .relation {
+		  padding: 0;
+		  margin: 0;
+		}
+		.stock .relation i {
+		  display: block;
+		  width: 50px;
+		  height: 50px;
+		  margin: 20px auto;
+		  margin-bottom: 5px;
+		  border-radius: 25px;
+		  background-color: #F8931D;
+		  background-image: url(${contextPath}/img/relation/relation.png);
+		  background-repeat: no-repeat;
+		  background-size: 33px;
+		  background-position: center 9px;
+		}
+		.stock .puls {
+		  position: relative;
+		  width: 33%;
+		  height: 110px;
+		  padding: 0;
+		  margin: 0;
+		}
+		.stock .puls i {
+		  display: block;
+		  width: 50px;
+		  height: 50px;
+		  margin: 20px auto;
+		  margin-bottom: 5px;
+		  border-radius: 25px;
+		  background-color: #DB4520;
+		  background-image: url(${contextPath}/img/relation/puls.png);
+		  background-repeat: no-repeat;
+		  background-size: contain;
+		  background-position: center;
+		}
+		/*右上角数据提示*/
+		.stock .numb {
+		  position: absolute;
+		  top: 6%;
+		  left: 63%;
+		  padding: 1px 5px;
+		  border-radius: 10px;
+		  background: #ff3300;
+		  color: #fff;
+		}
+		.stock .numb span {
+		  margin: 0;
+		  font-family: Arial;
+		}
+		/*链接*/
+		.connect {
+		  border-bottom: 1px solid #ccc;
+		}
+		.connect div {
+		  float: left;
+		  padding: 20px 0;
+		  text-align: center;
+		}
+		.connect div span {
+		  display: block;
+		  margin: 0 0 15px 0;
+		  font-size: 14px;
+		}
+		.connect .confirm,
+		.connect .unsure {
+		  position: relative;
+		  width: 33.5%;
+		  height: 110px;
+		  background: url(${contextPath}/img/relation/line.png) center right no-repeat;
+		}
+		.connect .unsure {
+		  padding: 0;
+		  margin: 0;
+		}
+		.connect .unsure i {
+		  display: block;
+		  width: 50px;
+		  height: 50px;
+		  margin: 20px auto;
+		  margin-bottom: 5px;
+		  border-radius: 25px;
+		  background-color: #C51F1F;
+		  background-image: url(${contextPath}/img/relation/unsure.png);
+		  background-repeat: no-repeat;
+		  background-size: 36px;
+		  background-position: center;
+		}
+		.connect .confirm {
+		  padding: 0;
+		  margin: 0;
+		}
+		.connect .confirm i {
+		  display: block;
+		  width: 50px;
+		  height: 50px;
+		  margin: 20px auto;
+		  margin-bottom: 5px;
+		  border-radius: 25px;
+		  background-color: #773460;
+		  background-image: url(${contextPath}/img/relation/confirm.png);
+		  background-repeat: no-repeat;
+		  background-size: 35px;
+		  background-position: center;
+		}
+		.connect .add {
+		  position: relative;
+		  width: 33%;
+		  height: 110px;
+		  padding: 0;
+		  margin: 0;
+		}
+		.connect .add i {
+		  display: block;
+		  width: 50px;
+		  height: 50px;
+		  margin: 20px auto;
+		  margin-bottom: 5px;
+		  border-radius: 25px;
+		  background-color: #DCD0A8;
+		  background-image: url(${contextPath}/img/relation/add.png);
+		  background-repeat: no-repeat;
+		  background-size: 35px;
+		  background-position: center;
+		}
+		/*右上角数据提示*/
+		.connect .numb {
+		  position: absolute;
+		  top: 6%;
+		  left: 63%;
+		  border-bottom: 1px solid #a50100;
+		  border-radius: 10px;
+		  padding: 1px 5px;
+		  background: #ff3300;
+		  color: #fff;
+		}
+		.connect .numb span {
+		  margin: 0;
+		  font-family: Arial;
+		}
+		
+		.readme {
+			background: #fff;
+			margin: 10px 0;
+			text-align: center;
+		}
+		
+		.readme button {
+			display: none;
+			width: 100%;
+			padding: 10px 0;
+			background: none;
+			border: none;
+			font-size: 12px;
+		}
+		
+		#readmeContent {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1005;
+			width: 100%;
+			height: 100%;
+			padding: 10px;
+			background: #fff;
+			overflow: auto;
+		}
+		/*动画*/
+		
+		@-webkit-keyframes zoomIn {
+			from {
+				opacity: 0;
+				-webkit-transform: scale3d(.3, .3, .3);
+				transform: scale3d(.3, .3, .3);
+			}
+			50% {
+				opacity: 1;
+			}
+		}
+		
+		@keyframes zoomIn {
+			from {
+				opacity: 0;
+				-webkit-transform: scale3d(.3, .3, .3);
+				transform: scale3d(.3, .3, .3);
+			}
+			50% {
+				opacity: 1;
+			}
+		}
+		
+		.zoomIn {
+			-webkit-animation-name: zoomIn;
+			animation-name: zoomIn;
+		}
+		
+		@-webkit-keyframes zoomOut {
+			from {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0;
+				-webkit-transform: scale3d(.3, .3, .3);
+				transform: scale3d(.3, .3, .3);
+			}
+			to {
+				opacity: 0;
+			}
+		}
+		
+		@keyframes zoomOut {
+			from {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0;
+				-webkit-transform: scale3d(.3, .3, .3);
+				transform: scale3d(.3, .3, .3);
+			}
+			to {
+				opacity: 0;
+			}
+		}
+		
+		.zoomOut {
+			-webkit-animation-name: zoomOut;
+			animation-name: zoomOut;
+		}
+		
+		.animated {
+			-webkit-animation-duration: 0.3s;
+			animation-duration: 0.3s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<!--导航条-->
+		<nav class="clearfix" id="nav">
+			<h2>普伟集团</h2>
+			<ul>
+				<!--已登录-->
+				<li>
+					<a class="msg" href="###"></a>
+				</li>
+				<!--未登录-->
+				<li>
+					<a class="register" href="###"></a>
+				</li>
+				<li>
+					<a class="search" href="###"></a>
+				</li>
+				<li>
+					<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+				</li>
+			</ul>
+		</nav>
+
+
+		<!--侧栏-->
+		<div id="sideBlock">
+			<!--侧栏顶部-->
+			<div class="sideBlock-top clearfix">
+				<img src="img/common/common6.png" />
+				<div class="sideBlock-top-center">
+					<p>张某某</p>
+					<p>电话：12345678</p>
+				</div>
+				<a href="">扫一扫</a>
+			</div>
+			<!--侧栏中部-->
+			<div class="sideBlock-middle">
+				<!--实用链接-->
+				<h6>实用链接</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part1">
+					<a class="clearfix" href="###">首页<i></i></a>
+					<a class="clearfix" href="###">精品课程<i></i></a>
+					<a class="clearfix" href="###">商机把握<i></i></a>
+					<a class="clearfix" href="###">学员产品<i></i></a>
+					<a class="clearfix" href="###">营商智囊<i></i></a>
+				</div>
+				<!--账户管理-->
+				<h6>账户管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part2">
+					<a class="clearfix" href="###">个人中心<i></i></a>
+					<a class="clearfix" href="###">个人资料<i></i></a>
+					<a class="clearfix" href="###">修改密码<i></i></a>
+				</div>
+				<!--管理-->
+				<h6>管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part3">
+					<a class="clearfix" href="###">企业管理<i></i></a>
+					<a class="clearfix" href="###">参训记录<i></i></a>
+				</div>
+
+				<!--退出按钮-->
+				<a class="out" href="###">退出登录</a>
+
+			</div>
+		</div>
+		<!--=================================================================================================-->
+		<!--内容-->
+		<div id="content">
+			<!-- 未注册情况下选项框 -->
+			<div class="selectBox clearfix">
+				<p>您未成为关系拥有者</p>
+				<div class="clearfix">	
+					<a href="javascript:void(0);" style="margin-right: 5px;">申请成为关系拥有者</a>
+				</div>
+			</div>
+			<!-- 头部我的账户 -->
+			<div class="account clearfix">
+				<p>我的账户</p>
+				<div class="rmb">
+					<span>51479.90</span>
+				</div>
+			</div>
+			<!-- 供应商 -->
+			<div class="vendor clearfix">
+				<div class="big clearfix">	
+					<div class="left">
+						<i></i>
+					</div>
+					<div class="right">
+						<span class="up">供应商</span>
+						<span class="down">4698</span>
+					</div>
+				</div>
+			</div>
+			<script>
+				$(function(){
+					$(".big").width($(".left").width()+$(".right").width());
+				})
+			</script>
+			<!-- 关系 -->
+			<div class="stock clearfix">
+				<div class="collect">
+					<i></i>
+					<span>关系汇总</span>
+					<div class="numb"><span>95931</span></div>
+				</div>
+				<div class="relation">
+					<i></i>
+					<span>我的关系</span>
+					<div class="numb"><span>2641</span></div>
+				</div>
+				<div class="puls">
+					<i></i>
+					<span>添加关系</span>
+				</div>
+			</div>
+			<!-- 链接 -->
+			<div class="connect clearfix">
+				<div class="unsure">
+					<i></i>
+					<span>待定链接</span>
+					<div class="numb"><span>364</span></div>
+				</div>
+				<div class="confirm">
+					<i></i>
+					<span>确定链接</span>
+					<div class="numb"><span>12</span></div>
+				</div>
+				<div class="add">
+					<i></i>
+					<span>添加链接</span>
+				</div>
+			</div>
+			<!-- 底部的两个按钮 -->
+			<!-- <div class="btn">
+				<div class="apply">
+					<a href="javascript:void(0);">申请成为供应商</a>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</body>
+</html>

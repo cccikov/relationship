@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title>添加商机</title>
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#supplierBtn").on("click",function(){
+				$(".view").hide();
+				$(".view2").show();
+			});
+			$("#resourceBtn").on("click",function(){
+				$(".view").hide();
+				$(".view3").show();
+			});
+
+			// 供应商列表点击
+			$(".supplier-item").on("click",function(){
+				var that = $(this);
+				that.addClass("active").siblings().removeClass("active");
+				$("#supplierId").val(that.attr("data-fid"));
+				$("#supplierBtn").html('<p class="big-name">'+that.find(".big-name").html()+'</p><p class="small-name">'+that.find(".small-name").html()+'</p>');
+				$(".view").hide();
+				$(".view1").show();
+			});
+
+			// 关系列表点击
+			$(".resource-item").on("click",function(){
+				var that = $(this);
+				that.addClass("active").siblings().removeClass("active");
+				$("#resourceId").val(that.attr("data-fid"));
+				$("#resourceBtn").html('<p class="big-name">'+that.find(".big-name").html()+'</p><p class="small-name">'+that.find(".small-name").html()+'</p>');
+				$(".view").hide();
+				$(".view1").show();
+			});
+
+			// 确定按钮
+			$("#sure").on("click",function(){
+				$("#business").submit();
+			});
+			// 取消按钮
+			$("#cancel").on("click",function(){
+				history.go(-1);
+			});
+		});
+	</script>
+	
+</head>
+<body>
+	<div id="wrap">
+		<!--导航条-->
+		<nav class="clearfix" id="nav">
+			<h2>普伟集团</h2>
+			<ul>
+				<!--已登录-->
+				<li>
+					<a class="msg" href="###"></a>
+				</li>
+				<!--未登录-->
+				<li>
+					<a class="register" href="###"></a>
+				</li>
+				<li>
+					<a class="search" href="###"></a>
+				</li>
+				<li>
+					<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+				</li>
+			</ul>
+		</nav>
+
+
+		<!--侧栏-->
+		<div id="sideBlock">
+			<!--侧栏顶部-->
+			<div class="sideBlock-top clearfix">
+				<img src="img/common/common6.png" />
+				<div class="sideBlock-top-center">
+					<p>张某某</p>
+					<p>电话：12345678</p>
+				</div>
+				<a href="">扫一扫</a>
+			</div>
+			<!--侧栏中部-->
+			<div class="sideBlock-middle">
+				<!--实用链接-->
+				<h6>实用链接</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part1">
+					<a class="clearfix" href="###">首页<i></i></a>
+					<a class="clearfix" href="###">精品课程<i></i></a>
+					<a class="clearfix" href="###">商机把握<i></i></a>
+					<a class="clearfix" href="###">学员产品<i></i></a>
+					<a class="clearfix" href="###">营商智囊<i></i></a>
+				</div>
+				<!--账户管理-->
+				<h6>账户管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part2">
+					<a class="clearfix" href="###">个人中心<i></i></a>
+					<a class="clearfix" href="###">个人资料<i></i></a>
+					<a class="clearfix" href="###">修改密码<i></i></a>
+				</div>
+				<!--管理-->
+				<h6>管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part3">
+					<a class="clearfix" href="###">企业管理<i></i></a>
+					<a class="clearfix" href="###">参训记录<i></i></a>
+				</div>
+
+				<!--退出按钮-->
+				<a class="out" href="###">退出登录</a>
+
+			</div>
+		</div>
+
+		<!--内容-->
+		<div id="content">
+			<style type="text/css">
+				#addBusiness{
+					padding:1px 0;
+				}
+				p{
+					margin:0;
+				}
+				.view1{
+					background: #fff;
+					padding:1px;
+				}
+				.view2,.view3{
+					display: none;
+				}
+
+				.head-tips{
+					margin:8px 15px;
+					color:#999;
+					font-size: 14px;
+				}
+
+				.select-btn{
+					display: block;
+					line-height: 42px;
+					border: 1px solid #a50100;
+					border-radius: 8px;
+					margin:0 15px 15px;
+					text-align: center;
+					font-size: 16px;
+					color:#a50100;
+				}
+				a .big-name{
+					max-width: 100%;
+					line-height: 1.5;
+					font-size: 16px;
+					margin:0;
+				}
+				a .small-name{
+					max-width: 100%;
+					line-height: 1.5;
+					font-size: 16px;
+					margin:0;
+				}
+				form{
+					text-align: center;
+				}
+				.btn-wrap{
+					text-align: center;
+					margin:0 0 15px;
+				}
+				.view-tips{
+					background: #fff;
+					padding:10px 5px;
+					font-size: 16px;
+					margin:0 0 5px;
+				}
+				/*列表*/
+				.list li{
+					padding:5px;
+					margin:5px;
+					background: #fff;
+					box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+				}
+				.list li.active{
+					outline: 1px solid #a50100;
+				}
+				.list img{
+					float: left;
+					margin:5px 10px 5px 5px;
+				}
+				.list .info{
+					overflow: hidden;
+				}
+				.list .big-name{
+					font-size: 16px;
+					margin:0 0 5px 0;
+				}
+			</style>
+			<div id="addBusiness">
+
+				<div class="view view1">
+					<p class="head-tips">请选择供应商</p>
+					<!-- 选择供应商 -->
+					<a class="select-btn" id="supplierBtn">选择供应商</a>
+
+					<p class="head-tips">请选择关系资源</p>
+					<!-- 选择关系资源 -->
+					<a class="select-btn" id="resourceBtn">选择关系资源</a>
+					
+					<!-- 隐藏的 -->
+					<form id="business" method="post" action="http://www.baidu.com">
+						<input id="supplierId" name='supplierId' type='hidden'>
+						<input id="resourceId" name='resourceId' type='hidden'>
+					</form>
+					<div class="btn-wrap">
+						<button class="btn btn-danger" id="sure">确定</button>
+						<button class="btn btn-info" id="cancel">取消</button>
+					</div>
+
+				</div>
+				
+				<div class="view view2">
+					<h5 class="view-tips">供应商列表</h5>
+					<ul class="list">
+						<!-- 供应商列表 -->
+						<li class="clearfix supplier-item active" data-fid="12321">
+						<!-- 供应商logo -->
+							<img src="img/share/top.jpg" width="40">
+							<!-- 供应商信息 -->
+							<div class="info">
+								<!-- 供应商公司名字 -->
+								<p class="big-name">我是佛山市禅城区氨基酸</p>
+								<!-- 供应商代表人名 -->
+								<p class="small-name">黄国辉</p>
+							</div>
+						</li>
+
+
+						<li class="clearfix supplier-item" data-fid="12321">
+						<!-- 供应商logo -->
+							<img src="img/share/top.jpg" width="40">
+							<!-- 供应商信息 -->
+							<div class="info">
+								<!-- 供应商公司名字 -->
+								<p class="big-name">我是佛山市禅城区氨123基酸</p>
+								<!-- 供应商代表人名 -->
+								<p class="small-name">黄国辉</p>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="view view3">
+					<h5 class="view-tips">关系列表</h5>
+					<ul class="list">
+						<!-- 关系列表 -->
+						<li class="clearfix resource-item active" data-fid="12321">
+							<!-- 关系信息 -->
+							<div class="info">
+								<!-- 关系公司名字 -->
+								<p class="big-name">我是佛山123市禅城区氨基123酸关系</p>
+								<!-- 关系代表人名 -->
+								<p class="small-name">刘德虎</p>
+							</div>
+						</li>
+
+
+						<li class="clearfix resource-item" data-fid="123456">
+							<!-- 关系信息 -->
+							<div class="info">
+								<!-- 关系公司名字 -->
+								<p class="big-name">我是佛山市禅123城区123氨基酸关系</p>
+								<!-- 关系代表人名 -->
+								<p class="small-name">刘德虎</p>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+
+				
+
+			</div>
+			
+		</div>	
+	</div>
+</body>
+</html>

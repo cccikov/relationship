@@ -1,0 +1,232 @@
+/*微信改版共用样式*/
+html{
+	background: #ebebeb;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font: 14px PingHei, 'Hiragino Sans GB', 'Microsoft YaHei';
+	background: #ebebeb;
+}
+/*共用演示*/
+a{
+	color: #000;
+}
+a:hover{
+	color: #000;
+	text-decoration: none;
+}
+a:focus{
+	color: #000;
+	text-decoration: none;
+	outline: none;
+}
+
+
+/*导航条*/
+#nav{
+	position: fixed;
+	top:0px;
+	left:0;
+	z-index: 1000;
+	width: 100%;
+	height:46px;
+	line-height: 46px;
+	background: #a50100;
+}
+#nav h2{
+	float: left;
+	margin:14px 10px 0;
+	font-size: 18px;
+	color:#ffffff;
+}
+#nav ul{
+	float: right;
+}
+#nav ul li{
+	float: left;
+	width: 46px;
+}
+#nav a{
+	display: block;
+	height:46px;
+	/*line-height: 46px;*/
+}
+#nav a.msg{
+	background: url(../img/common/common1.png) center center no-repeat;
+}
+#nav a.msg.active{
+	background:#ebebeb url(../img/common/common1active.png) center center no-repeat;
+}
+#nav a.search{
+	background: url(../img/common/common2.png) center center no-repeat;
+}
+#nav a.search.active{
+	background:#ebebeb url(../img/common/common2active.png) center center no-repeat;
+}
+#nav a.register{
+	background: url(../img/common/common3.png) center center no-repeat;
+}
+#nav a.register.active{
+	background:#ebebeb url(../img/common/common3active.png) center center no-repeat;
+}
+#nav a.sideBar{
+	background: url(../img/common/common4.png) center center no-repeat;
+}
+#nav a.sideBar.active{
+	background:#ebebeb url(../img/common/common4active.png) center center no-repeat;
+}
+
+/*app下载悬浮块*/
+#appDownload{
+	position: fixed;
+	bottom:0;
+	left:0;
+	z-index: 1000;
+	width: 100%;
+	height:68px;
+	background: #fff;
+}
+#appDownload img{
+	float: left;
+	margin:14px 14px 0 14px;
+}
+#appDownload .appDownload-middle{
+	float: left;
+}
+#appDownload p:nth-child(1){
+	margin:18px 0 0;
+	color:#000;
+}
+#appDownload p:nth-child(2){
+	margin:5px 0 0;
+	font-size: 12px;
+	color:#808080;
+}
+#appDownload a{
+	float: right;
+	width: 60px;
+	height: 26px;
+	line-height: 26px;
+	border-radius: 5px;
+	margin:21px 15px 0 0;
+	color:#fff;
+	background: #f61d0d;
+	font-size: 12px;
+	text-align: center;
+}
+#appDownload a:hover{
+	text-decoration: none;
+}
+#appDownload i{
+	position: absolute;
+	top:-8px;
+	right:0;
+	width: 16px;
+	height: 16px;
+	background: url(../img/common/common5.png) no-repeat;
+	background-size: contain;
+}
+
+/*侧栏*/
+#sideBlock{
+	display: none;
+	padding:46px 0 70px;
+}
+/*侧栏顶部*/
+.sideBlock-top{
+	margin:10px 0 0;
+	background: #fff;
+}
+.sideBlock-top img{
+	float: left;
+	margin: 16px 10px 16px 18px;
+	width: 50px;
+	height: 50px;
+}
+.sideBlock-top .sideBlock-top-center{
+	float: left;
+	margin:21px 0 0;
+}
+.sideBlock-top .sideBlock-top-center p:nth-child(1){
+	font-size: 15px;
+}
+.sideBlock-top .sideBlock-top-center p:nth-child(2){
+	font-size: 15px;
+	color:#ff9e61
+}
+.sideBlock-top a{
+	float: right;
+	padding:45px 0 0;
+	margin: 15px 20px 0 0;
+	background: url(../img/common/common7.png) center top no-repeat;
+}
+/*侧栏中部*/
+.sideBlock-middle{
+	padding:0 10px;
+}
+.sideBlock-middle h6{
+	margin:20px 0 10px;
+	color:#4d4d4d;
+}
+.sideBlock-middle a{
+	display: block;
+	height: 45px;
+	line-height: 45px;
+	padding:0 0 0 10px;
+	border-top:1px solid #ebebeb;
+	background: #fff;
+}
+.sideBlock-middle-part a i{
+	display: block;
+	float: right;
+	width: 45px;
+	height: 45px;
+}
+/*实用链接*/
+.sideBlock-middle-part1 a:nth-child(1) i{
+	background: url(../img/common/common8.png) center center no-repeat;
+}
+.sideBlock-middle-part1 a:nth-child(2) i{
+	background: url(../img/common/common9.png) center center no-repeat;
+}
+.sideBlock-middle-part1 a:nth-child(3) i{
+	background: url(../img/common/common10.png) center center no-repeat;
+}
+.sideBlock-middle-part1 a:nth-child(4) i{
+	background: url(../img/common/common11.png) center center no-repeat;
+}
+.sideBlock-middle-part1 a:nth-child(5) i{
+	background: url(../img/common/common12.png) center center no-repeat;
+}
+/*账户管理*/
+.sideBlock-middle-part2 a:nth-child(1) i{
+	background: url(../img/common/common13.png) center center no-repeat;
+}
+.sideBlock-middle-part2 a:nth-child(2) i{
+	background: url(../img/common/common14.png) center center no-repeat;
+}
+.sideBlock-middle-part2 a:nth-child(3) i{
+	background: url(../img/common/common15.png) center center no-repeat;
+}
+/*管理*/
+.sideBlock-middle-part3 a:nth-child(1) i{
+	background: url(../img/common/common16.png) center center no-repeat;
+}
+.sideBlock-middle-part3 a:nth-child(2) i{
+	background: url(../img/common/common17.png) center center no-repeat;
+}
+/*退出按钮*/
+.out{
+	margin:35px 0 25px;
+	text-align: center;
+	color:#ff0101;
+}
+.out:hover{
+	color:#ff0101;
+}
+
+/*内容begin*/
+#content{
+	padding:46px 0 70px;
+}

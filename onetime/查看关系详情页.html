@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title>我的关系详细信息</title>
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function(){
+			// 计算logo和名字的合理宽度
+			$(".comName").width($(".company").width()-$(".logo").width()-20);
+		});
+	</script>
+
+	<style>
+	.main {
+		padding: 5px;
+		margin: 5px;
+		background: #fff;
+	}
+	.main .company {
+		margin: 5px 0;
+		border-bottom: 1px solid #ccc;
+	}
+	.main .company .logo {
+		float: left;
+		margin: 5px;
+	}
+	.main .company .logo img {
+		display: block;
+		width: 65px;
+		height: 65px;
+	}
+	.main .company .comName {
+		float: left;
+		margin: 5px;
+		word-break: break-word;
+	}
+	.main .company .comName p {
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.main .person {
+		margin: 5px 0;
+		padding: 5px;
+	}
+	.main .person .name {
+		float: left;
+		margin: 5px;
+	}
+	.main .person .name span {
+		font-family: "微软雅黑";
+		font-size: 16px;
+	}
+	.main .person .tel {
+		float: left;
+		margin: 5px 20px;
+	}
+	.main .person .tel span {
+		font-size: 16px;
+	}
+	.main .info{
+		padding: 10px;
+		border-bottom: 1px solid #ccc;
+	}
+	.main .myImg{
+		margin: 10px 0;
+	}
+	.main .myImg .sdImg {
+		float: left;
+		width: 90px;
+		height: 90px;
+		border: 0px;
+		margin: 3px;
+		text-align: center;
+		overflow: hidden;
+	}
+	.main .myImg .sdImg img {
+		width: 100%;
+	}
+
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<!--导航条-->
+		<nav class="clearfix" id="nav">
+			<h2>普伟集团</h2>
+			<ul>
+				<!--已登录-->
+				<li>
+					<a class="msg" href="###"></a>
+				</li>
+				<!--未登录-->
+				<li>
+					<a class="register" href="###"></a>
+				</li>
+				<li>
+					<a class="search" href="###"></a>
+				</li>
+				<li>
+					<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+				</li>
+			</ul>
+		</nav>
+
+
+		<!--侧栏-->
+		<div id="sideBlock">
+			<!--侧栏顶部-->
+			<div class="sideBlock-top clearfix">
+				<img src="img/common/common6.png" />
+				<div class="sideBlock-top-center">
+					<p>张某某</p>
+					<p>电话：12345678</p>
+				</div>
+				<a href="">扫一扫</a>
+			</div>
+			<!--侧栏中部-->
+			<div class="sideBlock-middle">
+				<!--实用链接-->
+				<h6>实用链接</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part1">
+					<a class="clearfix" href="###">首页<i></i></a>
+					<a class="clearfix" href="###">精品课程<i></i></a>
+					<a class="clearfix" href="###">商机把握<i></i></a>
+					<a class="clearfix" href="###">学员产品<i></i></a>
+					<a class="clearfix" href="###">营商智囊<i></i></a>
+				</div>
+				<!--账户管理-->
+				<h6>账户管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part2">
+					<a class="clearfix" href="###">个人中心<i></i></a>
+					<a class="clearfix" href="###">个人资料<i></i></a>
+					<a class="clearfix" href="###">修改密码<i></i></a>
+				</div>
+				<!--管理-->
+				<h6>管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part3">
+					<a class="clearfix" href="###">企业管理<i></i></a>
+					<a class="clearfix" href="###">参训记录<i></i></a>
+				</div>
+
+				<!--退出按钮-->
+				<a class="out" href="###">退出登录</a>
+
+			</div>
+		</div>
+		<!--=================================================================================================-->
+		<!--内容-->
+		<div id="content">
+			<!-- 单元模块 -->
+			<div class="main clearfix">
+				<!-- logo和名字 -->
+				<div class="company clearfix">
+					<!-- logo -->
+					<div class="logo">
+						<img src="./img/share/bottom.jpg">
+					</div>
+					<!-- 名字 -->
+					<div class="comName">
+						<p>很长很长的公司的名字就像这样或许还可以再长一点</p>
+					</div>
+				</div>
+				<!-- 个人信息 -->
+				<div class="person clearfix">
+					<!-- 姓名 -->
+					<div class="name">
+						<span>正常的名字</span>
+					</div>
+					<!-- 电话 -->
+					<div class="tel">
+						<span>13456789100</span>
+					</div>
+				</div>
+				<!-- 文字信息 -->
+				<div class="info">
+					<p>
+						好吧，在这个地方我们就真的得稍微费点精神写一段不太长又不太短的文字介绍来介绍一下这个关系人或者供应商的基本信息，但是问题来了，到底多长才算合适呢，这里我觉得像这么长就可以了。
+					</p>
+				</div>
+				<!-- 图片信息 -->
+				<div class="myImg clearfix">
+					<div class="sdImg">
+						<img src="./img/share/top.jpg">
+					</div>
+					<div class="sdImg">
+						<img src="./img/share/top.jpg">
+					</div>
+					<div class="sdImg">
+						<img src="./img/share/top.jpg">
+					</div>
+					<div class="sdImg">
+						<img src="./img/share/top.jpg">
+					</div>
+					<div class="sdImg">
+						<img src="./img/share/top.jpg">
+					</div>
+					<div class="sdImg">
+						<img src="./img/share/top.jpg">
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

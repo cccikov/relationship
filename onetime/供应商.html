@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title>关系共享</title>
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function(){
+			// 设置公司名的合理宽度
+			$(".business").width($(".info").width()-$(".pic").width());
+		})
+	</script>
+	<style>
+		/*未注册情况下选项框*/
+		.selectBox {
+		  /*display: none;*/
+		  padding: 15px 0;
+		  border-bottom: 1px solid #ccc;
+		  text-align: center;
+		}
+		.selectBox p {
+		  line-height: 50px;
+		  font-size: 16px;
+		  color: #777;
+		}
+		.selectBox div {
+		  width: 90%;
+		  margin: 0 auto;
+		}
+		.selectBox a {
+		  display: block;
+		  float: left;
+		  width: 100%;
+		  line-height: 43px;
+		  padding: 0 20px;
+		  border-radius: 5px;
+		  text-align: center;
+		  background: #a50100;
+		  color: #fff;
+		}
+		.head{
+			margin: 5px 10px;
+			background: #fff;
+		}
+		.head ul{
+			margin: 0;
+		}
+		.head ul li{
+			position: relative;
+			display: block;
+			line-height: 40px;
+		}
+		.head ul li:nth-of-type(1){
+			border-bottom: 1px solid #ccc;
+		}
+		.head ul li a{
+			display: block;
+			padding: 0 10px;
+		}
+		.arrow i{
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			display: block;
+			width: 18px;
+			height: 18px;
+			background: url(./img/share/more.png) center center no-repeat;
+			background-size: contain;
+		}
+		#relation li {
+		  display: block;
+		  width: 96%;
+		  margin: 10px auto;
+		  background: #fff;
+		}
+		#relation li .main {
+		  padding: 5px 0;
+		}
+		#relation li .main .vendor {
+			float: left;
+			padding: 5px 0;
+		}
+		#relation li .main .vendor .info {
+			overflow: hidden;
+		}
+		#relation li .main .vendor .info .pic {
+			float: left;
+		}
+		#relation li .main .vendor .info .pic img {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			border-radius: 20px;
+			margin: 0 10px;
+		}
+		#relation li .main .vendor .info .business {
+			float: left;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		#relation li .main .vendor .info .business span {
+			margin: 0 5px;
+			font-size: 16px;
+		}
+		#relation li .main .vendor .info .business .name {
+			padding: 3px 5px;
+		}
+		#relation li .main .vendor .info .business .name span:nth-of-type(1) {
+			display: inline-block;
+			max-width: 5em;
+			margin: -3px 0;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			font-size: 12px;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<!--导航条-->
+		<nav class="clearfix" id="nav">
+			<h2>普伟集团</h2>
+			<ul>
+				<!--已登录-->
+				<li>
+					<a class="msg" href="###"></a>
+				</li>
+				<!--未登录-->
+				<li>
+					<a class="register" href="###"></a>
+				</li>
+				<li>
+					<a class="search" href="###"></a>
+				</li>
+				<li>
+					<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+				</li>
+			</ul>
+		</nav>
+
+
+		<!--侧栏-->
+		<div id="sideBlock">
+			<!--侧栏顶部-->
+			<div class="sideBlock-top clearfix">
+				<img src="img/common/common6.png" />
+				<div class="sideBlock-top-center">
+					<p>张某某</p>
+					<p>电话：12345678</p>
+				</div>
+				<a href="">扫一扫</a>
+			</div>
+			<!--侧栏中部-->
+			<div class="sideBlock-middle">
+				<!--实用链接-->
+				<h6>实用链接</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part1">
+					<a class="clearfix" href="###">首页<i></i></a>
+					<a class="clearfix" href="###">精品课程<i></i></a>
+					<a class="clearfix" href="###">商机把握<i></i></a>
+					<a class="clearfix" href="###">学员产品<i></i></a>
+					<a class="clearfix" href="###">营商智囊<i></i></a>
+				</div>
+				<!--账户管理-->
+				<h6>账户管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part2">
+					<a class="clearfix" href="###">个人中心<i></i></a>
+					<a class="clearfix" href="###">个人资料<i></i></a>
+					<a class="clearfix" href="###">修改密码<i></i></a>
+				</div>
+				<!--管理-->
+				<h6>管理</h6>
+				<div class="sideBlock-middle-part sideBlock-middle-part3">
+					<a class="clearfix" href="###">企业管理<i></i></a>
+					<a class="clearfix" href="###">参训记录<i></i></a>
+				</div>
+
+				<!--退出按钮-->
+				<a class="out" href="###">退出登录</a>
+
+			</div>
+		</div>
+		<!--=================================================================================================-->
+		<!--内容-->
+		<div id="content">
+			<!-- 未注册情况下选项框 -->
+			<!-- <div class="selectBox clearfix">
+				<p>您未成为供应商</p>
+				<div class="clearfix">	
+					<a href="javascript:void(0);" style="margin-right: 5px;">申请成为供应商</a>
+				</div>
+			</div> -->
+			<!-- 头部个人管理框 -->
+			<div class="head clearfix">
+				<ul>
+					<li>
+						<a class="result" href="javascript:void(0);"> 
+							<div class="title"> 
+								<span>申请审核中...</span>
+							</div> 
+							<div class="arrow">
+								<i class="icon-right"></i>
+							</div>
+						 </a>
+					</li>
+					<li>
+						<a class="product" href="javascript:void(0);"> 
+							<div class="title"> 
+								<span>我的产品</span>
+							</div> 
+							<div class="arrow">
+								<i class="icon-right"></i>
+							</div>
+						 </a>
+					</li>
+				</ul>
+			</div>
+			<div class="mian">
+				<ul id="relation">
+				<!-- 单元关系 -->
+				<li>
+					<div class="main clearfix">
+						<div class="vendor clearfix">
+							<div class="info clearfix">
+								<div class="pic">
+									<img src="./img/share/top.jpg">
+								</div>
+								<div class="business">
+									<span>佛山博美铝材和钢材还有建材有限公司</span>
+									<div class="name">
+										<span>王骆丹</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
