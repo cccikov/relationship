@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<title>新增悬赏</title>
 
@@ -33,6 +33,9 @@
 		}
 		#addReward form textarea {
 			resize: none;
+		}
+		[type='datetime-local']{
+			-webkit-appearance: none;
 		}
 	</style>
 	<script type="text/javascript" src="js/reward.js"></script>
@@ -132,7 +135,7 @@
 						<input class="form-control" type="datetime-local" name="">
 					</div>
 					<div class="btn-wrap text-center">
-						<input class="btn btn-danger" type="submit" value="提交"/>
+						<input class="btn btn-danger" id="submit" type="submit" value="提交"/>
 					</div>
 				</form>
 
@@ -141,5 +144,17 @@
 
 		</div>
 	</div>
+	<script type="text/javascript">
+		$("#submit").on("click",function(e){
+			e.preventDefault();
+			console.clear();
+			console.log($("[type='datetime-local']").val());
+			var now = new Date($("[type='datetime-local']").val());
+			console.log(now);
+			console.log(now.getTime());
+		});
+		var aDay = new Date();
+		console.log(aDay);
+	</script>
 </body>
 </html>
