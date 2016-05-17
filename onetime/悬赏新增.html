@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
@@ -14,7 +14,27 @@
 	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 
-	<link rel="stylesheet" type="text/css" href="css/reward.css">
+	<style type="text/css">
+		#addReward .info-list {
+			background: #fff;
+		}
+		#addReward .info-list .info-item {
+			padding: 10px;
+			border-bottom: 1px solid #ddd;
+		}
+		#addReward .info-list .info-item .company-name {
+			text-align: center;
+			margin: 0;
+			font-weight: 700;
+		}
+		#addReward form {
+			padding: 10px 10px;
+			background: #fff;
+		}
+		#addReward form textarea {
+			resize: none;
+		}
+	</style>
 	<script type="text/javascript" src="js/reward.js"></script>
 </head>
 <body>
@@ -105,10 +125,7 @@
 					</div>
 					<div class="form-group">
 					    <label>悬赏奖励</label>
-					    <div class="input-group">
-					      	<input class="form-control" type="text">
-					        <div class="input-group-addon">积分</div>
-					    </div>
+				      	<input class="form-control" type="text">
 					</div>
 					<div class="form-group">
 						<label>有效时间：</label>

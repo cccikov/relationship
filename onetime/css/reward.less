@@ -59,37 +59,76 @@ p{
 
 /*详情独有*/
 
-.comment-input{
-	position: relative;
-	padding:10px;
-	button{
-		position:absolute;
-		bottom:10px;
-		right:10px;
-	}
-	.form-group{
-		overflow:hidden;
-		margin:0 54px 0 0;
-		textarea{
-			resize:none;
-			height: 34px;
-			overflow:auto;
-		}
-	}
-} 
+/*认领和咨询按钮*/
+.btn-wrap{
+    margin:10px 12px;
+    text-align: right;
+    #adopt{
+        margin:0 15px 0 0;
+    }
+}
+
+/*comment heading*/
 .c-hd{
 	padding:5px;
 	font-size:14px;
 	font-weight:700;
 	color:#666;
 }
+
+/*认领列表*/
+.adopt-list{
+    background: #fff;
+    .adopt-item{
+        display: block;
+        padding:0;
+        line-height: 50px;
+        border-top: 1px solid #ddd;
+        &:first-of-type{
+            border: none;
+        }
+        img{
+            float: left;
+            margin:10px 5px;
+        }
+        p{
+            margin:0 50px 0 40px;
+            font-size: 15px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .btn{
+            float: right;
+            padding:1px 6px;
+            margin:13px 3px 0 0;
+        }
+    }
+    &.visitor{
+        p{
+            margin: 0 0 0 40px;
+        }
+        .btn{
+            display: none;   
+        }
+    }
+}
+
 /*评论列表*/ 
-.comment-list{
-	margin:0 5px;
+.consult-list{
+	padding:0 5px;
+	background: #fff;
+	&.inner{
+	    margin:10px 0 0;
+	    background: #D8D8D8;
+	}
 	/*单个评论*/
-	.comment-item{
+	.consult-item{
 		padding:5px 0;
 		border-top: 1px solid #ddd;
+		&:first-of-type{
+		   border: none; 
+		}
 		/*头像*/
 		img{
 			position:relative;
@@ -107,7 +146,7 @@ p{
 			        float: right;
 			        height: 25px;
 			        padding: 5px 0 0;
-			        .comment-btns{
+			        .consult-btns{
 			            margin:0 3px;
 			            color:#666;
 			            &:before{
@@ -157,8 +196,7 @@ p{
 	}
 }
 
-
-//悬赏新增
+/*悬赏新增*/
 #addReward{
 	.info-list{
 		background: #fff;
