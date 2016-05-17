@@ -20,6 +20,41 @@
 			.state .label{
 				font-size: 16px;
 			}
+			
+			.bus-connect{
+				position: relative;
+				height: 420px;
+			}
+			.bus-connect .panel{
+				position: absolute;
+				width: 40%;
+			}
+			/*关系拥有者*/
+			.contact{
+				top:0;
+				left:0;
+				right:0;
+				margin:0 auto;
+			}
+			.contact.panel-default{
+				border-color:#337AB7;
+			}
+			/*供应商*/
+			.supplier{
+				top:210px;
+				left:50px;
+			}
+			.supplier.panel-default{
+				border-color:#D9534F;
+			}
+			/*关系资源*/
+			.resource{
+				top:210px;
+				right:50px;
+			}
+			.resource.panel-default{
+				border-color: #5BC0DE;
+			}
 			.top img{
 				float: left;
 				margin:0 10px 0 0;
@@ -32,19 +67,6 @@
 			}
 			.name,.phone{
 				margin:5px 0 0 0;
-			}
-
-			.cancel .panel-default{
-				border-color:#777;
-			}
-			.waiting .panel-default{
-				border-color:#337ab7;
-			}
-			.deal .panel-default{
-				border-color:#5cb85c;
-			}
-			.fall .panel-default{
-				border-color:#f0ad4e;
 			}
 		</style>
 			
@@ -71,9 +93,10 @@
 					<span class="label label-warning">失败</span>
 				</div>
 
-				<div class="business-connect cancel">
+				<div class="bus-connect">
+					
 					<!-- 关系资源 -->
-					<div class="panel panel-default">
+					<div class="panel panel-default resource">
 						<div class="panel-body">
 							<div class="top clearfix">
 								<h4 class="company-name">普伟集团<span class="label label-info">关系资源</span></h4>
@@ -86,8 +109,24 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- 关系拥有者 -->
+					<div class="panel panel-default contact">
+						<div class="panel-body">
+							<div class="top clearfix">
+								<h4 class="company-name">普伟集团<span class="label label-primary">关系拥有者</span></h4>
+							</div>
+							<div class="name">
+								姓名：邓志鹏(董事长)
+							</div>
+							<div class="phone">
+								手机：13456789100
+							</div>
+						</div>
+					</div>
+					
 					<!-- 供应商 -->
-					<div class="panel panel-default">
+					<div class="panel panel-default supplier">
 						<div class="panel-body">
 							<div class="top clearfix">
 								<img class="logo" src="../img/logo.png" height="40" alt="" />
@@ -104,10 +143,10 @@
 
 				</div>
 
-				<ul class="list-group">
+				<!--<ul class="list-group">
 					<li class="list-group-item">还有产生多少交易？？</li>
 					<li class="list-group-item">还有其他内容吗？？</li>
-				</ul>
+				</ul>-->
 
 			</div>
 		</div>
