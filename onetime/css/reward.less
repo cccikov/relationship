@@ -47,6 +47,12 @@ p{
 			padding:10px;
 			color:#999;
 			font-size:12px;
+			.left{
+			    float: left;
+			}
+			.right{
+			    float: right;
+			}
 		}
 	}
 }
@@ -80,25 +86,69 @@ p{
 /*评论列表*/ 
 .comment-list{
 	margin:0 5px;
+	/*单个评论*/
 	.comment-item{
 		padding:5px 0;
 		border-top: 1px solid #ddd;
+		/*头像*/
 		img{
 			position:relative;
 			top:5px;
 			float: left;
 			border-radius:15px;
 		}
+		/*信息 内容 包含块*/
 		.content{
 			margin:0 0 0 35px;
-			.name{
-				color:#666;
-				font-size:14px;
+            /*评论人信息*/
+			.ps-info{
+			    /*评论，点赞按钮*/
+			    .act-wrap{
+			        float: right;
+			        height: 25px;
+			        padding: 5px 0 0;
+			        .comment-btns{
+			            margin:0 3px;
+			            color:#666;
+			            &:before{
+                            content: "";
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            margin:-3px 2px 0 0;
+                            vertical-align: middle;
+                        }
+			        }
+			        /*评论按钮*/
+			        .com-btn:before{
+			           background: url(../img/share/comment.png) center center no-repeat;
+			           background-size: contain;
+			        }
+			        /*点赞按钮*/
+			        .agree-btn:before{
+			            background: url(../img/share/agree.png) center center no-repeat;
+                        background-size: contain;
+			        }
+			        /*已点赞*/
+			        .agree-btn.active:before{
+			            background: url(../img/share/agreeactive.png) center center no-repeat;
+                        background-size: contain;
+			        }
+			    }
+			    /*用户名*/
+			     .name{
+			         overflow: hidden;
+                    color:#666;
+                    font-size:14px;
+                }
+                /*评论时间*/
+                .time{
+                    overflow: hidden;
+                    color:#aaa;
+                    font-size:12px;
+                }
 			}
-			.time{
-				color:#aaa;
-				font-size:12px;
-			}
+			/*评论内容*/
 			.main-content{
 				margin:5px 0;
 				color:#222;

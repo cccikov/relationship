@@ -46,6 +46,12 @@ p {
   color: #999;
   font-size: 12px;
 }
+.reward-item a .item-bottom .left {
+  float: left;
+}
+.reward-item a .item-bottom .right {
+  float: right;
+}
 /*详情独有*/
 .comment-input {
   position: relative;
@@ -75,27 +81,69 @@ p {
 .comment-list {
   margin: 0 5px;
 }
+/*单个评论*/
 .comment-list .comment-item {
   padding: 5px 0;
   border-top: 1px solid #ddd;
 }
+/*头像*/
 .comment-list .comment-item img {
   position: relative;
   top: 5px;
   float: left;
   border-radius: 15px;
 }
+/*信息 内容 包含块*/
 .comment-list .comment-item .content {
   margin: 0 0 0 35px;
 }
-.comment-list .comment-item .content .name {
+/*评论人信息*/
+/*评论，点赞按钮*/
+.comment-list .comment-item .content .ps-info .act-wrap {
+  float: right;
+  height: 25px;
+  padding: 5px 0 0;
+}
+.comment-list .comment-item .content .ps-info .act-wrap .comment-btns {
+  margin: 0 3px;
+  color: #666;
+}
+.comment-list .comment-item .content .ps-info .act-wrap .comment-btns:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: -3px 2px 0 0;
+  vertical-align: middle;
+}
+/*评论按钮*/
+.comment-list .comment-item .content .ps-info .act-wrap .com-btn:before {
+  background: url(../img/share/comment.png) center center no-repeat;
+  background-size: contain;
+}
+/*点赞按钮*/
+.comment-list .comment-item .content .ps-info .act-wrap .agree-btn:before {
+  background: url(../img/share/agree.png) center center no-repeat;
+  background-size: contain;
+}
+/*已点赞*/
+.comment-list .comment-item .content .ps-info .act-wrap .agree-btn.active:before {
+  background: url(../img/share/agreeactive.png) center center no-repeat;
+  background-size: contain;
+}
+/*用户名*/
+.comment-list .comment-item .content .ps-info .name {
+  overflow: hidden;
   color: #666;
   font-size: 14px;
 }
-.comment-list .comment-item .content .time {
+/*评论时间*/
+.comment-list .comment-item .content .ps-info .time {
+  overflow: hidden;
   color: #aaa;
   font-size: 12px;
 }
+/*评论内容*/
 .comment-list .comment-item .content .main-content {
   margin: 5px 0;
   color: #222;
@@ -119,3 +167,4 @@ p {
 #addReward form textarea {
   resize: none;
 }
+/*# sourceMappingURL=reward.css.map */
