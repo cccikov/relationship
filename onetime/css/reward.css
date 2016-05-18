@@ -26,12 +26,20 @@ p {
   box-sizing: content-box;
   line-height: 50px;
   padding: 0 10px 0 0;
-  overflow: hidden;
   text-align: center;
   font-size: 16px;
+}
+.reward-item a .item-top .reward-company span {
+  float: left;
   font-weight: 700;
+}
+.reward-item a .item-top .reward-company small {
+  display: block;
+  overflow: hidden;
+  padding: 0 0 0 5px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: #666;
 }
 .reward-item a .item-middle {
   padding: 10px;

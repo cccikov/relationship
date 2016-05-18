@@ -25,12 +25,20 @@ p{
 				box-sizing:content-box;
 				line-height: 50px;
 				padding:0 10px 0 0;
-				overflow: hidden;
 				text-align: center;
 				font-size: 16px;
-				font-weight: 700;
-				white-space: nowrap;
-				text-overflow: ellipsis;
+				span{
+				    float: left;
+				    font-weight: 700;
+				}
+				small{
+				    display: block;
+				    overflow: hidden;
+				    padding:0 0 0 5px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+				    color: #666;
+				}
 			}
 		}
 		// 单个中部

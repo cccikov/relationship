@@ -36,9 +36,29 @@
 		}
 		[type='datetime-local']{
 			-webkit-appearance: none;
+			padding:0 12px;
 		}
 	</style>
 	<script type="text/javascript" src="js/reward.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#sub").click(function(e){
+				var warning = $("#warning");
+				var rewardContent=$("#rewardContent").val().trim();//悬赏内容
+				var reward=$("#reward").val().trim();//悬赏奖励
+				var effectiveTime=$("#effectiveTime").val().replace('T',' ');//有效时间
+				console.log(effectiveTime);
+				if(rewardContent==""){
+					warning.html('悬赏内容不能为空').show();
+					return;
+				}else if(effectiveTime==""){
+					warning.html('有效时间不能为空').show();
+				  	return
+				}
+				
+			});
+		});
+	</script>
 </head>
 <body>
 	<div id="wrap">
@@ -121,21 +141,22 @@
 				</ul>
 
 				<!-- 表单 -->
-				<form method="get" action="http://www.baidu.com">
+				<form  >
 					<div class="form-group">
 						<label>悬赏内容：</label>
-						<textarea class="form-control" rows="2"></textarea>
+						<textarea class="form-control auto" maxlength='140' rows="2" id="rewardContent"></textarea>
 					</div>
 					<div class="form-group">
 					    <label>悬赏奖励</label>
-				      	<input class="form-control" type="text">
+				      	<input class="form-control" type="text" id="reward">
 					</div>
 					<div class="form-group">
 						<label>有效时间：</label>
-						<input class="form-control" type="datetime-local" name="">
+						<input  style="padding:0 12px;" class="form-control" type="datetime-local" name="effectiveTime" id="effectiveTime">
 					</div>
+					<div class="alert alert-warning" id="warning" role="alert"></div>
 					<div class="btn-wrap text-center">
-						<input class="btn btn-danger" id="submit" type="submit" value="提交"/>
+						<input class="btn btn-danger" value="提交" type="button" id="sub"/>
 					</div>
 				</form>
 
