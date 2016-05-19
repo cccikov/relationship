@@ -15,9 +15,13 @@
 			p{
 				margin:0;
 			}
-
+			textarea{
+				resize: none;
+			}
+			
 			#main{
 				padding:10px;
+				min-width:1007px;
 			}
 			/*悬赏发起人信息*/
 			.top-left{
@@ -48,8 +52,23 @@
 				color:#999;
 			}
 			/*跟踪列表*/
-			.track .list-group-item{
-				padding: 0 15px 10px;
+			.track h5{
+				margin:0 0 10px;
+			}
+			#addTrack{
+				width: 100px;
+			}
+			.track .left{
+				display: table-cell;
+				width: 100000px;
+			}
+			.track .right{
+				display: table-cell;
+				padding:0 5px;
+				vertical-align: middle;
+			}
+			.opera-man,.create-time,.edit-time{
+				display: none;
 			}
 			/*认领列表*/
 			.adopt{
@@ -76,12 +95,94 @@
 				content: "回复： ";
 				color:#999;
 			}
+			
+			/*模拟*/
+			/*#prompt{
+				display: block;
+    			padding-right: 17px;
+    			opacity: 1;
+			}
+			#prompt .modal-content{
+				transform: translateY(150px);
+			}*/
+			#prompt .left{
+				float: left;
+				width: 50%;
+				border-right: 1px solid #ccc;
+			}
+			#prompt .right{
+				float: right;
+				width: 50%;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function(){
-				// $('#prompt').modal('show');
-				// $('#prompt').modal('hide');
+				$("#addTrack").on("click",function(){
+					promptShow({
+						type:"add"
+					});
+				});
+				
+				$(".del").on("click",function(e){
+					var e = e || window.event;
+					e.stopPropagation();
+					alert("删除");
+				});
+				$(".track-item").on("click",function(){
+					var that = $(this);
+					promptShow({
+						type:"check",
+						obj:that
+					});
+				});
 			})
+			//type-add,check;
+			function promptShow(argu){
+				reset();//恢复默认
+				var titleInput = $("#p-title");
+				var contentInput = $("#p-content");
+				$('#prompt').modal('show');
+				if(argu.type=="check"){
+					$("#save").hide();
+					var obj = argu.obj;
+					titleInput.val(obj.find(".track-title").text()).attr("readonly",true);
+					contentInput.val(obj.find(".track-content").text()).attr("readonly",true);;
+					$("#p-opera").html("操作人："+obj.find(".opera-man").text());
+					$("#p-create").html("创建时间："+obj.find(".create-time").text());
+					$("#p-edit").html("修改时间："+obj.find(".edit-time").text());
+				}else if(argu.type=="add"){
+					$("#edit").hide();
+					$(".track-info").hide();
+				}
+
+				// 点击编辑按钮
+				$("#edit").off("click").on("click",function(){
+					titleInput.add(contentInput).attr("readonly",false);
+					$(this).hide().siblings("#save").show();
+				});
+
+				// 点击保存按钮
+				$("#save").off("click").on("click",function(){
+					if(titleInput.val().trim()==""){
+						titleInput.focus();
+						return;
+					}else if(contentInput.val().trim()==""){
+						contentInput.focus();
+						return;
+					}
+					/*=============================================== ajax ===============================================*/ 
+					console.log({title:titleInput.val(),content:contentInput.val()});
+
+					$('#prompt').modal('hide');
+				});
+			}
+			function reset(){
+				$("#save").show();
+				$("#edit").show();
+				$(".track-info").show();
+				$("#p-title").val("").attr("readonly",false);
+				$("#p-content").val("").attr("readonly",false);
+			}
 		</script>
 	</head>
 
@@ -129,17 +230,26 @@
 					</div>
 				</div>
 				
+				<!-- 跟踪列表 -->
 				<h5><strong>跟踪记录列表</strong></h5>
-				<ul class="list-group track">
-					<li class="list-group-item">
-						<h5 class="track-title"><strong>title</strong></h5>
-						<p class="track-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					</li>
-					<li class="list-group-item">
-						<h5 class="track-title"><strong>title</strong></h5>
-						<p class="track-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					</li>
-				</ul>
+				<div class="list-group track">
+					<a class="list-group-item track-item" href="javascript:void(0)">
+						<div class="left">
+							<h5 class="track-title"><strong>title</strong></h5><!-- 标题 -->
+							<p class="track-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><!-- 内容 -->
+							<span class="opera-man">ccc</span><!-- 操作人(隐藏)-->
+							<span class="create-time">2016/06/27 15:30</span><!-- 创建时间 (隐藏)-->
+							<span class="edit-time">2016/06/28 15:30</span><!-- 修改时间 (隐藏)-->
+						</div>
+						<div class="right">
+							<button class="btn btn-danger del">删除</button>
+						</div>	
+					</a>
+					<a class="list-group-item text-center">
+						<!--添加跟踪按钮-->
+						<button class="btn btn-primary" id="addTrack">＋</button>
+					</a>
+				</div>
 
 				<h5><strong>认领列表</strong></h5>
 				<ul class="list-group adopt">
@@ -147,8 +257,8 @@
 						<p class="row">
 							<strong class="col-xs-2 text-center">黄国辉</strong><!--人名-->
 							<small class="col-xs-2 text-left">1345678910</small><!--手机号-->
-							<span class="col-xs-5 text-left">普伟集团</span><!--企业名-->
-							<small class="col-xs-3 text-right">2016-09-15 18:50</small><!--时间-->
+							<span class="col-xs-6 text-left">普伟集团</span><!--企业名-->
+							<small class="col-xs-2 text-right">2016-09-15 18:50</small><!--时间-->
 						</p>
 					</li>
 				</ul>
@@ -196,18 +306,26 @@
 								<h4 class="modal-title" id="myModalLabel">跟踪记录</h4>
 							</div>
 							<div class="modal-body">
-								<div class="form-grounp">
+								<div class="form-group">
 									<label>题目：</label>
-									<input class="form-control" type="text" name="">
+									<input class="form-control" type="text" id="p-title">
 								</div>
-								<div class="form-grounp">
+								<div class="form-group">
 									<label>内容：</label>
-									<textarea class="form-control"></textarea>
+									<textarea class="form-control" rows="4" id="p-content"></textarea>
 								</div>
+								<ul class="list-group track-info text-center">
+									<li class="list-group-item" id="p-opera">操作人：ccc</li>		
+									<li class="list-group-item clearfix"> 
+										<div class="left" id="p-create">创建时间：2016-05-18 15：50</div>
+										<div class="right" id="p-edit">修改时间：2016-05-18 15：50</div>
+									</li>
+								</ul>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary" id="save">确定</button>
+								<button class="btn btn-info" id="edit">编辑</button>
+								<button type="button" class="btn btn-primary" id="save">保存</button>
 							</div>
 						</div>
 					</div>
