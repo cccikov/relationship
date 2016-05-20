@@ -230,3 +230,16 @@ a:focus{
 #content{
 	padding:46px 0 70px;
 }
+
+/*返回关系汇总首页*/
+.go-relation-home{
+	position: fixed;
+    bottom: 15px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #a50100 center 4px no-repeat;
+    background-size: 30px;
+    opacity: 0.8;
+}

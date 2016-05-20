@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>关系资源详情</title>
+	<!-- <#include "/wechat/include/common_resource.tpl" > -->
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<!-- 通用样式 -->
+	<link rel="stylesheet" href="/css/upload.css" type="text/css">
+	<link rel="stylesheet" href="/css/upload.css" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+	<!-- 引入js -->
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/uploader.js"></script>
+	<script src="js/photoswipe/photoswipe.min.js"></script>
+    <script src="js/photoswipe/photoswipe-ui-default.min.js"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+
+	<style>
+		/*关系拥有者详情*/
+		.realtion-head{
+			margin:5px 5px 0;
+			background: #9C5B17;
+			border-color: #9C5B17;
+			border-top-right-radius: 5px;
+			border-top-left-radius: 5px;
+			padding:10px 10px 5px;
+			color:#fff;
+			font-size: 14px;
+		}
+		.relation{
+			margin:0 5px 5px;
+			background: #fff;
+		}
+		.relation .left{
+			float: left;
+			margin:10px;
+		}
+		.relation .right{
+			overflow: hidden;
+			padding:10px 10px 10px 0;
+		}
+		.relation .company-name{
+			margin:0 0 5px 0;
+			/*text-align: left;*/
+		}
+
+		/*关系资源列表*/
+		.resource-list{
+			margin: 5px;
+			font-size: 14px;
+		}
+		.resource-list p{
+			margin:0 0 5px 0;
+		}
+		.list-group-item{
+			padding:10px 10px 5px;
+		}
+		.list-group-item.active{
+			background: #d9534f;
+			border-color: #d9534f;
+		}
+		.company-name{
+			font-size: 16px;
+			font-weight: 700;
+			/*text-align:center;*/
+		}
+		.list-group-item .left{
+			float: left;
+		}
+		.list-group-item .right{
+			display: block;
+			overflow: hidden;
+		}
+		.resource-list .right span:after{
+			content:"、";
+		}
+		.resource-list .right span:last-child:after{
+			content:"。";
+		}
+	</style>
+</head>
+
+	<body>
+		<div id="wrap">
+			
+			<!--导航条-->
+			<nav class="clearfix" id="nav">
+				<h2>普伟集团</h2>
+				<ul>
+					<!--已登录-->
+					<li>
+						<a class="msg" href="###"></a>
+					</li>
+					<!--未登录-->
+					<li>
+						<a class="register" href="###"></a>
+					</li>
+					<li>
+						<a class="search" href="###"></a>
+					</li>
+					<li>
+						<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+					</li>
+				</ul>
+			</nav>
+
+
+			<!--侧栏-->
+			<div id="sideBlock">
+				<!--侧栏顶部-->
+				<div class="sideBlock-top clearfix">
+					<img src="img/common/common6.png" />
+					<div class="sideBlock-top-center">
+						<p>张某某</p>
+						<p>电话：12345678</p>
+					</div>
+					<a href="">扫一扫</a>
+				</div>
+				<!--侧栏中部-->
+				<div class="sideBlock-middle">
+					<!--实用链接-->
+					<h6>实用链接</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part1">
+						<a class="clearfix" href="###">首页<i></i></a>
+						<a class="clearfix" href="###">精品课程<i></i></a>
+						<a class="clearfix" href="###">商机把握<i></i></a>
+						<a class="clearfix" href="###">学员产品<i></i></a>
+						<a class="clearfix" href="###">营商智囊<i></i></a>
+					</div>
+					<!--账户管理-->
+					<h6>账户管理</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part2">
+						<a class="clearfix" href="###">个人中心<i></i></a>
+						<a class="clearfix" href="###">个人资料<i></i></a>
+						<a class="clearfix" href="###">修改密码<i></i></a>
+					</div>
+					<!--管理-->
+					<h6>管理</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part3">
+						<a class="clearfix" href="###">企业管理<i></i></a>
+						<a class="clearfix" href="###">参训记录<i></i></a>
+					</div>
+
+					<!--退出按钮-->
+					<a class="out" href="###">退出登录</a>
+
+				</div>
+			</div>
+			<!-- <#include "/wechat/include/top_nav.tpl" >  -->
+
+			<!--内容-->
+			<div id="content">
+				
+				<!-- 关系拥有者 -->
+				<div class="realtion-head">关系拥有者</div>
+				<div class="relation clearfix">
+					<img class="left" src="img/share/top.jpg" width="40">
+					<div class="right">
+						<p class="company-name">深圳市腾讯计算机系统有限公司</p>
+						<span>陈大师</span>
+						<span>13545678912</span>
+					</div>
+				</div>
+
+				<!-- 关系资源列表 -->
+				<ul class="list-group resource-list">
+					<li class="list-group-item active"> 
+						<span>关系资源</span>
+					</li>
+					<!-- 关系资源详情 -->
+					<li class="list-group-item company-name ">佛山市钛合金门窗厂</li>					
+					<li class="list-group-item">姓名：谢**</li>					
+					<li class="list-group-item">职位：董事长</li>					
+					<li class="list-group-item">性别：男</li>					
+					<li class="list-group-item clearfix">
+						<span class="left">产品：</span>
+						<span class="right">pos机</span>
+					</li>
+					<li class="list-group-item clearfix">
+						<span class="left">行业：</span>
+						<div class="right">
+							<span>呵呵</span>
+							<span>呵呵</span>
+							<span>呵呵</span>
+							<span>呵呵</span>
+							<span>呵呵</span>
+							<span>呵呵</span>
+							<span>呵呵</span>
+							<span>呵呵</span>
+						</div>
+					</li>					
+				</ul>
+				
+				<a id="bottomMark" href="javascript:void(0)"></a>
+
+				<!-- 返回关系共享首页 -->
+				<a class="go-relation-home" style="background-image: url(${contextPath}/img/share/gohome.png)" href="${contextPath}/relation/index.do"></a>
+			</div>	
+		</div>
+	</body>
+</html>

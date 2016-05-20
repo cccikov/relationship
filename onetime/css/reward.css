@@ -1,210 +1,152 @@
+/*关系共享共用样式less*/
+
 #content {
-  padding: 46px 0 10px;
+    padding: 46px 0 5px;
 }
+
 p {
-  margin: 0;
+    margin: 0;
 }
+
+.label {
+    padding: 3px 5px 2px;
+}
+
+
+/*悬赏列表共用样式*/
+
 .reward-item {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin: 10px;
-  background: #fff;
-  box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.2);
+    border-top: 1px solid #eee;
+    background: #fff;
 }
+
 .reward-item a {
-  display: block;
+    display: block;
 }
-.reward-item a .item-top {
-  border-bottom: 1px solid #ddd;
+
+.item-top .top-left {
+    float: left;
+    padding: 10px;
 }
-.reward-item a .item-top img {
-  box-sizing: content-box;
-  float: left;
-  padding: 10px;
+
+.item-top .top-right {
+    overflow: hidden;
+    padding: 0 5px 0 0;
+    margin: 5px 0 0 0;
 }
-.reward-item a .item-top .reward-company {
-  box-sizing: content-box;
-  line-height: 50px;
-  padding: 0 10px 0 0;
-  text-align: center;
-  font-size: 16px;
+
+..name-time {
+    margin: 3px 0 0;
 }
-.reward-item a .item-top .reward-company span {
-  float: left;
-  font-weight: 700;
+
+..name-time .person-name {
+    float: left;
+    font-size: 16px;
+    font-weight: 700;
 }
-.reward-item a .item-top .reward-company small {
-  display: block;
-  overflow: hidden;
-  padding: 0 0 0 5px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #666;
+
+..name-time .time {
+    float: right;
+    margin: 4px 0 0;
+    color: #999;
+    font-size: 12px;
 }
-.reward-item a .item-middle {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-indent: 2em;
+
+..name-time .time:before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: -3px 5px 0 0;
+    vertical-align: middle;
+    background: url(../img/relation/time.png) center center no-repeat;
+    background-size: contain;
 }
-.reward-item a .item-bottom {
-  padding: 10px;
-  color: #999;
-  font-size: 12px;
+
+..company-name {
+    margin: 3px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #666;
 }
-.reward-item a .item-bottom .left {
-  float: left;
+
+.item-middle {
+    margin: 0 5px 0 50px;
 }
-.reward-item a .item-bottom .right {
-  float: right;
+
+.item-bottom {
+    padding: 10px;
+    color: #272636;
+    font-size: 14px;
 }
-/*详情独有*/
-/*认领和咨询按钮*/
-.btn-wrap {
-  margin: 10px 12px;
-  text-align: right;
+
+.item-bottom .left {
+    float: left;
+    margin: 0 8px 0 0;
 }
-.btn-wrap #adopt {
-  margin: 0 15px 0 0;
+
+.item-bottom .left:before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: -4px 2px 0 0;
+    vertical-align: middle;
 }
-/*comment heading*/
-.c-hd {
-  margin: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #666;
+
+.item-bottom .left.adopt-num:before {
+    background: url(../img/relation/adopt.png) no-repeat;
+    background-size: 16px;
 }
-/*认领列表*/
-.adopt-list {
-  background: #fff;
+
+.item-bottom .left.consult-num:before {
+    background: url(../img/relation/comment.png) no-repeat;
+    background-size: 14px;
 }
-.adopt-list .adopt-item {
-  display: block;
-  padding: 0;
-  line-height: 50px;
-  border-top: 1px solid #ddd;
+
+.item-bottom .right {
+    float: right;
 }
-.adopt-list .adopt-item:first-of-type {
-  border: none;
+
+.reward-head {
+    margin: 0 0 5px;
 }
-.adopt-list .adopt-item img {
-  float: left;
-  margin: 10px 5px;
+
+.reward-head a {
+    float: left;
+    width: 50%;
+    line-height: 40px;
+    background: #fff;
+    text-align: center;
+    font-size: 16px;
 }
-.adopt-list .adopt-item p {
-  margin: 0 50px 0 40px;
-  font-size: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+.reward-head a:nth-child(1) {
+    border-right: 1px solid #EBEBEB;
 }
-.adopt-list .adopt-item .btn {
-  float: right;
-  padding: 1px 6px;
-  margin: 13px 3px 0 0;
+
+.reward-head a:nth-child(2) {
+    border-left: 1px solid #eee;
 }
-.adopt-list.visitor p {
-  margin: 0 0 0 40px;
+
+.reward-head a.active:after {
+    content: "";
+    display: block;
+    border: 1px solid #A50100;
 }
-.adopt-list.visitor .btn {
-  display: none;
+
+#addReward {
+    position: fixed;
+    bottom: 90px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: rgba(0, 188, 212, 0.8) url(../img/relation/puls.png) center center no-repeat;
+    background-size: contain;
 }
-/*评论列表*/
-.consult-list {
-  padding: 0 5px;
-  background: #fff;
-}
-.consult-list.inner {
-  margin: 10px 0 0;
-  background: #efefef;
-}
-/*单个评论*/
-.consult-list .consult-item {
-  padding: 5px 0;
-  border-top: 1px solid #ddd;
-}
-.consult-list .consult-item:first-of-type {
-  border: none;
-}
-/*头像*/
-.consult-list .consult-item img {
-  position: relative;
-  top: 5px;
-  float: left;
-  border-radius: 15px;
-}
-/*信息 内容 包含块*/
-.consult-list .consult-item .content {
-  margin: 0 0 0 35px;
-}
-/*评论人信息*/
-/*评论，点赞按钮*/
-.consult-list .consult-item .content .ps-info .act-wrap {
-  float: right;
-  height: 25px;
-  padding: 5px 0 0;
-}
-.consult-list .consult-item .content .ps-info .act-wrap .consult-btns {
-  margin: 0 3px;
-  color: #666;
-}
-.consult-list .consult-item .content .ps-info .act-wrap .consult-btns:before {
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin: -3px 2px 0 0;
-  vertical-align: middle;
-}
-/*评论按钮*/
-.consult-list .consult-item .content .ps-info .act-wrap .com-btn:before {
-  background: url(../img/share/comment.png) center center no-repeat;
-  background-size: contain;
-}
-/*点赞按钮*/
-.consult-list .consult-item .content .ps-info .act-wrap .agree-btn:before {
-  background: url(../img/share/agree.png) center center no-repeat;
-  background-size: contain;
-}
-/*已点赞*/
-.consult-list .consult-item .content .ps-info .act-wrap .agree-btn.active:before {
-  background: url(../img/share/agreeactive.png) center center no-repeat;
-  background-size: contain;
-}
-/*用户名*/
-.consult-list .consult-item .content .ps-info .name {
-  overflow: hidden;
-  color: #666;
-  font-size: 14px;
-}
-/*评论时间*/
-.consult-list .consult-item .content .ps-info .time {
-  overflow: hidden;
-  color: #aaa;
-  font-size: 12px;
-}
-/*评论内容*/
-.consult-list .consult-item .content .main-content {
-  margin: 5px 0;
-  color: #222;
-}
-/*悬赏新增*/
-#addReward .info-list {
-  background: #fff;
-}
-#addReward .info-list .info-item {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-#addReward .info-list .info-item .company-name {
-  text-align: center;
-  margin: 0;
-  font-weight: 700;
-}
-#addReward form {
-  padding: 10px 10px;
-  background: #fff;
-}
-#addReward form textarea {
-  resize: none;
-}
+
+
 /*# sourceMappingURL=reward.css.map */

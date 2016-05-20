@@ -1,0 +1,91 @@
+/*关系共享共用样式less*/
+#content {
+  padding: 46px 0 5px;
+}
+p {
+  margin: 0;
+}
+.label {
+  padding: 3px 5px 2px;
+}
+/*悬赏列表共用样式*/
+.reward-list .reward-item {
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+.reward-list .reward-item a {
+  display: block;
+}
+.reward-list .reward-item a .item-top .top-left {
+  float: left;
+  padding: 10px;
+}
+.reward-list .reward-item a .item-top .top-right {
+  overflow: hidden;
+  padding: 0 5px 0 0;
+  margin: 5px 0 0 0;
+}
+.reward-list .reward-item a .item-top .top-right .name-time {
+  margin: 3px 0 0;
+}
+.reward-list .reward-item a .item-top .top-right .name-time .person-name {
+  float: left;
+  font-size: 16px;
+  font-weight: 700;
+}
+.reward-list .reward-item a .item-top .top-right .name-time .time {
+  float: right;
+  margin: 4px 0 0;
+  color: #999;
+  font-size: 12px;
+}
+.reward-list .reward-item a .item-top .top-right .name-time .time:before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: -3px 5px 0 0;
+  vertical-align: middle;
+  background: url(../img/relation/time.png) center center no-repeat;
+  background-size: contain;
+}
+.reward-list .reward-item a .item-top .top-right .company-name {
+  margin: 3px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #666;
+}
+.reward-list .reward-item a .item-middle {
+  margin: 0 5px 0 50px;
+}
+.reward-list .reward-item a .item-bottom {
+  padding: 10px;
+  color: #272636;
+  font-size: 14px;
+}
+.reward-list .reward-item a .item-bottom .left {
+  float: left;
+  margin: 0 8px 0 0;
+}
+.reward-list .reward-item a .item-bottom .left:before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: -4px 2px 0 0;
+  vertical-align: middle;
+}
+.reward-list .reward-item a .item-bottom .left.adopt-num:before {
+  background: url(../img/relation/adopt.png) no-repeat;
+  background-size: 16px;
+}
+.reward-list .reward-item a .item-bottom .left.consult-num:before {
+  background: url(../img/relation/comment.png) no-repeat;
+  background-size: 14px;
+}
+.reward-list .reward-item a .item-bottom .right {
+  float: right;
+}
+/*# sourceMappingURL=relationshipCommon.css.map */

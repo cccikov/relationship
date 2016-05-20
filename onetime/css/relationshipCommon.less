@@ -1,0 +1,99 @@
+/*关系共享共用样式less*/
+#content{
+    padding: 46px 0 5px;
+}
+p{
+    margin:0;
+}
+.label{
+    padding:3px 5px 2px;
+}
+/*悬赏列表共用样式*/
+.reward-list{
+    .reward-item{
+        border-top: 1px solid #eee;
+        background: #fff;
+        a{
+            display: block;
+            // 单个顶部
+            .item-top{
+                //顶部左边图片
+                .top-left{
+                   float: left;
+                   padding:10px;
+                }
+                //顶部右边信息
+                .top-right{
+                    overflow: hidden;
+                    padding:0 5px 0 0;
+                    margin:5px 0 0 0;
+                    .name-time{
+                        margin:3px 0 0;
+                        .person-name{
+                            float: left;
+                            font-size: 16px;
+                            font-weight: 700;
+                        }
+                        .time{
+                            float: right;
+                            margin:4px 0 0;
+                            color:#999;
+                            font-size: 12px;
+                            &:before{
+                                content: "";
+                                display: inline-block;
+                                width: 12px;
+                                height: 12px;
+                                margin:-3px 5px 0 0;
+                                vertical-align: middle;
+                                background: url(../img/relation/time.png) center center no-repeat;
+                                background-size: contain;
+                            }
+                        }
+                    }
+                    .company-name{
+                        margin:3px 0 0;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        font-size: 14px;
+                        color:#666;
+                    }
+                }
+            }
+            // 单个中部
+            .item-middle{
+                margin:0 5px 0 50px;
+            }
+            // 单个底部
+            .item-bottom{
+                padding:10px;
+                color:#272636;
+                font-size:14px;
+                .left{
+                    float: left;
+                    margin:0 8px 0 0;
+                    &:before{
+                        content: "";
+                        display: inline-block;
+                        width: 14px;
+                        height: 14px;
+                        margin:-4px 2px 0 0;
+                        vertical-align: middle;
+                    }
+                    &.adopt-num:before{
+                        background: url(../img/relation/adopt.png) no-repeat;
+                        background-size: 16px;
+                    }
+                    &.consult-num:before{
+                        background: url(../img/relation/comment.png) no-repeat;
+                        background-size: 14px;
+                    }
+                }
+                .right{
+                    float: right;
+                }
+            }
+        }
+    }
+}

@@ -190,102 +190,213 @@
 			}
 			/*关系共享介绍*/
 			
-			.readme {
-				background: #fff;
-				margin: 10px 0;
-				text-align: center;
-			}
-			
-			.readme button {
+			/*readme*/
+			#showReadme {
 				display: none;
+				position: fixed;
+				bottom:0;
+				left:0;
 				width: 100%;
 				padding: 10px 0;
 				background: none;
 				border: none;
 				font-size: 12px;
+				background: #fff;
+				text-align: center;
 			}
-			
-			#readmeContent {
+			#hideReadme{
 				display: none;
 				position: fixed;
-				top: 0;
-				left: 0;
-				z-index: 1005;
+				top:0;
+				left:0;
+				z-index: 1020;
+				width: 100%;
+				padding: 10px 0;
+				background: none;
+				border: none;
+				font-size: 12px;
+				background: #fff;
+				text-align: center;
+			}
+			#readmeContent {
+				display: none;
+				position:fixed;
+				top:0;
+				left:0;
+				z-index: 1010;
 				width: 100%;
 				height: 100%;
-				padding: 10px;
-				background: #fff;
 				overflow: auto;
-			}
-			/*动画*/
-			
-			@-webkit-keyframes zoomIn {
-				from {
-					opacity: 0;
-					-webkit-transform: scale3d(.3, .3, .3);
-					transform: scale3d(.3, .3, .3);
-				}
-				50% {
-					opacity: 1;
-				}
-			}
-			
-			@keyframes zoomIn {
-				from {
-					opacity: 0;
-					-webkit-transform: scale3d(.3, .3, .3);
-					transform: scale3d(.3, .3, .3);
-				}
-				50% {
-					opacity: 1;
-				}
-			}
-			
-			.zoomIn {
-				-webkit-animation-name: zoomIn;
-				animation-name: zoomIn;
-			}
-			
-			@-webkit-keyframes zoomOut {
-				from {
-					opacity: 1;
-				}
-				50% {
-					opacity: 0;
-					-webkit-transform: scale3d(.3, .3, .3);
-					transform: scale3d(.3, .3, .3);
-				}
-				to {
-					opacity: 0;
-				}
-			}
-			
-			@keyframes zoomOut {
-				from {
-					opacity: 1;
-				}
-				50% {
-					opacity: 0;
-					-webkit-transform: scale3d(.3, .3, .3);
-					transform: scale3d(.3, .3, .3);
-				}
-				to {
-					opacity: 0;
-				}
-			}
-			
-			.zoomOut {
-				-webkit-animation-name: zoomOut;
-				animation-name: zoomOut;
+				background: #fff;
+				padding:1px 0 1px;
 			}
 			
 			.animated {
-				-webkit-animation-duration: 0.3s;
-				animation-duration: 0.3s;
-				-webkit-animation-fill-mode: both;
-				animation-fill-mode: both;
+			  -webkit-animation-duration: .6s;
+			  animation-duration: .6s;
+			  -webkit-animation-fill-mode: both;
+			  animation-fill-mode: both;
 			}
+			
+			.slideInUp {
+			  -webkit-animation-name: slideInUp;
+			  animation-name: slideInUp;
+			}
+			@-webkit-keyframes slideInUp {
+			  from {
+			    -webkit-transform: translate3d(0, 100%, 0);
+			    transform: translate3d(0, 100%, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+			@keyframes slideInUp {
+			  from {
+			    -webkit-transform: translate3d(0, 100%, 0);
+			    transform: translate3d(0, 100%, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+			
+			.slideInUp2 {
+			  -webkit-animation-name: slideInUp2;
+			  animation-name: slideInUp2;
+			  -webkit-animation-duration: 1.2s;
+			  animation-duration: 1.2s;
+			  -webkit-animation-fill-mode: both;
+			  animation-fill-mode: both;
+			}
+			@-webkit-keyframes slideInUp2 {
+			  from {
+			    -webkit-transform: translate3d(0, 800px, 0);
+			    transform: translate3d(0, 800px, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+			@keyframes slideInUp2 {
+			  from {
+			    -webkit-transform: translate3d(0, 800px, 0);
+			    transform: translate3d(0, 800px, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+
 		</style>
+		<script type="text/javascript">
+			$(function() {
+				var winH = $(window).height();
+				
+				var status = 0;
+				$(window).on("touchstart",function(e){
+					var diff = 0;
+					var cur = ago = start = e.originalEvent.touches[0].clientY;
+					if(status==0){
+						$(window).on("touchmove",function(e){
+//							e.preventDefault();
+							cur =  e.originalEvent.touches[0].clientY;
+							diff = cur - ago;
+							ago = cur;
+							if(diff<-15 && status == 0){
+								//$("#showReadme").show().addClass("slideInUp");
+								$("#showReadme").css({"bottom":"-36px"}).show().animate({"bottom":0},500,function(){
+									$(window).off("touchmove")
+								});
+								status = 1;
+							}
+						});
+					}
+					//if(status==1){
+					//	$(window).off("touchmove").on("touchmove",function(e){
+					//		cur =  e.originalEvent.touches[0].clientY;
+					//		diff = cur - start;
+					//		ago = cur;
+					//		console.log(diff);
+					//		if(diff<-winH/2){
+					//			$("#readmeContent").show().addClass("slideInUp2");
+					//			status = 2;
+					//		}
+					//	});
+					//}
+					
+					if(status==2){
+						$(window).on("touchmove",function(e){
+//							e.preventDefault();
+							cur =  e.originalEvent.touches[0].clientY;
+							diff = cur - ago;
+							ago = cur;
+							console.log(diff);
+							if(diff>15 && status==2){
+								$("#hideReadme").css({"top":"-36px"}).show().animate({"top":0},500,function(){
+									$(window).off("touchmove")
+								});
+								status=3;
+							}
+						});
+					}
+				});
+				
+				
+				$("#showReadme").on("touchstart",function(e){
+					if(status==1){
+						$(window).off("touchmove").on("touchmove",function(e){
+							e.preventDefault();
+							cur =  e.originalEvent.touches[0].clientY;
+							$("#readmeContent").show().css("top",cur);
+							$("#showReadme").hide();
+							
+						});
+						$(window).on("touchend",function(){
+							$("#readmeContent").animate({"top":0},300,function(){
+								$(window).off("touchend").off("touchmove");
+								status = 2; 
+							});
+							
+						});
+					}
+				});
+				
+				$("#hideReadme").on("touchstart",function(e){
+					var diff = 0;
+					if(status==3){
+						$(window).on("touchmove",function(e){
+							e.preventDefault();
+							cur =  e.originalEvent.touches[0].clientY;
+							$("#readmeContent").css("top",cur);
+							$("#hideReadme").hide();
+							 
+						});
+						$(window).on("touchend",function(){
+							$("#readmeContent").animate({"top":winH},300,function(){
+								$(window).off("touchend").off("touchmove");
+								$("#readmeContent").hide();
+								status = 0;
+							});
+						});
+					}
+				});
+				
+				
+			});
+		</script>
 	</head>
 
 	<body>
@@ -447,11 +558,237 @@
 
 			</div>
 
-			<div class="readme">
-				<button id="showReadme">点击查看关系共享介绍</button>
-			</div>
-			<div class="animated" id="readmeContent">
-				<pre>我是介绍我是介绍</pre>
+			<button class="animated" id="showReadme">上滑查看关系共享介绍</button>
+			<button class="animated" id="hideReadme">下滑关闭关系共享介绍</button>
+			
+			<style>
+				#readmeContent{
+					color:#515151;
+					letter-spacing: 1px;
+				}
+				#readmeContent ol li{
+					margin:5px 0 0;
+				}
+				.question{
+					font-size: 15px;
+					color:#313131;
+				}
+				.answer{
+					font-size: 14px;
+				}
+				.readme-item{
+					padding:8px 0 3px;
+					border-top: 1px solid #eee;
+				}
+				.readme-left{
+					float: left;
+					min-width: 30px;
+					padding:0 5px;
+					text-align: center;
+				}
+				.readme-right{
+					overflow: hidden;
+					min-width: 30px;
+					padding:0 5px 0 0;
+					margin:0 0 5px;
+				}
+			</style>
+			
+			<div id="readmeContent">
+				<h4 class="text-center">关系共享系统介绍</h4>
+				
+				<ul class="readme-list">
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								什么是关系共享平台？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								【关系共享平台】是由普伟集团发起，以普伟集团16载所积累人脉关系为基点，大成商道同修会及普伟总裁俱乐部1200多位企业家为核心主体，普伟集团11000家会员企业家为支撑，构成的大型商圈人脉资源共享交流合作平台。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样成为关系拥有者？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								注册/登录普伟会员系统，进入【关系共享】界面，点击申请，上传个人企业身份证明资料（名片、营业执照等），并同时添加3条您所拥有的人脉关系，经后台审核后即可成为关系共享平台的关系拥有者。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								为什么要加入关系共享平台？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								在关系共享平台中，可以申请成为关系拥有者或进驻供应商，可快捷、方便查找到您的准客户、准供应商，以及拥有相对应关系资源的关系拥有者，由关系拥有者将您推荐给对应的准客户、准供应商，快速实现商机对接。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								成为关系拥有者有什么好处？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								关系拥有者可以上传自己的人脉关系获得积分，同时可以搜索、查阅其他关系拥有者的关系资源，通过积分兑换的方式联系到您所需要的关系拥有者。并且，可以为进驻的供应商、关系悬赏者提供商机对接，商机对接成功后可获得相应的佣金报酬。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								成为关系拥有者有什么好处？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								关系拥有者可以上传自己的人脉关系获得积分，同时可以搜索、查阅其他关系拥有者的关系资源，通过积分兑换的方式联系到您所需要的关系拥有者。并且，可以为进驻的供应商、关系悬赏者提供商机对接，商机对接成功后可获得相应的佣金报酬。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样成为进驻供应商？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								在关系共享平台上进行在线申请，申请后将由运营团队对您的企业进行实地考察，了解企业、产品信息，并进行审核。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								成为进驻供应商有什么好处？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								通过审核成功成为进驻供应商后，可以在普伟商圈内展示公司信息及产品信息，获得查阅全部人脉关系资料的权利，快速找到下游客户。并且，将优先获得关系拥有者的商机对接机会，实现商机配对。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样查找关系资源？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								进入【寻找关系】界面，您将看到全部关系拥有者的所有拥有的关系数量，通过【搜索】可以直接查找您所需要找到的客户、供应商或联系人，搜索后如果您需要对应的关系资源，可点击兑换关系拥有者联系方式，联系关系拥有者为您牵桥搭线。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样添加关系资源？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								点击【添加关系】可以上传您的人脉关系资源。上传方式可以采用手工填写或上传图片，其中上传图片方式需要后台审核通过后方为生效。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样进行商机对接？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<div class="readme-right">
+								<span>商机对接有三种方式：</span>
+								<ol>
+									<li>
+										1、如果您想推荐进驻的供应商给您的关系人，则可点击【添加商机】，选择对应的供应商以及您希望对接的关系人，保存后即生成【待定商机】。待供应商与您的关系人对接上后，由其点击确认，则落实成为【确定商机】。运营团队将全程跟进此项商机的进行情况，商机产生实际交易后，为您结算佣金。
+									</li>
+									<li>
+										2、如果您查找到您需要获得的关系资源，可直接点击关系拥有者栏目下的【添加商机】申请该关系拥有者为您对接商机，此项生成的商机管理，您可以选择自主管理或选择委托平台为您跟进管理；若选择平台管理，则需要填写商机对接的佣金并先行支付到平台，待商机确认后，由平台向关系拥有者支付佣金，平台将提取佣金的15%作为运营费用，运营团队将全程跟进此项商机的进行情况，并结算佣金。
+									</li>
+									<li>
+										3、您可以通过【关系悬赏】直接发布需要寻找的关系资源，发布【关系悬赏】时需要约定提供关系资源的报酬，并先向平台支付佣金，平台确认收款并审核通过发布内容后，将在平台上进行发布，其他关系拥有者将可查询到悬赏任务，并对接。发布人可自主选择其中的1位关系拥有者提供的资源进行确认并点击【添加商机】生成对应的商机信息。运营团队将全程跟进此项商机的进行情况，并结算佣金。
+									</li>
+								</ol>
+							</div>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								为什么不能兑换关系拥有者联系方式？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								不能兑换关系拥有者的联系方式，原因有二：1、您未注册并通过审核成为关系拥有者或进驻供应商；2、您的账号没有足够积分兑换联系方式，每兑换1个关系拥有者联系方式需要消耗10积分。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								关系拥有者联系方式兑换积分如何获取？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								兑换积分获取方式有：1、添加自己的关系资源，每添加1个关系人可获得10积分。
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</body>

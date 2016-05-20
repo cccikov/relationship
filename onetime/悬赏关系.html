@@ -13,69 +13,129 @@
 	<!-- 引入js -->
 	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
-
+	
 	<style type="text/css">
+		/*关系共享共用样式less*/
 		#content {
-			padding: 46px 0 10px;
-		}
-		.btn-wrap {
-			margin: 10px;
+		    padding: 46px 0 5px;
 		}
 		p {
-			margin: 0;
+		    margin: 0;
 		}
+		.label {
+		    padding: 3px 5px 2px;
+		}
+		/*悬赏列表共用样式*/
 		.reward-item {
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			margin: 10px;
-			background: #fff;
-			box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.2);
+		    border-top: 1px solid #eee;
+		    background: #fff;
 		}
 		.reward-item a {
-			display: block;
+		    display: block;
 		}
-		.item-top {
-			border-bottom: 1px solid #ddd;
+		.item-top .top-left {
+		    float: left;
+		    padding: 10px;
 		}
-		.item-top img {
-			box-sizing: content-box;
-			float: left;
-			padding: 10px;
+		.item-top .top-right {
+		    overflow: hidden;
+		    padding: 0 5px 0 0;
+		    margin: 5px 0 0 0;
 		}
-		.reward-company {
-			box-sizing: content-box;
-			line-height: 50px;
-			padding: 0 10px 0 0;
-			font-size: 16px;
+		.name-time {
+		    margin: 3px 0 0;
 		}
-		.reward-company span {
-			float: left;
-			font-weight: 700;
+		.name-time .person-name {
+		    float: left;
+		    font-size: 16px;
+		    font-weight: 700;
 		}
-		.reward-company small {
-			display: block;
-			overflow: hidden;
-			padding: 0 0 0 5px;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			color: #666;
+		.name-time .time {
+		    float: right;
+		    margin: 4px 0 0;
+		    color: #999;
+		    font-size: 12px;
+		}
+		.name-time .time:before {
+		    content: "";
+		    display: inline-block;
+		    width: 12px;
+		    height: 12px;
+		    margin: -3px 5px 0 0;
+		    vertical-align: middle;
+		    background: url(img/relation/time.png) center center no-repeat;
+		    background-size: contain;
+		}
+		.company-name {
+		    margin: 3px 0 0;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		    font-size: 14px;
+		    color: #666;
 		}
 		.item-middle {
-			padding: 10px;
-			border-bottom: 1px solid #ddd;
-			text-indent: 2em;
-			word-break: break-all;
+		    margin: 0 5px 0 50px;
 		}
 		.item-bottom {
-			padding: 10px;
-			color: #999;
-			font-size: 12px;
+		    padding: 10px;
+		    color: #272636;
+		    font-size: 14px;
 		}
 		.item-bottom .left {
-			float: left;
+		    float: left;
+		    margin: 0 8px 0 0;
+		}
+		.item-bottom .left:before {
+		    content: "";
+		    display: inline-block;
+		    width: 14px;
+		    height: 14px;
+		    margin: -4px 2px 0 0;
+		    vertical-align: middle;
+		}
+		.item-bottom .left.adopt-num:before {
+		    background: url(img/relation/adopt.png) no-repeat;
+		    background-size: 16px;
+		}
+		.item-bottom .left.consult-num:before {
+		    background: url(img/relation/comment.png) no-repeat;
+		    background-size: 14px;
 		}
 		.item-bottom .right {
-			float: right;
+		    float: right;
+		}
+		.reward-head {
+		    margin: 0 0 5px;
+		}
+		.reward-head a {
+		    float: left;
+		    width: 50%;
+		    line-height: 40px;
+		    background: #fff;
+		    text-align: center;
+		    font-size: 16px;
+		}
+		.reward-head a:nth-child(1) {
+		    border-right: 1px solid #EBEBEB;
+		}
+		.reward-head a:nth-child(2) {
+		    border-left: 1px solid #eee;
+		}
+		.reward-head a.active:after {
+		    content: "";
+		    display: block;
+		    border: 1px solid #A50100;
+		}
+		#addReward {
+		    position: fixed;
+		    bottom: 90px;
+		    right: 8px;
+		    width: 40px;
+		    height: 40px;
+		    border-radius: 20px;
+		    background: rgba(0, 188, 212, 0.8) url(img/relation/puls.png) center center no-repeat;
+		    background-size: contain;
 		}
 	</style>
 </head>
@@ -146,67 +206,187 @@
 		<!--=================================================================================================-->
 		<!--内容-->
 		<div id="content">
-
 		<!-- 悬赏关系 begin -->
 			<div id="reward">
-
-				<div class="btn-wrap text-right">
-					<button class="btn btn-danger">＋</button>
+				
+				<!-- 顶部 伪tab-->
+				<div class="reward-head clearfix">
+					<a class="active" href="javascript:void(0)">全部悬赏</a>
+					<a href="javascript:void(0)">我的悬赏</a>
 				</div>
 
 				<!-- 悬赏列表 -->
 				<ul class="reward-list">
-
 					<!-- 单个悬赏 -->
 					<li class="reward-item">
 						<a href="javascript:void(0)">
 							<!-- 单个顶部 -->
 							<div class="item-top clearfix">
-								<img src="img/share/top.jpg" width="30">
-								<p class="reward-company"><span>黄国辉</span><small>普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团</small></p>
+								<!-- 顶部左边图片 -->
+								<div class="top-left">
+									<img src="img/share/top.jpg" width="30">
+								</div>
+								<!-- 顶部右边信息 -->
+								<div class="top-right">
+									<p class="name-time clearfix">
+										<span class="person-name">黄国辉</span>
+										<span class="time">2016/5/17 09:11</span>
+									</p>
+									<p class="company-name">普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团</p>
+								</div>
 							</div>
 							<!-- 单个中部 -->
 							<div class="item-middle">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum fuga ea, fugit, dolore nobis necessitatibus consequatur qui quibusdam eaque velit.
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus fuga!
 							</div>
 							<!-- 单个底部 -->
 							<div class="item-bottom clearfix">
-								<span class="left label label-success">已确认</span>
-								<!--<span class="left label label-primary">悬赏中</span>-->
-								<!--<span class="left label label-warning">已过期</span>-->
-								<span class="right">有效时间:2016/5/17 09:11</span>
+								<span class="adopt-num left">1</span>
+								<span class="consult-num left">1</span>
+								<span class="right label label-success">已确认</span>
+								<!--<span class="right label label-primary">悬赏中</span>-->
+								<!--<span class="right label label-warning">已过期</span>-->
 							</div>
 						</a>
 					</li>
-
 					<!-- 单个悬赏 -->
 					<li class="reward-item">
 						<a href="javascript:void(0)">
 							<!-- 单个顶部 -->
 							<div class="item-top clearfix">
-								<img src="img/share/top.jpg" width="30">
-								<p class="reward-company">普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团</p>
+								<!-- 顶部左边图片 -->
+								<div class="top-left">
+									<img src="img/share/top.jpg" width="30">
+								</div>
+								<!-- 顶部右边信息 -->
+								<div class="top-right">
+									<p class="name-time clearfix">
+										<span class="person-name">黄国辉</span>
+										<span class="time">2016/5/17 09:11</span>
+									</p>
+									<p class="company-name">普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团</p>
+								</div>
 							</div>
 							<!-- 单个中部 -->
 							<div class="item-middle">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, libero incidunt. Laboriosam voluptatem earum, autem corporis velit aperiam est nisi!
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus fuga!
 							</div>
 							<!-- 单个底部 -->
 							<div class="item-bottom clearfix">
-								<!--<span class="left label label-success">已确认</span>-->
-								<!--<span class="left label label-primary">悬赏中</span>-->
-								<span class="left label label-warning">已过期</span>
-								<span class="right">有效时间:2016/5/17 09:11</span>
+								<span class="adopt-num left">1</span>
+								<span class="consult-num left">1</span>
+								<!--<span class="right label label-success">已确认</span>-->
+								<span class="right label label-primary">悬赏中</span>
+								<!--<span class="right label label-warning">已过期</span>-->
 							</div>
 						</a>
 					</li>
-
-
+					<!-- 单个悬赏 -->
+					<li class="reward-item">
+						<a href="javascript:void(0)">
+							<!-- 单个顶部 -->
+							<div class="item-top clearfix">
+								<!-- 顶部左边图片 -->
+								<div class="top-left">
+									<img src="img/share/top.jpg" width="30">
+								</div>
+								<!-- 顶部右边信息 -->
+								<div class="top-right">
+									<p class="name-time clearfix">
+										<span class="person-name">黄国辉</span>
+										<span class="time">2016/5/17 09:11</span>
+									</p>
+									<p class="company-name">普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团</p>
+								</div>
+							</div>
+							<!-- 单个中部 -->
+							<div class="item-middle">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus fuga!
+							</div>
+							<!-- 单个底部 -->
+							<div class="item-bottom clearfix">
+								<span class="adopt-num left">1</span>
+								<span class="consult-num left">1</span>
+								<!--<span class="right label label-success">已确认</span>-->
+								<!--<span class="right label label-primary">悬赏中</span>-->
+								<span class="right label label-warning">已过期</span>
+							</div>
+						</a>
+					</li>
+					<!-- 单个悬赏 -->
+					<li class="reward-item">
+						<a href="javascript:void(0)">
+							<!-- 单个顶部 -->
+							<div class="item-top clearfix">
+								<!-- 顶部左边图片 -->
+								<div class="top-left">
+									<img src="img/share/top.jpg" width="30">
+								</div>
+								<!-- 顶部右边信息 -->
+								<div class="top-right">
+									<p class="name-time clearfix">
+										<span class="person-name">黄国辉</span>
+										<span class="time">2016/5/17 09:11</span>
+									</p>
+									<p class="company-name">普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团</p>
+								</div>
+							</div>
+							<!-- 单个中部 -->
+							<div class="item-middle">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus fuga!
+							</div>
+							<!-- 单个底部 -->
+							<div class="item-bottom clearfix">
+								<span class="adopt-num left">1</span>
+								<span class="consult-num left">1</span>
+								<!--<span class="right label label-success">已确认</span>-->
+								<!--<span class="right label label-primary">悬赏中</span>-->
+								<span class="right label label-warning">已过期</span>
+							</div>
+						</a>
+					</li>
+					<!-- 单个悬赏 -->
+					<li class="reward-item">
+						<a href="javascript:void(0)">
+							<!-- 单个顶部 -->
+							<div class="item-top clearfix">
+								<!-- 顶部左边图片 -->
+								<div class="top-left">
+									<img src="img/share/top.jpg" width="30">
+								</div>
+								<!-- 顶部右边信息 -->
+								<div class="top-right">
+									<p class="name-time clearfix">
+										<span class="person-name">黄国辉</span>
+										<span class="time">2016/5/17 09:11</span>
+									</p>
+									<p class="company-name">普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团普伟集团</p>
+								</div>
+							</div>
+							<!-- 单个中部 -->
+							<div class="item-middle">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus fuga!
+							</div>
+							<!-- 单个底部 -->
+							<div class="item-bottom clearfix">
+								<span class="adopt-num left">1</span>
+								<span class="consult-num left">1</span>
+								<!--<span class="right label label-success">已确认</span>-->
+								<!--<span class="right label label-primary">悬赏中</span>-->
+								<span class="right label label-warning">已过期</span>
+							</div>
+						</a>
+					</li>
 				</ul>
 
 			</div>
 		<!-- 悬赏关系 end -->
-
+		
+			<!-- 添加悬赏按钮 -->
+			<a id="addReward" href="javascript:void(0)"></a>
+			
+			<!-- 返回关系共享首页 -->
+			<a class="go-relation-home" style="background-image: url(img/share/gohome.png)" href="${contextPath}/relation/index.do"></a>
 		</div>
 	</div>
 </body>
