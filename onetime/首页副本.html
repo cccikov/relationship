@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>关系共享</title>
+
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+		<!-- 引入js -->
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#content {
+				background: #fff;
+				padding-bottom: 0px;
+			}
+			/*未注册情况下选项框*/
+			
+			.selectBox {
+				padding: 15px 0;
+				border-bottom: 1px solid #ccc;
+				text-align: center;
+			}
+			
+			.selectBox p {
+				line-height: 50px;
+				font-size: 16px;
+				color: #777;
+			}
+			
+			.selectBox div {
+				width: 90%;
+				margin: 0 auto;
+			}
+			
+			.selectBox a {
+				display: block;
+				float: left;
+				width: 100%;
+				line-height: 43px;
+				padding: 0 20px;
+				border-radius: 5px;
+				text-align: center;
+				background: #a50100;
+				color: #fff;
+			}
+			/*头部我的账户*/
+			
+			.account {
+				position: relative;
+				text-align: center;
+				background-image: -webkit-linear-gradient(top, #f37425, #f14c1f);
+				color: #FFFFDF;
+			}
+			
+			.account p {
+				padding: 10px 0;
+				margin: 0;
+			}
+			
+			.account p:before {
+				content: "";
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				margin: -3px 5px 0 0;
+				vertical-align: middle;
+				background: url(img/mall/money.png) center center no-repeat;
+				background-size: contain;
+			}
+			
+			.account .rmb {
+				width: 100%;
+				padding: 10px 0 15px;
+				font-size: 38px;
+			}
+			
+			.account .rmb:before {
+				content: "";
+				display: inline-block;
+				width: 40px;
+				height: 40px;
+				margin: -5px -15px;
+				background: url(img/share/rmb.png) center center no-repeat;
+				background-size: contain;
+			}
+			
+			.account .integral {
+				padding: 0 10px 10px;
+				text-align: right
+			}
+			/*九宫格 大块*/
+			.work-group{
+				border-bottom: 1px solid #eee;
+			}
+			.work-group:first-of-type{
+				border-top: 1px solid #eee;
+			}
+			/*九宫格 单元*/
+			.work-item{
+				float: left;
+				width: 33.3333333333333333333333%;
+				height: 110px;
+				border-right: 1px solid #eee;
+				text-align:center;
+			}
+			.work-item:nth-of-type(3){
+				border-right: none;
+			}
+			.work-item>span {
+				display: block;
+			}
+			
+			.work-item .icon {
+				position: relative;
+				display: block;
+				width: 45px;
+				height: 45px;
+				margin: 20px auto;
+				margin-bottom: 5px;
+				border-radius: 25px;
+				background-repeat: no-repeat;
+				background-size: 35px;
+				background-position: center;
+				opacity: .9;
+			}
+			
+			.work-item .icon span {
+				position: absolute;
+				left: 35px;
+				top: -12px;
+				line-height: 16px;
+				min-width: 18px;
+				padding: 1px 5px;
+				border-radius: 10px;
+				font-size: 12px;
+				background: #ff3300;
+				color: #fff;
+			}
+			
+			.collect .icon{
+				background-color: #6BC235;
+		  		background-image: url(img/share/collect.png);
+		  		background-size:26px;
+			}
+			.reward .icon{
+				background-color: #C36BAC;
+		  		background-image: url(img/share/reward.png);
+		  		background-size:29px;
+			}
+			.relation .icon{
+				background-color: #C51F1F;
+		  		background-image: url(img/share/relation.png);
+		  		background-size:24px;
+			}
+			.unsure .icon{
+				background-color: #C51F1F;
+		  		background-image: url(img/share/unsure.png);
+				background-size:26px;
+			}
+			.confirm .icon{
+				background-color: #773460;
+		  		background-image: url(img/share/confirm.png);
+				background-size:26px;
+			}
+			.add .icon{
+				background-color: #DCD0A8;
+		  		background-image: url(img/share/add.png);
+				background-size:26px;
+			}
+			.vendor .icon{
+				background-color: #3EBCCA;
+		  		background-image: url(img/share/vendor.png);
+		  		background-size:32px;
+			}
+			.puls .icon{
+				background-color: #DB4520;
+		  		background-image: url(img/share/puls.png);
+				background-size:36px;
+			}
+			.attn .icon{
+				background-color: #843E2D;
+		  		background-image: url(img/share/attn.png);
+				background-size:30px;
+			}
+			/*关系共享介绍*/
+			
+			/*readme*/
+			#showReadme {
+				display: none;
+				position: fixed;
+				bottom:0;
+				left:0;
+				width: 100%;
+				padding: 10px 0;
+				background: none;
+				border: none;
+				font-size: 12px;
+				background: #fff;
+				text-align: center;
+			}
+			#hideReadme{
+				display: none;
+				position: fixed;
+				top:0;
+				left:0;
+				z-index: 1020;
+				width: 100%;
+				padding: 10px 0;
+				background: none;
+				border: none;
+				font-size: 12px;
+				background: #fff;
+				text-align: center;
+			}
+			
+			/*介绍内容样式*/
+			#readmeContent {
+				display: none;
+				position:fixed;
+				top:0;
+				left:0;
+				z-index: 1010;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background: #fff;
+				padding:1px 0 1px;
+				color:#515151;
+				letter-spacing: 1px;
+			}
+
+			#readmeContent ol li{
+				margin:5px 0 0;
+			}
+			.question{
+				font-size: 15px;
+				color:#313131;
+			}
+			.answer{
+				font-size: 14px;
+			}
+			.readme-item{
+				padding:8px 0 3px;
+				border-top: 1px solid #eee;
+			}
+			.readme-left{
+				float: left;
+				min-width: 30px;
+				padding:0 5px;
+				text-align: center;
+			}
+			.readme-right{
+				overflow: hidden;
+				min-width: 30px;
+				padding:0 5px 0 0;
+				margin:0 0 5px;
+			}
+			
+			.animated {
+			  -webkit-animation-duration: .6s;
+			  animation-duration: .6s;
+			  -webkit-animation-fill-mode: both;
+			  animation-fill-mode: both;
+			}
+			
+			.slideInUp {
+			  -webkit-animation-name: slideInUp;
+			  animation-name: slideInUp;
+			}
+			@-webkit-keyframes slideInUp {
+			  from {
+			    -webkit-transform: translate3d(0, 100%, 0);
+			    transform: translate3d(0, 100%, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+			@keyframes slideInUp {
+			  from {
+			    -webkit-transform: translate3d(0, 100%, 0);
+			    transform: translate3d(0, 100%, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+			
+			.slideInUp2 {
+			  -webkit-animation-name: slideInUp2;
+			  animation-name: slideInUp2;
+			  -webkit-animation-duration: 1.2s;
+			  animation-duration: 1.2s;
+			  -webkit-animation-fill-mode: both;
+			  animation-fill-mode: both;
+			}
+			@-webkit-keyframes slideInUp2 {
+			  from {
+			    -webkit-transform: translate3d(0, 800px, 0);
+			    transform: translate3d(0, 800px, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+			@keyframes slideInUp2 {
+			  from {
+			    -webkit-transform: translate3d(0, 800px, 0);
+			    transform: translate3d(0, 800px, 0);
+			    visibility: visible;
+			  }
+			
+			  to {
+			    -webkit-transform: translate3d(0, 0, 0);
+			    transform: translate3d(0, 0, 0);
+			  }
+			}
+
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				var winH = $(window).height();
+				
+				var status = 0;
+//				var timer = setInterval(function(){
+//					console.log(status);
+//				},100)
+				$(window).on("touchstart",function(e){
+					console.log("start");
+					var diff = 0;
+					var cur = ago = start = e.originalEvent.touches[0].clientY;
+					// 状态0 起始状态 --> 上拉按钮出现
+					if(status==0){
+						$(window).off("touchmove").on("touchmove",function(e){
+							console.log("0Fn");
+							cur =  e.originalEvent.touches[0].clientY;
+							diff = cur - ago;
+							ago = cur;
+							if(diff<-15 && status == 0){
+								$("#showReadme").css({"bottom":"-36px"}).show().animate({"bottom":0},500,function(){
+								});
+								$(window).off("touchmove");
+								status = 1;
+							}
+						});
+					}
+					if(status==2){
+						$(window).off("touchmove").on("touchmove",function(e){
+							console.log("2Fn");
+							cur =  e.originalEvent.touches[0].clientY;
+							diff = cur - ago;
+							ago = cur;
+							if(diff>15 && status==2){
+								$("#hideReadme").css({"top":"-36px"}).show().animate({"top":0},500,function(){
+								});
+									$(window).off("touchmove");
+								status=3;
+							}
+						});
+					}
+					
+				});
+				
+				
+				$("#showReadme").on("touchstart",function(e){
+					console.log("1.0Fn");
+					// 状态1 上拉按钮出现 --> 内容出现
+					if(status==1){
+						$("#showReadme").off("touchmove").on("touchmove",function(e){
+							console.log("1.1Fn");
+							e.preventDefault();
+							cur =  e.originalEvent.touches[0].clientY;
+							$("#readmeContent").show().css("top",cur);
+							$("#showReadme").hide();
+
+							// 有move 才有 touchend事件
+							$(window).off("touchend").on("touchend",function(){
+								console.log("1.2Fn");
+								$("#readmeContent").animate({"top":0},300);
+								$(window).off("touchend");
+								$("#showReadme").off("touchmove");
+								status = 2; 
+							});
+							
+						});
+						
+					}
+				});
+				
+				$("#hideReadme").on("touchstart",function(e){
+					console.log("3.0Fn");
+					var diff = 0;
+					if(status==3){
+						$("#hideReadme").off("touchmove").on("touchmove",function(e){
+							console.log("3.1Fn");
+							e.preventDefault();
+							cur =  e.originalEvent.touches[0].clientY;
+							$("#readmeContent").css("top",cur);
+							$("#hideReadme").hide();
+
+							// 有move 才有 touchend事件
+							$(window).off("touchend").on("touchend",function(){
+								console.log("3.2Fn");
+								$("#readmeContent").animate({"top":winH},300,function(){
+									$("#readmeContent").hide();
+								});
+								$(window).off("touchend");
+								$("#hideReadme").off("touchmove");
+								status = 0;
+							});
+							 
+						});
+						
+					}
+				});
+				//总结：在事件里面监听其他事件一定要先off()再on()，就算里面里面的监听会有off()也不行，因为这样照样会生成多个监听事件，只不过执行完之后都会off();但是这样就会造成多次重复执行同一天命令，特别是有定时器，你以为结束后其实一直还在执行
+				
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!--导航条-->
+			<nav class="clearfix" id="nav">
+				<h2>普伟集团</h2>
+				<ul>
+					<!--已登录-->
+					<li>
+						<a class="msg" href="###"></a>
+					</li>
+					<!--未登录-->
+					<li>
+						<a class="register" href="###"></a>
+					</li>
+					<li>
+						<a class="search" href="###"></a>
+					</li>
+					<li>
+						<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+					</li>
+				</ul>
+			</nav>
+
+			<!--侧栏-->
+			<div id="sideBlock">
+				<!--侧栏顶部-->
+				<div class="sideBlock-top clearfix">
+					<img src="img/common/common6.png" />
+					<div class="sideBlock-top-center">
+						<p>张某某</p>
+						<p>电话：12345678</p>
+					</div>
+					<a href="">扫一扫</a>
+				</div>
+				<!--侧栏中部-->
+				<div class="sideBlock-middle">
+					<!--实用链接-->
+					<h6>实用链接</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part1">
+						<a class="clearfix" href="###">首页<i></i></a>
+						<a class="clearfix" href="###">精品课程<i></i></a>
+						<a class="clearfix" href="###">商机把握<i></i></a>
+						<a class="clearfix" href="###">学员产品<i></i></a>
+						<a class="clearfix" href="###">营商智囊<i></i></a>
+					</div>
+					<!--账户管理-->
+					<h6>账户管理</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part2">
+						<a class="clearfix" href="###">个人中心<i></i></a>
+						<a class="clearfix" href="###">个人资料<i></i></a>
+						<a class="clearfix" href="###">修改密码<i></i></a>
+					</div>
+					<!--管理-->
+					<h6>管理</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part3">
+						<a class="clearfix" href="###">企业管理<i></i></a>
+						<a class="clearfix" href="###">参训记录<i></i></a>
+					</div>
+
+					<!--退出按钮-->
+					<a class="out" href="###">退出登录</a>
+
+				</div>
+			</div>
+			<!--=================================================================================================-->
+			<div id="content">
+				<!-- 未注册情况下选项框 -->
+				<!--<div class="selectBox clearfix">
+					<p>您未成为关系拥有者</p>
+					<div class="clearfix">
+						<a onclick="toApplyContact()" style="margin-right: 5px;">
+							申请成为关系拥有
+						</a>
+					</div>
+				</div>-->
+				<!-- 头部我的账户 -->
+				<div class="account clearfix">
+					<p>我的账户</p>
+					<div class="rmb">
+						<span>0</span>
+					</div>
+					<!-- 积分 -->
+					<div class="integral">积分：20</div>
+				</div>
+
+				<div class="work">
+					<!-- 寻找关系,关系悬赏,我的关系 -->
+					<div class="work-group clearfix">
+						<!-- 寻找关系 -->
+						<div class="work-item collect" onclick="toResourceFun('all')">
+							<i class="icon">
+								<span>20</span>
+							</i>
+							<span>关系汇总</span>
+						</div>
+						<!-- 关系悬赏 -->
+						<div class="work-item reward" onclick="toResourceFun('all')">
+							<i class="icon">
+								<span>20</span>
+							</i>
+							<span>关系悬赏</span>
+						</div>
+						<!-- 供应商 -->
+						<div class="work-item vendor" onclick="toSupplierProductList()">
+							<i class="icon">
+								<span>20</span>
+							</i>
+							<span>供应商</span>
+						</div>
+					</div>
+					
+					<!-- 供应商 -->
+					<div class="work-group clearfix">
+						<!-- 我的关系 -->
+						<div class="work-item relation" onclick="toResourceFun('my')">
+							<i class="icon">
+								<span>20</span>
+							</i>
+							<span>我的关系</span>
+						</div>
+						<!-- 添加关系 -->
+						<div class="work-item puls" onclick="toResourceFun('add')">
+							<i class="icon"></i>
+							<span>添加关系</span>
+						</div>
+						
+						<!-- 我的关注 -->
+						<div class="work-item attn" onclick="toResourceFun('add')">
+							<i class="icon"></i>
+							<span>我的关注</span>
+						</div>
+					</div>
+
+					<!-- 待定商机,确定商机,添加商机 -->
+					<div class="work-group clearfix">
+						<!-- 待定商机 -->
+						<div class="work-item unsure" onclick="toRecommendFun('wait')">
+							<i class="icon">
+								<span>20</span>
+							</i>
+							<span>待定商机</span>
+						</div>
+						<!-- 确定商机 -->
+						<div class="work-item confirm" onclick="toRecommendFun('pass')">
+							<i class="icon">
+								<span>20</span>
+							</i>
+							<span>确定商机</span>
+						</div>
+						<!-- 添加商机 -->
+						<div class="work-item add" onclick="toRecommendFun('add')">
+							<i class="icon"></i>
+							<span>添加商机</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<button class="animated" id="showReadme">上滑查看关系共享介绍</button>
+			<button class="animated" id="hideReadme">下滑关闭关系共享介绍</button>
+				
+			<div id="readmeContent">
+				<h4 class="text-center">关系共享系统介绍</h4>
+				
+				<ul class="readme-list">
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								什么是关系共享平台？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								【关系共享平台】是由普伟集团发起，以普伟集团16载所积累人脉关系为基点，大成商道同修会及普伟总裁俱乐部1200多位企业家为核心主体，普伟集团11000家会员企业家为支撑，构成的大型商圈人脉资源共享交流合作平台。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样成为关系拥有者？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								注册/登录普伟会员系统，进入【关系共享】界面，点击申请，上传个人企业身份证明资料（名片、营业执照等），并同时添加3条您所拥有的人脉关系，经后台审核后即可成为关系共享平台的关系拥有者。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								为什么要加入关系共享平台？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								在关系共享平台中，可以申请成为关系拥有者或进驻供应商，可快捷、方便查找到您的准客户、准供应商，以及拥有相对应关系资源的关系拥有者，由关系拥有者将您推荐给对应的准客户、准供应商，快速实现商机对接。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								成为关系拥有者有什么好处？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								关系拥有者可以上传自己的人脉关系获得积分，同时可以搜索、查阅其他关系拥有者的关系资源，通过积分兑换的方式联系到您所需要的关系拥有者。并且，可以为进驻的供应商、关系悬赏者提供商机对接，商机对接成功后可获得相应的佣金报酬。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								成为关系拥有者有什么好处？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								关系拥有者可以上传自己的人脉关系获得积分，同时可以搜索、查阅其他关系拥有者的关系资源，通过积分兑换的方式联系到您所需要的关系拥有者。并且，可以为进驻的供应商、关系悬赏者提供商机对接，商机对接成功后可获得相应的佣金报酬。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样成为进驻供应商？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								在关系共享平台上进行在线申请，申请后将由运营团队对您的企业进行实地考察，了解企业、产品信息，并进行审核。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								成为进驻供应商有什么好处？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								通过审核成功成为进驻供应商后，可以在普伟商圈内展示公司信息及产品信息，获得查阅全部人脉关系资料的权利，快速找到下游客户。并且，将优先获得关系拥有者的商机对接机会，实现商机配对。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样查找关系资源？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								进入【寻找关系】界面，您将看到全部关系拥有者的所有拥有的关系数量，通过【搜索】可以直接查找您所需要找到的客户、供应商或联系人，搜索后如果您需要对应的关系资源，可点击兑换关系拥有者联系方式，联系关系拥有者为您牵桥搭线。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样添加关系资源？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								点击【添加关系】可以上传您的人脉关系资源。上传方式可以采用手工填写或上传图片，其中上传图片方式需要后台审核通过后方为生效。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								怎样进行商机对接？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<div class="readme-right">
+								<span>商机对接有三种方式：</span>
+								<ol>
+									<li>
+										1、如果您想推荐进驻的供应商给您的关系人，则可点击【添加商机】，选择对应的供应商以及您希望对接的关系人，保存后即生成【待定商机】。待供应商与您的关系人对接上后，由其点击确认，则落实成为【确定商机】。运营团队将全程跟进此项商机的进行情况，商机产生实际交易后，为您结算佣金。
+									</li>
+									<li>
+										2、如果您查找到您需要获得的关系资源，可直接点击关系拥有者栏目下的【添加商机】申请该关系拥有者为您对接商机，此项生成的商机管理，您可以选择自主管理或选择委托平台为您跟进管理；若选择平台管理，则需要填写商机对接的佣金并先行支付到平台，待商机确认后，由平台向关系拥有者支付佣金，平台将提取佣金的15%作为运营费用，运营团队将全程跟进此项商机的进行情况，并结算佣金。
+									</li>
+									<li>
+										3、您可以通过【关系悬赏】直接发布需要寻找的关系资源，发布【关系悬赏】时需要约定提供关系资源的报酬，并先向平台支付佣金，平台确认收款并审核通过发布内容后，将在平台上进行发布，其他关系拥有者将可查询到悬赏任务，并对接。发布人可自主选择其中的1位关系拥有者提供的资源进行确认并点击【添加商机】生成对应的商机信息。运营团队将全程跟进此项商机的进行情况，并结算佣金。
+									</li>
+								</ol>
+							</div>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								为什么不能兑换关系拥有者联系方式？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								不能兑换关系拥有者的联系方式，原因有二：1、您未注册并通过审核成为关系拥有者或进驻供应商；2、您的账号没有足够积分兑换联系方式，每兑换1个关系拥有者联系方式需要消耗10积分。
+							</p>
+						</div>
+					</li>
+					
+					<li class="readme-item">
+						<div class="question clearfix">
+							<span class="readme-left">Q:</span>
+							<p class="readme-right">
+								关系拥有者联系方式兑换积分如何获取？
+							</p>
+						</div>
+						<div class="answer clearfix">
+							<span class="readme-left">A:</span>
+							<p class="readme-right">
+								兑换积分获取方式有：1、添加自己的关系资源，每添加1个关系人可获得10积分。
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+
+</html>
