@@ -218,6 +218,8 @@
 				background: #fff;
 				text-align: center;
 			}
+			
+			/*介绍内容样式*/
 			#readmeContent {
 				display: none;
 				position:fixed;
@@ -229,6 +231,35 @@
 				overflow: auto;
 				background: #fff;
 				padding:1px 0 1px;
+				color:#515151;
+				letter-spacing: 1px;
+			}
+
+			#readmeContent ol li{
+				margin:5px 0 0;
+			}
+			.question{
+				font-size: 15px;
+				color:#313131;
+			}
+			.answer{
+				font-size: 14px;
+			}
+			.readme-item{
+				padding:8px 0 3px;
+				border-top: 1px solid #eee;
+			}
+			.readme-left{
+				float: left;
+				min-width: 30px;
+				padding:0 5px;
+				text-align: center;
+			}
+			.readme-right{
+				overflow: hidden;
+				min-width: 30px;
+				padding:0 5px 0 0;
+				margin:0 0 5px;
 			}
 			
 			.animated {
@@ -306,11 +337,16 @@
 				var winH = $(window).height();
 				
 				var status = 0;
+				var timer = setInterval(function(){
+					console.log(status);
+				},100)
 				$(window).on("touchstart",function(e){
 					var diff = 0;
 					var cur = ago = start = e.originalEvent.touches[0].clientY;
+					// 状态0 起始状态 --> 上拉按钮出现
 					if(status==0){
 						$(window).on("touchmove",function(e){
+							console.log("diyibu");
 //							e.preventDefault();
 							cur =  e.originalEvent.touches[0].clientY;
 							diff = cur - ago;
@@ -318,8 +354,8 @@
 							if(diff<-15 && status == 0){
 								//$("#showReadme").show().addClass("slideInUp");
 								$("#showReadme").css({"bottom":"-36px"}).show().animate({"bottom":0},500,function(){
-									$(window).off("touchmove")
 								});
+								$(window).off("touchmove");
 								status = 1;
 							}
 						});
@@ -343,11 +379,10 @@
 							cur =  e.originalEvent.touches[0].clientY;
 							diff = cur - ago;
 							ago = cur;
-							console.log(diff);
 							if(diff>15 && status==2){
 								$("#hideReadme").css({"top":"-36px"}).show().animate({"top":0},500,function(){
-									$(window).off("touchmove")
 								});
+									$(window).off("touchmove");
 								status=3;
 							}
 						});
@@ -356,21 +391,25 @@
 				
 				
 				$("#showReadme").on("touchstart",function(e){
+
+					// 状态1 上拉按钮出现 --> 内容出现
 					if(status==1){
-						$(window).off("touchmove").on("touchmove",function(e){
+						$("#showReadme").off("touchmove").on("touchmove",function(e){
 							e.preventDefault();
 							cur =  e.originalEvent.touches[0].clientY;
 							$("#readmeContent").show().css("top",cur);
 							$("#showReadme").hide();
-							
-						});
-						$(window).on("touchend",function(){
-							$("#readmeContent").animate({"top":0},300,function(){
-								$(window).off("touchend").off("touchmove");
-								status = 2; 
+
+							// 有move 才有 touchend事件
+							$(window).on("touchend",function(){
+								$("#readmeContent").animate({"top":0},300,function(){
+								});
+									$(window).off("touchend").off("touchmove");
+									status = 2; 
 							});
 							
 						});
+						
 					}
 				});
 				
@@ -382,15 +421,18 @@
 							cur =  e.originalEvent.touches[0].clientY;
 							$("#readmeContent").css("top",cur);
 							$("#hideReadme").hide();
+
+							// 有move 才有 touchend事件
+							$(window).on("touchend",function(){
+								$("#readmeContent").animate({"top":winH},300,function(){
+									$("#readmeContent").hide();
+								});
+									$(window).off("touchend").off("touchmove");
+									status = 0;
+							});
 							 
 						});
-						$(window).on("touchend",function(){
-							$("#readmeContent").animate({"top":winH},300,function(){
-								$(window).off("touchend").off("touchmove");
-								$("#readmeContent").hide();
-								status = 0;
-							});
-						});
+						
 					}
 				});
 				
@@ -560,40 +602,7 @@
 
 			<button class="animated" id="showReadme">上滑查看关系共享介绍</button>
 			<button class="animated" id="hideReadme">下滑关闭关系共享介绍</button>
-			
-			<style>
-				#readmeContent{
-					color:#515151;
-					letter-spacing: 1px;
-				}
-				#readmeContent ol li{
-					margin:5px 0 0;
-				}
-				.question{
-					font-size: 15px;
-					color:#313131;
-				}
-				.answer{
-					font-size: 14px;
-				}
-				.readme-item{
-					padding:8px 0 3px;
-					border-top: 1px solid #eee;
-				}
-				.readme-left{
-					float: left;
-					min-width: 30px;
-					padding:0 5px;
-					text-align: center;
-				}
-				.readme-right{
-					overflow: hidden;
-					min-width: 30px;
-					padding:0 5px 0 0;
-					margin:0 0 5px;
-				}
-			</style>
-			
+				
 			<div id="readmeContent">
 				<h4 class="text-center">关系共享系统介绍</h4>
 				
