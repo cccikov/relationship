@@ -22,31 +22,34 @@
 		</script>
 
 		<style>
-			p{
-				margin:0;
+			p {
+				margin: 0;
 			}
-		
+			
 			#content {
-				padding: 46px 0 50px;
+				padding: 46px 0 15px;
 				font-size: 15px;
 			}
 			
 			.main {
+				position: relative;
 				padding: 5px;
 				margin: 0 0 5px;
 				background: #fff;
 				border-radius: 5px;
 			}
-			.supplier+.supplier{
+			
+			.supplier+.supplier {
 				margin: 12px 0 5px;
 			}
+			
 			.main .company {
 				border-bottom: 1px solid #ccc;
 			}
 			
 			.main .company .logo {
 				float: left;
-				padding:2px 5px 5px;
+				padding: 2px 5px 5px;
 			}
 			
 			.main .company .logo img {
@@ -57,21 +60,24 @@
 			
 			.main .company .comName {
 				overflow: hidden;
-				margin:5px;
+				margin: 5px;
 				word-break: break-word;
 			}
 			
 			.main .company .comName p {
 				font-weight: bold;
 			}
+			
 			.main .person {
 				position: relative;
 				padding: 5px;
 			}
+			
 			.main .person .name {
 				float: left;
 				padding: 0 5px;
 			}
+			
 			.main .person .supplierTip {
 				position: absolute;
 				top: 2px;
@@ -89,24 +95,23 @@
 				background: #B94040;
 				color: #fff;
 			}
+			
 			.main .info {
-				padding:0 10px;
-			}
-			.main .info p{
-				margin:0;
-				text-indent: .75em;
-				color:#666;
+				padding: 0 10px;
 			}
 			
-			/*write by ccc*/
-			.main {
-				position: relative;
+			.main .info p {
+				margin: 0;
+				text-indent: .75em;
+				color: #666;
 			}
+			/*write by ccc*/
+			
 			
 			.mark-fall:after {
 				content: "等待确定商机";
 				position: absolute;
-				top: 10px;
+				top: 3px;
 				right: 0px;
 				left: 0px;
 				width: 120px;
@@ -117,13 +122,13 @@
 				text-align: center;
 				color: #FB0000;
 				font-size: 14px;
-				transform: translateX(70px) rotate(-20deg) translateX(-45px);
+				transform: translateX(70px) rotate(-15deg) translateX(-45px);
 			}
 			
 			.mark-success:after {
 				content: "确认商机";
 				position: absolute;
-				top: 0px;
+				top: -12px;
 				right: 0px;
 				left: 0px;
 				width: 120px;
@@ -134,7 +139,7 @@
 				text-align: center;
 				color: #61BD5B;
 				font-size: 14px;
-				transform: translateX(70px) translateY(30px) rotate(15deg);
+				transform: translateX(26px) translateY(30px) rotate(15deg);
 			}
 			
 			.deal {
@@ -153,7 +158,15 @@
 				height: 40px;
 				font-size: 14px;
 			}
-			/*反馈*/
+			.reward-detail{
+				padding:5px;
+				background: #fff;
+				border-radius: 5px;
+			}
+			.reward-detail p{
+				text-indent: 12px;
+			}
+			
 			/*反馈列表*/
 			.consult-list {
 				padding: 0 5px;
@@ -163,12 +176,10 @@
 			.consult-list .consult-item {
 				padding: 5px 0;
 			}
-			
 			li.consult-item+li {
 				border-top: 1px solid #eee;
 			}
 			/*头像*/
-			
 			.consult-list .consult-item img {
 				position: relative;
 				top: 5px;
@@ -176,7 +187,6 @@
 				border-radius: 15px;
 			}
 			/*信息 内容 包含块*/
-			
 			.consult-list .content {
 				margin: 0 0 0 35px;
 			}
@@ -200,24 +210,24 @@
 				margin: 5px 0;
 				color: #222;
 			}
+			.fb-wrap{
+				padding:0 5px;
+				margin:-5px 0 0;
+			}
 			/*跟进记录*/
-			
 			.record-list {
 				padding: 0 8px 0 10px;
 			}
-			
 			.record-item {
 				padding: 5px 0 5px 20px;
 				border-left: 2px solid #bdbdbd;
 			}
-			
 			.record-list .content {
 				position: relative;
 				padding: 5px;
 				background: #ddd;
 				color: #666;
 			}
-			
 			.record-list .content:before {
 				content: "";
 				position: absolute;
@@ -229,7 +239,6 @@
 				border-radius: 10px;
 				background: #bdbdbd;
 			}
-			
 			.record-list .content:after {
 				content: "";
 				position: absolute;
@@ -238,11 +247,9 @@
 				border-bottom: 10px solid #ddd;
 				border-left: 10px solid #ebebeb;
 			}
-			
 			.record-item:first-of-type {
 				border-left: 2px solid #f40;
 			}
-			
 			.record-item:first-of-type .content {
 				background: #f40;
 				color: #fff;
@@ -332,11 +339,11 @@
 
 				<!-- 商机 -->
 				<div>
-
 					<!-- 供应商模块 -->
 					<!-- supplier是供应商类，方便DOM操作，用以区分关系人-->
 					<!-- main是样式类，方便日后维护 -->
-					<div class="supplier main mark-fall mark-success"><!-- 关系拥有者 mark-fall为待定确定关系，mark-success为已确定关系 -->
+					<div class="supplier main mark-fall mark-success">
+						<!-- 关系拥有者 mark-fall为待定确定关系，mark-success为已确定关系 -->
 						<!-- logo和名字 -->
 						<div class="company clearfix">
 							<!-- logo -->
@@ -365,11 +372,12 @@
 							<p>我是供应商的文字介绍</p>
 						</div>
 					</div>
-					
+
 					<!-- 供应商模块 -->
 					<!-- supplier是供应商类，方便DOM操作，用以区分关系人-->
 					<!-- main是样式类，方便日后维护 -->
-					<div class="supplier main"><!-- 关系拥有者 mark-fall为待定确定关系，mark-success为已确定关系 -->
+					<div class="supplier main">
+						<!-- 关系拥有者 mark-fall为待定确定关系，mark-success为已确定关系 -->
 						<!-- logo和名字 -->
 						<div class="company clearfix">
 							<!-- logo -->
@@ -421,14 +429,81 @@
 							</div>
 						</div>
 					</div>
-						<div class="deal">
-							<button class="btn bottom-btn">确定合作</button>
+					<div class="deal">
+						<button class="btn bottom-btn">确定合作</button>
+					</div>
+					<div class="deal">
+						<button class="btn bottom-btn">取消推荐</button>
+					</div>
+					
+					
+					
+					
+					<!-- 悬赏 -->
+					<div class="supplier main mark-success">
+						<!-- 关系拥有者 mark-fall为待定确定关系，mark-success为已确定关系 -->
+						<!-- logo和名字 -->
+						<div class="company clearfix">
+							<!-- logo -->
+							<div class="logo">
+								<img src="img/share/top.jpg">
+							</div>
+							<!-- 名字 -->
+							<div class="comName">
+								<p>
+									普伟集团
+								</p>
+							</div>
 						</div>
-						<div class="deal">
-							<button class="btn bottom-btn">取消推荐</button>
+						<!-- 个人信息 -->
+						<div class="person clearfix">
+							<!-- 姓名 -->
+							<div class="name">
+								<span>黄国辉</span>
+								<span>13578945612</span>
+								<!-- 标识为供应商的标签 -->
+								<span class="supplierTip">发布/认领人</span>
+							</div>
 						</div>
+					</div>
+					<!-- 悬赏 -->
+					<div class="supplier main mark-fall">
+						<!-- 关系拥有者 mark-fall为待定确定关系，mark-success为已确定关系 -->
+						<!-- logo和名字 -->
+						<div class="company clearfix">
+							<!-- logo -->
+							<div class="logo">
+								<img src="img/share/top.jpg">
+							</div>
+							<!-- 名字 -->
+							<div class="comName">
+								<p>
+									普伟集团
+								</p>
+							</div>
+						</div>
+						<!-- 个人信息 -->
+						<div class="person clearfix">
+							<!-- 姓名 -->
+							<div class="name">
+								<span>黄国辉</span>
+								<span>13578945612</span>
+								<!-- 标识为供应商的标签 -->
+								<span class="supplierTip">发布/认领人</span>
+							</div>
+						</div>
+					</div>
+					<div class="reward-detail">
+						<p>
+							我是悬赏内容，悬赏内容，悬赏内容，悬赏内容，悬赏内容，悬赏内容
+						</p>
+						<a class="btn btn-link" href="http://www.baidu.com">查看悬赏详情</a>
+					</div>
+					
+					
 				</div>
 
+				
 				<!-- 反馈列表 -->
 				<h5><strong>反馈列表</strong></h5>
 				<ul class="consult-list" id="consultBox">
@@ -451,8 +526,12 @@
 							</p>
 						</div>
 					</li>
-
+						
 				</ul>
+				<!--反馈按钮 feedback-->
+				<div class="text-right fb-wrap">
+					<button class="btn btn-warning" id="feedback">添加反馈</button>
+				</div>
 
 				<!-- 跟进记录 -->
 				<h5><strong>跟进记录</strong></h5>
