@@ -18,6 +18,7 @@
 			#content {
 				background: #fff;
 				padding-bottom: 0px;
+				margin:0 0 40px;
 			}
 			/*未注册情况下选项框*/
 			
@@ -192,10 +193,11 @@
 			
 			/*readme*/
 			#showReadme {
-				display: none;
+				/*display: none;*/
 				position: fixed;
 				bottom:0;
 				left:0;
+				z-index: 1011;
 				width: 100%;
 				padding: 10px 0;
 				background: none;
@@ -203,13 +205,9 @@
 				font-size: 12px;
 				background: #fff;
 				text-align: center;
+				border-top: 1px solid #eee;
 			}
 			#hideReadme{
-				display: none;
-				position: fixed;
-				top:0;
-				left:0;
-				z-index: 1020;
 				width: 100%;
 				padding: 10px 0;
 				background: none;
@@ -217,6 +215,7 @@
 				font-size: 12px;
 				background: #fff;
 				text-align: center;
+				border-bottom: 1px solid #eee;
 			}
 			
 			/*介绍内容样式*/
@@ -261,181 +260,55 @@
 				padding:0 5px 0 0;
 				margin:0 0 5px;
 			}
-			
-			.animated {
-			  -webkit-animation-duration: .6s;
-			  animation-duration: .6s;
-			  -webkit-animation-fill-mode: both;
-			  animation-fill-mode: both;
-			}
-			
-			.slideInUp {
-			  -webkit-animation-name: slideInUp;
-			  animation-name: slideInUp;
-			}
-			@-webkit-keyframes slideInUp {
-			  from {
-			    -webkit-transform: translate3d(0, 100%, 0);
-			    transform: translate3d(0, 100%, 0);
-			    visibility: visible;
-			  }
-			
-			  to {
-			    -webkit-transform: translate3d(0, 0, 0);
-			    transform: translate3d(0, 0, 0);
-			  }
-			}
-			@keyframes slideInUp {
-			  from {
-			    -webkit-transform: translate3d(0, 100%, 0);
-			    transform: translate3d(0, 100%, 0);
-			    visibility: visible;
-			  }
-			
-			  to {
-			    -webkit-transform: translate3d(0, 0, 0);
-			    transform: translate3d(0, 0, 0);
-			  }
-			}
-			
-			.slideInUp2 {
-			  -webkit-animation-name: slideInUp2;
-			  animation-name: slideInUp2;
-			  -webkit-animation-duration: 1.2s;
-			  animation-duration: 1.2s;
-			  -webkit-animation-fill-mode: both;
-			  animation-fill-mode: both;
-			}
-			@-webkit-keyframes slideInUp2 {
-			  from {
-			    -webkit-transform: translate3d(0, 800px, 0);
-			    transform: translate3d(0, 800px, 0);
-			    visibility: visible;
-			  }
-			
-			  to {
-			    -webkit-transform: translate3d(0, 0, 0);
-			    transform: translate3d(0, 0, 0);
-			  }
-			}
-			@keyframes slideInUp2 {
-			  from {
-			    -webkit-transform: translate3d(0, 800px, 0);
-			    transform: translate3d(0, 800px, 0);
-			    visibility: visible;
-			  }
-			
-			  to {
-			    -webkit-transform: translate3d(0, 0, 0);
-			    transform: translate3d(0, 0, 0);
-			  }
-			}
 
 		</style>
 		<script type="text/javascript">
 			$(function() {
 				var winH = $(window).height();
-				
-				var status = 0;
-				var timer = setInterval(function(){
-					console.log(status);
-				},100)
-				$(window).on("touchstart",function(e){
-					var diff = 0;
-					var cur = ago = start = e.originalEvent.touches[0].clientY;
-					// 状态0 起始状态 --> 上拉按钮出现
-					if(status==0){
-						$(window).on("touchmove",function(e){
-							console.log("diyibu");
-//							e.preventDefault();
-							cur =  e.originalEvent.touches[0].clientY;
-							diff = cur - ago;
-							ago = cur;
-							if(diff<-15 && status == 0){
-								//$("#showReadme").show().addClass("slideInUp");
-								$("#showReadme").css({"bottom":"-36px"}).show().animate({"bottom":0},500,function(){
-								});
-								$(window).off("touchmove");
-								status = 1;
-							}
-						});
-					}
-					//if(status==1){
-					//	$(window).off("touchmove").on("touchmove",function(e){
-					//		cur =  e.originalEvent.touches[0].clientY;
-					//		diff = cur - start;
-					//		ago = cur;
-					//		console.log(diff);
-					//		if(diff<-winH/2){
-					//			$("#readmeContent").show().addClass("slideInUp2");
-					//			status = 2;
-					//		}
-					//	});
-					//}
-					
-					if(status==2){
-						$(window).on("touchmove",function(e){
-//							e.preventDefault();
-							cur =  e.originalEvent.touches[0].clientY;
-							diff = cur - ago;
-							ago = cur;
-							if(diff>15 && status==2){
-								$("#hideReadme").css({"top":"-36px"}).show().animate({"top":0},500,function(){
-								});
-									$(window).off("touchmove");
-								status=3;
-							}
-						});
-					}
-				});
-				
+				var status = 1;
 				
 				$("#showReadme").on("touchstart",function(e){
-
 					// 状态1 上拉按钮出现 --> 内容出现
 					if(status==1){
 						$("#showReadme").off("touchmove").on("touchmove",function(e){
 							e.preventDefault();
 							cur =  e.originalEvent.touches[0].clientY;
 							$("#readmeContent").show().css("top",cur);
-							$("#showReadme").hide();
-
 							// 有move 才有 touchend事件
-							$(window).on("touchend",function(){
-								$("#readmeContent").animate({"top":0},300,function(){
-								});
-									$(window).off("touchend").off("touchmove");
-									status = 2; 
+							$(window).off("touchend").on("touchend",function(){
+								$("#showReadme").animate({"bottom":-37},300);
+								$("#readmeContent").animate({"top":0},300);
+								$(window).off("touchend");
+								$("#showReadme").off("touchmove");
+								status = 3; 
 							});
 							
 						});
-						
 					}
 				});
 				
 				$("#hideReadme").on("touchstart",function(e){
 					var diff = 0;
 					if(status==3){
-						$(window).on("touchmove",function(e){
+						$("#hideReadme").off("touchmove").on("touchmove",function(e){
 							e.preventDefault();
 							cur =  e.originalEvent.touches[0].clientY;
 							$("#readmeContent").css("top",cur);
-							$("#hideReadme").hide();
 
 							// 有move 才有 touchend事件
-							$(window).on("touchend",function(){
+							$(window).off("touchend").on("touchend",function(){
 								$("#readmeContent").animate({"top":winH},300,function(){
 									$("#readmeContent").hide();
+									$("#showReadme").animate({"bottom":0},300);
 								});
-									$(window).off("touchend").off("touchmove");
-									status = 0;
+								$(window).off("touchend");
+								$("#hideReadme").off("touchmove");
+								status = 1;
 							});
-							 
 						});
-						
 					}
 				});
-				
+				//总结：在事件里面监听其他事件一定要先off()再on()，就算里面里面的监听会有off()也不行，因为这样照样会生成多个监听事件，只不过执行完之后都会off();但是这样就会造成多次重复执行同一天命令，特别是有定时器，你以为结束后其实一直还在执行
 				
 			});
 		</script>
@@ -601,11 +474,9 @@
 			</div>
 
 			<button class="animated" id="showReadme">上滑查看关系共享介绍</button>
-			<button class="animated" id="hideReadme">下滑关闭关系共享介绍</button>
-				
 			<div id="readmeContent">
+				<button class="animated" id="hideReadme">下滑关闭关系共享介绍</button>
 				<h4 class="text-center">关系共享系统介绍</h4>
-				
 				<ul class="readme-list">
 					
 					<li class="readme-item">
@@ -800,6 +671,8 @@
 				</ul>
 			</div>
 		</div>
+		
+		
 	</body>
 
 </html>

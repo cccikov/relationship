@@ -262,11 +262,45 @@
 			.record-item:first-of-type .content:after {
 				border-bottom: 10px solid #f40;
 			}
-			
+			/*显示部分*/
 			.record-list .time {
+				display: table-cell;
 				font-size: 12px;
 			}
+			.record-list .title{
+				display: table-cell;
+				padding:0 0 0 5px;
+			}
+			/*隐藏部分*/
+			.con-hide{
+				display: none;
+			}
+			.track-detail{
+				padding:5px;
+			}
+			.opear-man:before{
+				content: "跟踪人：";
+			}
+			
 		</style>
+		<script type="text/javascript">
+			$(function(){
+				$(".record-item").on("click",function(){
+					var that = $(this);
+					var thatObj = $(this).find(".con-hide");
+					if(that.attr("class").indexOf("active")==-1){
+						thatObj.slideDown();
+						that.addClass("active");
+						that.siblings(".active").removeClass("active").find(".con-hide").slideUp();
+					}else{
+						console.log("haha");
+						thatObj.slideUp(function(){
+							that.removeClass("active")
+						});
+					}
+				});
+			});
+		</script>
 	</head>
 
 	<body>
@@ -538,32 +572,18 @@
 				<ul class="record-list">
 					<li class="record-item">
 						<div class="content">
-							<span class="time">2016/05/25</span>
-							<span class="word">双方已经成为亲家</span>
-						</div>
-					</li>
-					<li class="record-item">
-						<div class="content">
-							<span class="time">2016/05/23</span>
-							<span class="word">双方再次见面，谈好酒席，礼金，房产归属</span>
-						</div>
-					</li>
-					<li class="record-item">
-						<div class="content">
-							<span class="time">2016/05/23</span>
-							<span class="word">双方儿女见面</span>
-						</div>
-					</li>
-					<li class="record-item">
-						<div class="content">
-							<span class="time">2016/05/23</span>
-							<span class="word">双方见面</span>
-						</div>
-					</li>
-					<li class="record-item">
-						<div class="content">
-							<span class="time">2016/05/22</span>
-							<span class="word">形成商机，约定时间见面</span>
+							<!-- 显示部分 -->
+							<div class="con-show">
+								<span class="time">2016/05/25</span>
+								<span class="title">双方已经成为亲家</span>
+							</div>
+							<!-- 隐藏部分 -->
+							<div class="con-hide">
+								<p class="track-detail">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae architecto inventore quis pariatur ducimus non autem corrupti laborum fuga. Aperiam eveniet sit rem cumque facere qui ex maiores quisquam ipsa.
+								</p>
+								<p class="opear-man">ccc</p>
+							</div>
 						</div>
 					</li>
 				</ul>
