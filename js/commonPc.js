@@ -76,4 +76,15 @@ function imgScale(){
 		console.log(_index);
 		imgObjs.eq(_index).addClass("active").siblings().removeClass("active");
 	});
+	
+	// 关系共享里自动适应高度textarea
+	$(function() {
+		$("textarea.auto").on("input", function() {
+			var that = $(this);
+			that.height("auto");
+			if (that.height() < (that[0].scrollHeight - 12)) {
+				that.height(that[0].scrollHeight - 12);
+			}
+		});
+	});
 }
