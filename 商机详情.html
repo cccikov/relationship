@@ -505,7 +505,13 @@
 					$("#trMoney").val(listMoney.text());
 					$("#trPer").val(listPer.text());
 					$("#trActual").val(listActual.text());
-					$("#trState")[0].checked = listState.text() == "已提现";
+					if(listState.text()=="未提现"){
+						$("#trState").val("0");
+					}else if(listState.text() == "已申请提现" ){
+						$("#trState").val("1");
+					}else if(listState.text() == "提现成功"){
+						$("#trState").val("2");
+					}
 					$("#addTrRemark").val(listRemark.text());	
 					
 					$("#tr-opera").html("操作人："+obj.find(".opera-man").text());
@@ -521,7 +527,7 @@
 					var money = $("#trMoney").val().trim();
 					var per = $("#trPer").val().trim();
 					var actual = $("#trActual").val().trim();
-					var state = $("#trState")[0].checked ? 1 : 0; //1为已提现
+					var state = $("#trState").val(); //1为已提现
 					var remark = $("#addTrRemark").val().trim();
 					
 					//校验
@@ -552,9 +558,7 @@
 				$("#warning").hide();
 				$(".trade-info").show();
 				$("#trPrompt input:not([type='checkbox']),#trPrompt textarea").val("");
-				$("#trState").attr({
-					"disabled":false
-				})[0].checked=false;
+				$("#trState").val("0");
 			}
 		</script>
 	</head>
@@ -774,7 +778,7 @@
 												</div>
 												<div class="col-xs-3">
 													<strong>状态：</strong>
-													<span class="tr-state">已提现</span>
+													<span class="tr-state">已申请提现</span>
 												</div>
 											</div>
 										</div>
@@ -800,7 +804,7 @@
 				</div>
 
 				<!-- 反馈弹窗 -->
-				<div class="modal fade" id="fPrompt">
+				<div class="modal fade" id="fPrompt" tabindex="-1"><!--tabindex="-1"esc的时候关闭弹窗-->
 				    <div class="modal-dialog">
 				        <div class="modal-content">
 				            <div class="modal-header">
@@ -869,7 +873,7 @@
 				</div>
 				
 				<!-- 交易记录弹窗 -->
-				<div class="modal fade" id="trPrompt">
+				<div class="modal fade" id="trPrompt" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -898,8 +902,13 @@
 										<input class="form-control" name="trActual" id="trActual" min="0" type="number" />
 									</div>
 								</div>
-								<div class="checkbox">
-									<label><input id="trState" name="trState" type="checkbox"/>是否已体现</label>
+								<div class="form-group">
+									<label>提现状态&nbsp;&nbsp;&nbsp;</label>
+									<select id="trState" name="trState">
+										<option value="0">未提现</option>
+										<option value="1">已申请提现</option>
+										<option value="2">提现成功</option>
+									</select>
 								</div>
 								<div class="form-group">
 									<label for="addTrRemark">备注</label>
