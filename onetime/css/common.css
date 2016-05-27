@@ -53,28 +53,29 @@ a:focus{
 	/*line-height: 46px;*/
 }
 #nav a.msg{
-	background: url(../img/common/common1.png) center center no-repeat;
+	background: url(../img/common/common1.png) center center/30px no-repeat;
 }
 #nav a.msg.active{
-	background:#ebebeb url(../img/common/common1active.png) center center no-repeat;
+	background:#ebebeb url(../img/common/common1active.png) center center/30px no-repeat;
 }
 #nav a.search{
-	background: url(../img/common/common2.png) center center no-repeat;
+	background: url(../img/common/common2.png) center center/30px no-repeat;
 }
 #nav a.search.active{
-	background:#ebebeb url(../img/common/common2active.png) center center no-repeat;
+	background:#ebebeb url(../img/common/common2active.png) center center/30px no-repeat;
 }
 #nav a.register{
-	background: url(../img/common/common3.png) center center no-repeat;
+	background: url(../img/common/common3.png) center center/30px no-repeat;
 }
 #nav a.register.active{
-	background:#ebebeb url(../img/common/common3active.png) center center no-repeat;
+	background:#ebebeb url(../img/common/common3active.png) center center/30px no-repeat;
 }
 #nav a.sideBar{
-	background: url(../img/common/common4.png) center center no-repeat;
+	background: url(../img/common/common4.png) center center /30px no-repeat;
 }
 #nav a.sideBar.active{
-	background:#ebebeb url(../img/common/common4active.png) center center no-repeat;
+	background:#ebebeb url(../img/common/common4active.png) center center /30px no-repeat;
+	
 }
 
 /*app下载悬浮块*/

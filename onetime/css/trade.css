@@ -1,0 +1,77 @@
+/*交易列表*/
+#trade {
+  font-size: 14px;
+}
+#trade .trade-list {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+#trade .trade-list .trade-item {
+  border-bottom: 1px solid #eee;
+}
+#trade .trade-list .trade-item .toCash {
+  display: none;
+}
+#trade .trade-list .trade-item .trade-contain {
+  position: relative;
+  padding: 5px 30px 5px 12px;
+  background: #fff;
+  transition: transform .3s;
+}
+#trade .trade-list .trade-item .trade-contain p {
+  margin: 0;
+}
+#trade .trade-list .trade-item .trade-contain .time {
+  position: absolute;
+  bottom: 7px;
+  right: 35px;
+  font-size: 10px;
+  color: #999;
+}
+#trade .trade-list .trade-item .trade-contain .time:before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: -3px 5px 0 0;
+  vertical-align: middle;
+  background: url(../img/relation/time.png) no-repeat center / contain;
+}
+#trade .trade-list .trade-item .trade-contain .state {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+}
+#trade .trade-list .trade-item.waiting .state {
+  background: url(../img/relation/waiting.png) no-repeat center / contain;
+}
+#trade .trade-list .trade-item.finish .state {
+  background: url(../img/relation/finish.png) no-repeat center / contain;
+}
+#trade .trade-list .trade-item.trade-active {
+  position: relative;
+}
+#trade .trade-list .trade-item.trade-active .toCash {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0;
+  background: url(../img/training/sure.png) no-repeat center / 20px;
+}
+#trade .trade-list .trade-item.trade-active .trade-contain {
+  z-index: 5;
+  padding: 5px 30px 5px 0;
+  margin: 0 0 0 12px;
+  transform: translateX(30px);
+  transition: transform .3s;
+}
+#trade .trade-list .trade-item.chosen .toCash {
+  background: url(../img/training/sureactive.png) no-repeat center / 20px;
+}
