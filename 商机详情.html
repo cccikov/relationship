@@ -504,6 +504,7 @@
 					
 					$("#trMoney").val(listMoney.text());
 					$("#trPer").val(listPer.text());
+					$("#trActual").val(listActual.text());
 					$("#trState")[0].checked = listState.text() == "已提现";
 					$("#addTrRemark").val(listRemark.text());	
 					
@@ -519,6 +520,7 @@
 				$("#trSave").off("click").on("click",function(){
 					var money = $("#trMoney").val().trim();
 					var per = $("#trPer").val().trim();
+					var actual = $("#trActual").val().trim();
 					var state = $("#trState")[0].checked ? 1 : 0; //1为已提现
 					var remark = $("#addTrRemark").val().trim();
 					
@@ -535,8 +537,12 @@
 						$("#trPer").focus();
 						$("#warning").show().html("提成百分比只能输入0-100的数字");
 						return;
+					}else if(actual==""){
+						$("#trActual").focus();
+						$("#warning").show().html("实际收入不能为空");
+						return;
 					}
-					alert(money+" "+per+" "+state+" "+remark);
+					alert(money+" "+per+" "+actual+" "+state+" "+remark);
 					//success
 					$("#trPrompt").modal("hide");
 					location.reload();
@@ -818,9 +824,7 @@
 				                <button type="button" class="btn btn-primary" id="fSave">保存</button>
 				            </div>
 				        </div>
-				        <!-- /.modal-content -->
 				    </div>
-				    <!-- /.modal-dialog -->
 				</div>
 
 				<!-- 跟踪弹窗 -->
@@ -885,6 +889,13 @@
 									<div class="input-group">
 										<input class="form-control" name="trPer" id="trPer" max="100" min="0" type="number" />
 									 	<div class="input-group-addon">%</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="trActual">实际收入</label>
+									<div class="input-group">
+									 	<div class="input-group-addon">￥</div>
+										<input class="form-control" name="trActual" id="trActual" min="0" type="number" />
 									</div>
 								</div>
 								<div class="checkbox">
