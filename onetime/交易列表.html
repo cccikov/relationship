@@ -92,7 +92,7 @@
 				<div id="trade">
 					<!-- 交易列表 -->
 					<ul class="trade-list">
-						<li class="trade-item waiting"><!--canApply未申请, waiting申请中，finish已提现-->
+						<li class="trade-item waiting" data-fid="1"><!--canApply未申请, waiting申请中，finish已提现-->
 							<a class="toCash" href="javascript:void(0)"></a>
 							<div class="trade-contain clearfix">
 								<p><strong>成交金额：</strong><span>￥9999.00</span></p>
@@ -102,7 +102,7 @@
 								<i class="state"></i>
 							</div>
 						</li>
-						<li class="trade-item canApply"><!--canApply未申请, waiting申请中，finish已提现-->
+						<li class="trade-item canApply" data-fid="2"><!--canApply未申请, waiting申请中，finish已提现-->
 							<a class="toCash" href="javascript:void(0)"></a>
 							<div class="trade-contain clearfix">
 								<p><strong>成交金额：</strong><span>￥9999.00</span></p>
@@ -112,7 +112,7 @@
 								<i class="state"></i>
 							</div>
 						</li>
-						<li class="trade-item canApply"><!--canApply未申请, waiting申请中，finish已提现-->
+						<li class="trade-item canApply" data-fid="3"><!--canApply未申请, waiting申请中，finish已提现-->
 							<a class="toCash" href="javascript:void(0)"></a>
 							<div class="trade-contain clearfix">
 								<p><strong>成交金额：</strong><span>￥9999.00</span></p>
@@ -122,7 +122,7 @@
 								<i class="state"></i>
 							</div>
 						</li>
-						<li class="trade-item finish"><!--canApply未申请, waiting申请中，finish已提现-->
+						<li class="trade-item finish" data-fid="4"><!--canApply未申请, waiting申请中，finish已提现-->
 							<a class="toCash" href="javascript:void(0)"></a>
 							<div class="trade-contain clearfix">
 								<p><strong>成交金额：</strong><span>￥9999.00</span></p>
@@ -132,7 +132,7 @@
 								<i class="state"></i>
 							</div>
 						</li>
-						<li class="trade-item canApply"><!--canApply未申请, waiting申请中，finish已提现-->
+						<li class="trade-item canApply" data-fid="5"><!--canApply未申请, waiting申请中，finish已提现-->
 							<a class="toCash" href="javascript:void(0)"></a>
 							<div class="trade-contain clearfix">
 								<p><strong>成交金额：</strong><span>￥9999.00</span></p>
@@ -143,7 +143,13 @@
 							</div>
 						</li>
 					</ul>
-					<button id="cashBtn">提现</button>
+					<div class="container-fluid">
+						<div class="row">
+							<button class="btn btn-info col-xs-3 col-xs-offset-1" id="cashBtn">提现</button>
+							<button class="btn btn-primary col-xs-3 col-xs-offset-1 hide" id="submit">提现</button>
+							<button class="btn btn-danger col-xs-3 col-xs-offset-4 hide" id="cancel">取消</button>
+						</div>
+					</div>
 				</div>	
 			<!-- 微信端交易记录 end -->
 	
@@ -151,15 +157,39 @@
 			<!--内容end-->
 		</div>
 		<script type="text/javascript">
+			//canApply trade-active chosen 为同一个节点不同状态 ，canApply(可提现)才可以有trade-active(可选择)，才可以有chosen(选中)
 			$("#cashBtn").on("click",function(){
+				$(this).addClass("hide");
+				$("#submit,#cancel").removeClass("hide");
 				$(".canApply").addClass("trade-active");
-				$(".trade-active").off("click").on("click",function(){
-					var that = $(this).toggleClass("chosen");
-				});
+				
+				//$(".trade-active").off("click").on("click",function(){//这个要放在cashBtn点击事件里面，因为点击了之后才有这样的节点
+				//	var that = $(this).toggleClass("chosen");
+				//});
 			});
-			var date = new Date("1920/1/1 15:00");
-			console.log(date.getTime());
-
+			
+			$(".trade-list").on("click",".trade-active",function(){//如果像注释那样放在click里面，会导致就算没了trade-active className都可以点击，因为已经在那个节点上添加了事件
+				$(this).toggleClass("chosen");
+			});
+			
+			$("#cancel").on("click",function(){
+				$("#cashBtn").removeClass("hide");
+				$("#submit,#cancel").addClass("hide");
+				$(".canApply").removeClass("chosen trade-active");
+			});
+			
+			$("#submit").on("click",function(){
+				var arr = [];
+				$(".chosen").each(function(index,key){
+					arr.push($(key).attr("data-fid"));
+				});
+				if(arr.length==0){
+					alert("请选择需要提现的交易记录");
+					return;
+				}
+				console.log(arr);
+				location.reload();
+			});
 		</script>
 	</body>
 
