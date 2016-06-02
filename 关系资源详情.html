@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>关系详情页</title>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/commonPc.css" />
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/commonPc.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			#main {
+				margin: 10px 10px 0;
+			}
+			
+			.pass-btn {
+				margin: 0 0 20px 0;
+			}
+			
+			.pass-btn .btn {
+				width: 68px;
+			}
+			/*档案*/
+			
+			.files {
+				/*display: none;*/
+			}
+			
+			.general {
+				position: relative;
+				line-height: 40px;
+				padding-right: 200px;
+				margin: 0 0 10px 0;
+			}
+			
+			.company-name {
+				display: inline-block;
+				margin: 0;
+				font-weight: 700;
+			}
+			
+			.general .contact {
+				position: absolute;
+				top: 0px;
+				right: 10px;
+				width: 180px;
+				padding: 2px 10px;
+				border: 1px solid #eee;
+				border-left-width: 7px;
+				border-left-color: #BB332F;
+				border-radius: 5px;
+			}
+			
+			.general .contact p {
+				line-height: 1.42;
+				margin: 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.right-border {
+				border-right: 1px solid #ddd;
+			}
+			
+			.check-man {
+				border-right: 1px solid #ccc;
+			}
+			
+			#card {
+				max-width: 100px;
+				margin: 0 0 20px;
+				cursor: pointer;
+			}
+			
+			#card.active {
+				max-width: 100%;
+			}
+			
+			.hand-import {
+				margin: 0 0 10px;
+			}
+			/*
+ 			* 关系共享 行业选择 分别在添加关系 关系详情页面
+			*/
+			/*行业*/
+			
+			.industry-h4 {
+				position: relative;
+				padding: 10px 0;
+				margin: 15px 0 0;
+				font-weight: 700;
+				font-size: 16px;
+				color: #333;
+				text-align: left;
+				text-indent: 20px;
+				background: #fff;
+			}
+			
+			#showIndustry {
+				position: absolute;
+				top: 8px;
+				right: 25px;
+				padding: 1px 6px;
+				margin:0 0 0 20px;
+			}
+			
+			.industry {
+				display: none;
+				font-size: 13px;
+				background: #ebebeb;
+				padding: 0 10px 10px;
+			}
+			
+			.industry p {
+				position: relative;
+				padding: 10px 0;
+				margin: 0;
+			}
+			
+			.industry ul {
+				margin: 0;
+			}
+			
+			.industry .chosen-list {
+				margin: 0 -1% 1% 0px;
+			}
+			
+			.industry .chosen-list li {
+				box-sizing: border-box;
+				overflow: hidden;
+				float: left;
+				width: 19%;
+				padding: 10px 15px 10px 0;
+				margin: 1% 1% 0 0;
+				background: #fff url(onetime/img/relation/del1.png) right center no-repeat;
+				background-size: 15px;
+				white-space: nowrap;
+			}
+			
+			.industry .chosen-list li:nth-of-type(5n) {
+				margin: 1% 0 0 0;
+			}
+			
+			.industry .industry-list {
+				background: #fff;
+			}
+			
+			.industry .industry-list .industry-item {
+				position: relative;
+				float: left;
+				width: 20%;
+			}
+			
+			.industry .industry-list .industry-item.active i {
+				display: block;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				width: 0;
+				height: 0;
+				border: 8px solid #f6f6f6;
+				border-color: transparent transparent #f6f6f6 transparent;
+				margin-left: -8px;
+			}
+			
+			.industry .industry-list .industry-item p {
+				line-height: 18px;
+				padding: 10px 0;
+			}
+			
+			.industry .industry-list .industry-item p i {
+				display: none;
+			}
+			
+			.industry .industry-second-list {
+				display: none;
+				background: #f6f6f6;
+			}
+			
+			.industry .industry-second-list.active {
+				display: block;
+			}
+			
+			.industry .industry-second-list .industry-second-item {
+				box-sizing: border-box;
+				float: left;
+				width: 18%;
+				height: 36px;
+				line-height: 36px;
+				margin:1%;
+			}
+			
+			.industry .industry-second-list .industry-second-item.chosen {
+				border-radius: 10px;
+				border-color: #adadad;
+				-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+				box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+				color: #333;
+				background-color: #e6e6e6;
+			}
+
+			/*审核详情*/
+			.check-info{
+				margin:20px 0 0;
+			}
+		</style>
+		<script type="text/javascript">
+			var fid = "${resource.fid}";
+			$(function() {
+				//审核点击事件
+				$("#fail").add("#pass").on("click", function() {
+					var that = $(this);
+					var state = null;
+					if (that.attr("id") == "fail") {
+						state = 0;
+					} else {
+						state = 1;
+					}
+					$('#prompt').modal('show');
+				});
+				// 名片图片放大
+				$("#card").on("click", function() {
+					if ($(this).attr("class").indexOf("active") == -1) {
+						$(this).addClass("active");
+					} else {
+						$(this).removeClass("active");
+					}
+				});
+				
+				//行业选择
+				$("#showIndustry").on("click", function() {
+					$(".industry").show();
+					$(this).hide();
+				});
+				
+				//一级菜单点击
+				$(".industry-item").on("click", function() {
+					if (!$(this).is(".active")) {
+						// 一级菜单选中
+						$(".industry-item").removeClass("active");
+						$(this).addClass("active");
+						// 对应的二级菜单显示
+						var fid = $(this).attr("data-fid");
+						$(".industry-second-list[data-fid='" + fid + "']").addClass("active").siblings(".industry-second-list").removeClass("active");
+					} else {
+						$(this).removeClass("active");
+						$(".industry-second-list").removeClass("active");
+					}
+				});
+				
+				//二级菜单点击
+				$(".industry-second-item").on("click", function() {
+					var that = $(this);
+					var secondFid = that.attr("data-fid");
+					if (!that.is(".chosen")) {
+						var secondText = that.text();
+						console.log(secondFid, secondText);
+						that.addClass("chosen");
+						$("<li data-fid='" + secondFid + "'>" + secondText + "</li>").appendTo(".chosen-list");
+					} else {
+						that.removeClass("chosen");
+						$(".chosen-list [data-fid='" + secondFid + "']").remove();
+					}
+				});
+
+				//已选择的点击
+				$(".chosen-list").on("click", "li", function() {
+					var that = $(this);
+					var chosenFid = that.attr("data-fid");
+					console.log(chosenFid);
+					$(".industry-second-list [data-fid='" + chosenFid + "']").removeClass("chosen");
+					that.remove();
+				});
+
+				
+				//提交
+				$("#submit").on("click", function() {
+					var e = e || window.event; //阻止submit默认事件
+					e.preventDefault();
+					var name = $("input[name='name']").val();
+					var mobile = $("#phone").val();
+					var position = $("#position").val();
+					var sex = $("input[name='sex']:checked").val();
+					if (name == "") {
+						alert("姓名不能为空");
+						return false;
+					}
+					if (position == "") {
+						alert("职位不能为空");
+						return false;
+					}
+					var regChina = /^[\u4e00-\u9fa5]{1,}$/gi; //中文
+					var regEnglish = /^[a-zA-Z]{1,}$/gi; //字母
+					if (regChina.test(name)) { //中文
+						if (name.length < 2 || name.length > 10) {
+							alert("中文名长度必须大于等于2个字并且少于10个字");
+							return false;
+						}
+					} else if (regEnglish.test(name)) { //是英文
+						if (name.length < 2 || name.length > 30) {
+							alert("英文名长度必须大于等于2个字并且少于30个字");
+							return false;
+						}
+					} else {
+						alert("姓名只能是中文名或英文名");
+						return false;
+					}
+					if (mobile == "") {
+						alert("手机号不能为空");
+						return false;
+					}
+					var re = /^1[3458]\d{9}$/gi; //最简单的正则表达式,将匹配he这个单词
+					if (!re.test(mobile)) {
+						alert("手机号格式不正确");
+						return false;
+					}
+					/*$.ajax({
+						type: "post",
+						url: "${contextPath}/web/contactResource/update.do",
+						data: {
+							name: name,
+							fid: fid,
+							mobile: mobile,
+							position: position,
+							sex: sex
+						},
+						dataType: "json",
+						success: function(result) {
+							if (result.success) {*/
+					var checkTime = formatDate(new Date());
+					var checkMan = "ccc";
+					alert("编辑成功");
+					$(".check-man").html("编辑人：" + checkMan);
+					$(".check-time").html("编辑时间：" + checkTime);
+					$(".check-msg").show();
+					$(".hand-import").hide();
+					$("#cardName").html("姓名：" + $("#name").val());
+					$("#cardPosition").html("职务：" + $("#position").val());
+					$("#cardSex").html("性别：" + (($("[name=sex]:checked").val()) == "man" ? "男" : "女"));
+					$("#cardPhone").html("手机：" + $("#phone").val());
+					$("#detail").show();
+					$("#submit").hide();
+					/*} else {
+								alert(result.msg);
+							}
+						}
+					});*/
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="thirdWrap">
+			<!--导航-->
+			<div id="nav">
+				<ol class="breadcrumb">
+					<li><a href="${contextPath}/web/contact/index.do?key=0">管理关系拥有者</a></li>
+					<li><a href="${contextPath}/web/contact/view.do?fid=${resource.contact.fid}">关系拥有者详情</a></li>
+					<li class="active">关系</li>
+				</ol>
+			</div>
+			<!--主要-->
+			<div id="main">
+				<!--通过，不通过-->
+				<div class="pass-btn text-right">
+					<div class="btn-group" role="group" aria-label="...">
+						<button class="btn btn-primary" id="pass" type="button">通过</button>
+						<button class="btn btn-danger" id="fail" type="button">不通过</button>
+					</div>
+				</div>
+
+				<!-- 模拟prompt -->
+				<div class="modal fade" id="prompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">审核说明</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-grounp">
+									<textarea class="form-control" id="info" name="info" rows="3" placeholder="请填写审核意见"></textarea>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="save">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="files panel panel-default">
+					<div class="panel-body">
+
+						<div class="general clearfix">
+							<!-- <img class="logo" src="img/logo.png" height="40" alt="" /> -->
+							<!-- 公司名 -->
+							<h4 class="company-name">${resource.businessName}</h4>
+							<!-- 关系拥有者 -->
+							<div class="contact">
+								<p class="contact-man">${resource.contact.linkman.name}(13578945612)</p>
+								<p class="contact-company">普伟集团</p>
+							</div>
+						</div>
+
+						<!-- 名片 -->
+						<img class="img-thumbnail" id="card" src="img/logo.png" alt="名片">
+
+						<!-- 基本信息 加 审核详情-->
+						<ul class="list-group" id="detail">
+							<li class="list-group-item clearfix">
+								<div class="col-xs-6 right-border" id="cardName">
+									姓名：${resource.name}
+								</div>
+								<div class="col-xs-6" id="cardPosition">
+									职务：${resource.position}
+								</div>
+
+							</li>
+							<li class="list-group-item clearfix">
+								<div class="col-xs-6 right-border" id="cardSex">
+									性别：${resource.sex}
+								</div>
+								<div class="col-xs-6" id="cardPhone">
+									手机：${resource.mobile}
+								</div>
+							</li>
+						</ul>
+
+						<!-- 手动输入 -->
+						<form class="hand-import" method="post" action="">
+							<div class="form-group">
+								<label for="name">姓名</label>
+								<input class="form-control" id="name" name="name" placeholder="姓名">
+							</div>
+							<div class="form-group">
+								<label for="职务">职务</label>
+								<input class="form-control" id="position" name="position" placeholder="职务">
+							</div>
+							<div class="form-group">
+								<label for="phone">手机号</label>
+								<input class="form-control" id="phone" name="phone" placeholder="手机号">
+							</div>
+							<div class="radio">
+								<strong>性别：</strong>
+								<label class="radio-inline"><input class="sex" name="sex" type="radio" value="男" checked="">男</label>
+								<label class="radio-inline"><input class="sex" name="sex" type="radio" value="女">女</label>
+							</div>
+						</form>
+
+						<!--行业-->
+						<h4 class="industry-h4">行业选择<button class="btn btn-default" id="showIndustry">点击选择行业</button></h4>
+						<div class="industry text-center">
+							<!-- 已选择 -->
+							<ul class="chosen-list clearfix">
+								<!--<li data-fid="522">全部</li>-->
+							</ul>
+							<!-- 一级 -->
+							<ul class="industry-list clearfix">
+								<li class="industry-item" data-fid="a1">
+									<p>a1<i class="arrow"></i></p>
+								</li>
+								<li class="industry-item" data-fid="a2">
+									<p>a2<i class="arrow"></i></p>
+								</li>
+								<li class="industry-item" data-fid="a3">
+									<p>a3<i class="arrow"></i></p>
+								</li>
+								<li class="industry-item" data-fid="a4">
+									<p>a4<i class="arrow"></i></p>
+								</li>
+								<li class="industry-item" data-fid="a5">
+									<p>a5<i class="arrow"></i></p>
+								</li>
+							</ul>
+							<!-- 二级 -->
+							<ul class="industry-second-list clearfix" data-fid="a1">
+								<li class="industry-second-item" data-fid="a1a">a1a</li>
+								<li class="industry-second-item" data-fid="a1b">a1b</li>
+								<li class="industry-second-item" data-fid="a1c">a1c</li>
+								<li class="industry-second-item" data-fid="a1d">a1d</li>
+								<li class="industry-second-item" data-fid="a1e">a1e</li>
+								<li class="industry-second-item" data-fid="a1f">a1f</li>
+								<li class="industry-second-item" data-fid="a1g">a1g</li>
+							</ul>
+							<ul class="industry-second-list clearfix" data-fid="a2">
+								<li class="industry-second-item" data-fid="a2a">a2a</li>
+							</ul>
+							<ul class="industry-second-list clearfix" data-fid="a3">
+								<li class="industry-second-item" data-fid="a3a">a3a</li>
+							</ul>
+							<ul class="industry-second-list clearfix" data-fid="a4">
+								<li class="industry-second-item" data-fid="a4a">a4a</li>
+							</ul>
+							<ul class="industry-second-list clearfix" data-fid="a5">
+								<li class="industry-second-item" data-fid="a5a">a5a</li>
+							</ul>
+						</div>
+
+						<!-- 审批详情 -->
+						<ul class="list-group check-info">
+							<li class="list-group-item">创建时间：${resource.createTime}</li>
+							<li class="list-group-item text-center check-msg clearfix">
+								<div class="col-xs-6 check-man">编辑人：${resource.editor.name}</div>
+								<div class="col-xs-6 check-time">编辑时间：${resource.editTime}</div>
+							</li>
+							<!--<li class="list-group-item stateInfo" <#if resource.state=="需重审"||resource.state=="待审">style="display:none"</#if>>说明：${resource.stateInfo}</li> -->
+						</ul>
+						<div class="text-center">
+							<input class="btn btn-primary" id="submit" type="submit" value="提交">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+
+</html>
